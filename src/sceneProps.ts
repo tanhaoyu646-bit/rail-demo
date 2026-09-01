@@ -4,7 +4,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { revealPaperRows, revealPaperSize, drawPaperReveal } from './revealPaperLayout';
 import { createRefinedFpsHand } from './refinedFpsHand';
-import { createUploadedFpsHand } from './uploadedFpsHand';
 import { disposeOwnedObject } from './resourceLifetime';
 
 export type InventoryItemId = 'recorder' | 'notebook' | 'ic-card' | 'delivery-reveal' | 'documents' | 'backpack';
@@ -22,12 +21,13 @@ type HeldModelConfig = {
   rotation?: [number, number, number];
 };
 
-const heldModelConfigs: Partial<Record<InventoryItemId, HeldModelConfig>> = {
+const privateHeldModelConfigs: Partial<Record<InventoryItemId, HeldModelConfig>> = {
   recorder: { url: asset('models/props/recorder-lite.glb'), targetHeight: 0.205 },
   notebook: { url: asset('models/props/driver-notebook-closed-lite.glb'), targetHeight: 0.39 },
   'ic-card': { url: asset('models/props/ic-card-lite.glb'), targetHeight: 0.24, rotation: [Math.PI / 2, 0, 0] },
   documents: { url: asset('models/props/work-card-lite.glb'), targetHeight: 0.34 },
 };
+const heldModelConfigs: Partial<Record<InventoryItemId, HeldModelConfig>> = __PUBLIC_DEMO__ ? {} : privateHeldModelConfigs;
 
 const activeHeldModelConfigs: Partial<Record<InventoryItemId, HeldModelConfig>> = {};
 
@@ -460,8 +460,14 @@ async function addFpsHands(group: THREE.Group, id: InventoryItemId, variant: Hel
   // so a scanned forearm is never drawn on top of a second procedural arm.
   const previous = group.getObjectByName('右手握持');
   if (previous) disposeOwnedObject(previous);
+  if (__PUBLIC_DEMO__) {
+    addFallbackFpsHands(group, id, variant);
+    group.userData.handSource = 'procedural-public-demo-hand';
+    return;
+  }
   if (new URLSearchParams(window.location.search).get('hand') !== 'procedural') {
     try {
+      const { createUploadedFpsHand } = await import('./uploadedFpsHand');
       group.add(await createUploadedFpsHand(id, variant));
       group.userData.handSource = 'uploaded-hand-20260831';
       return;

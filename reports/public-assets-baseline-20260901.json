@@ -1,0 +1,344 @@
+{
+  "source": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public",
+  "created_utc": "2026-09-01T13:13:57.567299+00:00",
+  "file_count": 42,
+  "total_size_bytes": 61293031,
+  "files": [
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-accident-emergency-rules.png",
+      "relative_path": "assets\\documents\\book-accident-emergency-rules.png",
+      "extension": ".png",
+      "size_bytes": 232234,
+      "mtime_utc": "2026-08-28T15:48:36.546714+00:00",
+      "sha256": "3e415695cffe32bf344e2305b2d51caf7b91b1a00a4a89ee644ef3f4209e6461"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-accident-response.png",
+      "relative_path": "assets\\documents\\book-accident-response.png",
+      "extension": ".png",
+      "size_bytes": 218594,
+      "mtime_utc": "2026-08-28T15:48:26.386236+00:00",
+      "sha256": "d5005e959f0295bd9137b09d777b44e6634ac131fd63866b9a66690a1e0641ed"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-crew-handbook.png",
+      "relative_path": "assets\\documents\\book-crew-handbook.png",
+      "extension": ".png",
+      "size_bytes": 270059,
+      "mtime_utc": "2026-08-28T15:48:31.875911+00:00",
+      "sha256": "fc1a7a1a0ade094be23faa0c9a98a074a01a1c0a680cdd5987b01e384ad33f1e"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-crew-operation-standard.png",
+      "relative_path": "assets\\documents\\book-crew-operation-standard.png",
+      "extension": ".png",
+      "size_bytes": 419156,
+      "mtime_utc": "2026-08-28T15:48:34.236134+00:00",
+      "sha256": "896a07a3ff2b004e9b9b9745661c095be2bb143e5185a6b555859ca60804fd72"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-locomotive-operation.png",
+      "relative_path": "assets\\documents\\book-locomotive-operation.png",
+      "extension": ".png",
+      "size_bytes": 230735,
+      "mtime_utc": "2026-08-28T15:48:23.761918+00:00",
+      "sha256": "ed9ca3b01da2c50349f81b4e13e79107199cef7b98ece734aefe024c2d32f00e"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-operation-organization.png",
+      "relative_path": "assets\\documents\\book-operation-organization.png",
+      "extension": ".png",
+      "size_bytes": 149920,
+      "mtime_utc": "2026-08-28T15:48:21.063560+00:00",
+      "sha256": "e8465d4670feadf25e88b15df623574e9cd660bbb3ea5a92f296e5085d5dde59"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-passenger-rules.png",
+      "relative_path": "assets\\documents\\book-passenger-rules.png",
+      "extension": ".png",
+      "size_bytes": 164424,
+      "mtime_utc": "2026-08-28T15:48:28.881341+00:00",
+      "sha256": "518b2df623186e8f9a60775814ef35c548a044a0f93defef7ed2558551799819"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\book-technical-rules.png",
+      "relative_path": "assets\\documents\\book-technical-rules.png",
+      "extension": ".png",
+      "size_bytes": 141967,
+      "mtime_utc": "2026-08-28T15:48:18.298769+00:00",
+      "sha256": "b8cf97c8b3148a4d5f956b3ca8d22d09d78dd832186042b77d818549a777c8f7"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\certificate-driver.png",
+      "relative_path": "assets\\documents\\certificate-driver.png",
+      "extension": ".png",
+      "size_bytes": 221955,
+      "mtime_utc": "2026-08-28T15:48:40.122743+00:00",
+      "sha256": "9f7547ac4740d22bd8b42013034a85ba028e9c93f5ea49d5307da0f0c3e64fe2"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\certificate-training.png",
+      "relative_path": "assets\\documents\\certificate-training.png",
+      "extension": ".png",
+      "size_bytes": 174661,
+      "mtime_utc": "2026-08-28T15:48:44.391713+00:00",
+      "sha256": "a4294ffa64ccbbd4b52fc0277f5eaaf36235706517de889ca27fd52727f06b49"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\certificate-work.png",
+      "relative_path": "assets\\documents\\certificate-work.png",
+      "extension": ".png",
+      "size_bytes": 126867,
+      "mtime_utc": "2026-08-28T15:48:42.332350+00:00",
+      "sha256": "8a3daf2643359532aab6024b4ac9817cb787c1d190e65b88ab1876314e3b55a9"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\driver-report.png",
+      "relative_path": "assets\\documents\\driver-report.png",
+      "extension": ".png",
+      "size_bytes": 167896,
+      "mtime_utc": "2026-08-28T15:26:44.047416+00:00",
+      "sha256": "c1d504458699250dc26532d43451da5303031efb1b34dc9b4bf698e828b93b79"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\running-reveal.png",
+      "relative_path": "assets\\documents\\running-reveal.png",
+      "extension": ".png",
+      "size_bytes": 25000,
+      "mtime_utc": "2023-09-21T00:32:10+00:00",
+      "sha256": "cd1e9137c367541c6194ca2fcdeae8355e9fcd50ee2ef0f17a509964a52f8240"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-accident-emergency-rules.png",
+      "relative_path": "assets\\documents\\upright\\book-accident-emergency-rules.png",
+      "extension": ".png",
+      "size_bytes": 202367,
+      "mtime_utc": "2026-08-29T13:09:17.370351+00:00",
+      "sha256": "e192f7d2b721c75c81c38c1acd077e9eee305e551bc506d4a7f48ad2da033b73"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-accident-response.png",
+      "relative_path": "assets\\documents\\upright\\book-accident-response.png",
+      "extension": ".png",
+      "size_bytes": 195427,
+      "mtime_utc": "2026-08-29T13:09:17.811172+00:00",
+      "sha256": "44036521c16557910713233d822465bfecef4dedfaa3ecea7c09b34532f4a247"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-crew-handbook.png",
+      "relative_path": "assets\\documents\\upright\\book-crew-handbook.png",
+      "extension": ".png",
+      "size_bytes": 191506,
+      "mtime_utc": "2026-08-29T13:09:18.342323+00:00",
+      "sha256": "657ab34a9b011e8ba8e4b11be67fa39f9968c1c62c0254bd7dcd7dfd48bd674a"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-crew-operation-standard.png",
+      "relative_path": "assets\\documents\\upright\\book-crew-operation-standard.png",
+      "extension": ".png",
+      "size_bytes": 316947,
+      "mtime_utc": "2026-08-29T13:09:18.990772+00:00",
+      "sha256": "1aa3dbf93bafad1f2e1debeb4fdebcfac77f4e71769a490ee50d19ef45202e6d"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-locomotive-operation.png",
+      "relative_path": "assets\\documents\\upright\\book-locomotive-operation.png",
+      "extension": ".png",
+      "size_bytes": 195161,
+      "mtime_utc": "2026-08-29T13:09:19.681173+00:00",
+      "sha256": "366761a7b281acb0f59fcf91168d53d8510313fe376a13f23a36d29eb40fb134"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-operation-organization.png",
+      "relative_path": "assets\\documents\\upright\\book-operation-organization.png",
+      "extension": ".png",
+      "size_bytes": 198771,
+      "mtime_utc": "2026-08-29T13:09:20.068296+00:00",
+      "sha256": "ac6f692438b253594e2977ae012af4c9d4dd86a9caf8c7318b185c0afdc8d596"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-passenger-rules.png",
+      "relative_path": "assets\\documents\\upright\\book-passenger-rules.png",
+      "extension": ".png",
+      "size_bytes": 159432,
+      "mtime_utc": "2026-08-29T13:09:20.344895+00:00",
+      "sha256": "4ca70b743b2d435903546b3f8e6e62d69f828d9fe51256e3244af42eedc2d620"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\book-technical-rules.png",
+      "relative_path": "assets\\documents\\upright\\book-technical-rules.png",
+      "extension": ".png",
+      "size_bytes": 186166,
+      "mtime_utc": "2026-08-29T13:09:20.655825+00:00",
+      "sha256": "254469ad04685a766c0ea242c8a36f2a8f205fbe0f44fec102df715baf3822ff"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\certificate-driver.png",
+      "relative_path": "assets\\documents\\upright\\certificate-driver.png",
+      "extension": ".png",
+      "size_bytes": 222750,
+      "mtime_utc": "2026-08-29T13:09:21.104344+00:00",
+      "sha256": "fa1da78fdea5a7645dabf89bd30ff8f6de90fa95a493e2c27736c3bb5c357ce6"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\certificate-training.png",
+      "relative_path": "assets\\documents\\upright\\certificate-training.png",
+      "extension": ".png",
+      "size_bytes": 183822,
+      "mtime_utc": "2026-08-29T13:09:21.497401+00:00",
+      "sha256": "d4175d58b918cea6bf38398d451d82c0ee25a01292d60bec61d1a1b8bd27a770"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\documents\\upright\\certificate-work.png",
+      "relative_path": "assets\\documents\\upright\\certificate-work.png",
+      "extension": ".png",
+      "size_bytes": 150429,
+      "mtime_utc": "2026-08-29T13:09:21.851130+00:00",
+      "sha256": "543d7f3b45c79afc30a35e751323dd807ee839c59136782823fa4fa15bb97426"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\hands\\right-hand-fps-lite.glb",
+      "relative_path": "assets\\models\\hands\\right-hand-fps-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 1530180,
+      "mtime_utc": "2026-08-30T13:20:06.586478+00:00",
+      "sha256": "851c9b9f9a33322a5ed836ff50c8de89bf267327f82b84a37e0c365c70f6b4b4"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\hands\\uploaded-hand-20260831.glb",
+      "relative_path": "assets\\models\\hands\\uploaded-hand-20260831.glb",
+      "extension": ".glb",
+      "size_bytes": 10032632,
+      "mtime_utc": "2026-08-31T10:19:31.148913+00:00",
+      "sha256": "fa5e5e94d5c0484d874c4937518b75c8c697d6128e1c0e108193283b72d9c5de"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\driver-notebook-closed-lite.glb",
+      "relative_path": "assets\\models\\props\\driver-notebook-closed-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 3504664,
+      "mtime_utc": "2026-08-29T13:05:16.937118+00:00",
+      "sha256": "f9c416f14d16de0cb4a873da9421da3199e7c18ce9323c2cd1cfe72456a95e0f"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\driver-notebook-open-lite.glb",
+      "relative_path": "assets\\models\\props\\driver-notebook-open-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 4127196,
+      "mtime_utc": "2026-08-29T13:05:26.421388+00:00",
+      "sha256": "6ae9bb76483cba96ec58a71937882370c67d056a71108ed3409a66b51c7c7bfa"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\duty-report-lite.glb",
+      "relative_path": "assets\\models\\props\\duty-report-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 3957064,
+      "mtime_utc": "2026-08-29T13:05:06.526700+00:00",
+      "sha256": "e160a90e7986ffb906734798a50132be29af86ee265f628bba39061cda0e9919"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\ic-card-lite.glb",
+      "relative_path": "assets\\models\\props\\ic-card-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 3947568,
+      "mtime_utc": "2026-08-29T13:04:56.839733+00:00",
+      "sha256": "4a01dcfdf5eeec27d20db5f518bbb93ce0674ad26554ec778845e094d079a12d"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\recorder-lite.glb",
+      "relative_path": "assets\\models\\props\\recorder-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 3276504,
+      "mtime_utc": "2026-08-29T13:04:47.574327+00:00",
+      "sha256": "5fe540558fadb1dada7c2658ad019b46913773e396b9e6081665de9f10f59551"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\props\\work-card-lite.glb",
+      "relative_path": "assets\\models\\props\\work-card-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 4212112,
+      "mtime_utc": "2026-08-29T13:05:35.269727+00:00",
+      "sha256": "d7a4fc3a2c9092d0db474c813e807c3a77d15945dfb92158fe30401dd04b3318"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\models\\railway-uniform-dispatcher-lite.glb",
+      "relative_path": "assets\\models\\railway-uniform-dispatcher-lite.glb",
+      "extension": ".glb",
+      "size_bytes": 7861596,
+      "mtime_utc": "2026-08-28T16:06:39.514878+00:00",
+      "sha256": "c742e88c0548fd4103d86f8d1b4521efa94ec1cf3e3c89bd25d96c7815c89939"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\notebook\\driver-notebook-cover.jpg",
+      "relative_path": "assets\\notebook\\driver-notebook-cover.jpg",
+      "extension": ".jpg",
+      "size_bytes": 2237595,
+      "mtime_utc": "2026-08-28T15:39:53.896086+00:00",
+      "sha256": "a4adaae84193129dfff3f515da7f9cde8cc87fbf5ddee55ee20e8d3e317b6be3"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\notebook\\driver-notebook-open.jpg",
+      "relative_path": "assets\\notebook\\driver-notebook-open.jpg",
+      "extension": ".jpg",
+      "size_bytes": 3096130,
+      "mtime_utc": "2026-08-28T15:39:53.720690+00:00",
+      "sha256": "c383db6f6771086cbfa131b24ec5dc1d28ce5d42a9801463c6718fade63be66c"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\notebook\\driver-notebook-planning.jpg",
+      "relative_path": "assets\\notebook\\driver-notebook-planning.jpg",
+      "extension": ".jpg",
+      "size_bytes": 2238883,
+      "mtime_utc": "2026-08-28T15:39:53.273496+00:00",
+      "sha256": "833ef57f937b7e076ae11d4576fb4c19a0e9efb1e7acda17944edc1761f6f92d"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\props\\ic-card.png",
+      "relative_path": "assets\\props\\ic-card.png",
+      "extension": ".png",
+      "size_bytes": 216407,
+      "mtime_utc": "2026-08-28T15:52:09.542704+00:00",
+      "sha256": "d1db403414872729e2bdea6ff77f38c2c3d16efb66cf9c27581c9d79d2939e89"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\props\\recorder.png",
+      "relative_path": "assets\\props\\recorder.png",
+      "extension": ".png",
+      "size_bytes": 43477,
+      "mtime_utc": "2026-08-28T15:55:05.277191+00:00",
+      "sha256": "a4004a5338bff66477f2cfb398e8b98b9b8cb3ffbfbf88973f6a4bc5ed9288ab"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\ui\\kiosk-reveal-reference.png",
+      "relative_path": "assets\\ui\\kiosk-reveal-reference.png",
+      "extension": ".png",
+      "size_bytes": 1017673,
+      "mtime_utc": "2026-08-28T15:51:32.493017+00:00",
+      "sha256": "dde9ad3ef2a70ecd0786f9197e67551358bb9ac5b1db5d512a0c940450eb9198"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\ui\\lkj-all-reveals.png",
+      "relative_path": "assets\\ui\\lkj-all-reveals.png",
+      "extension": ".png",
+      "size_bytes": 273666,
+      "mtime_utc": "2026-08-28T15:50:21.647677+00:00",
+      "sha256": "c09c00d3a4903d6ce5822d14feb20bb107df977c3e6010b117babd7134600b4c"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\ui\\lkj-card-count.png",
+      "relative_path": "assets\\ui\\lkj-card-count.png",
+      "extension": ".png",
+      "size_bytes": 997730,
+      "mtime_utc": "2026-08-28T15:50:11.576307+00:00",
+      "sha256": "f537f20e880c8a5fd09e4b90fa15f6b2663e0a81c44459340a4beeb734144ddc"
+    },
+    {
+      "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\public\\assets\\ui\\published-reveal-reference.png",
+      "relative_path": "assets\\ui\\published-reveal-reference.png",
+      "extension": ".png",
+      "size_bytes": 3975708,
+      "mtime_utc": "2026-08-28T15:49:48.454098+00:00",
+      "sha256": "942129e47c3e37aa72bf513ac72fdc60c9f1746bfbe9d1bb9d542d82f2c6a1b0"
+    }
+  ]
+}

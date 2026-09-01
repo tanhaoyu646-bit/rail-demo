@@ -1,0 +1,166 @@
+{
+  "createdAt": "2026-09-01T13:54:17.879Z",
+  "fileCount": 31,
+  "totalBytes": 5873804,
+  "forbidden": [],
+  "sourceMaps": [],
+  "requiredWatermarkCount": 2,
+  "leakedAnswerFragments": [],
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assets/documents/book-accident-emergency-rules.png",
+      "bytes": 232234,
+      "sha256": "3e415695cffe32bf344e2305b2d51caf7b91b1a00a4a89ee644ef3f4209e6461"
+    },
+    {
+      "path": "assets/documents/book-accident-response.png",
+      "bytes": 218594,
+      "sha256": "d5005e959f0295bd9137b09d777b44e6634ac131fd63866b9a66690a1e0641ed"
+    },
+    {
+      "path": "assets/documents/book-crew-handbook.png",
+      "bytes": 270059,
+      "sha256": "fc1a7a1a0ade094be23faa0c9a98a074a01a1c0a680cdd5987b01e384ad33f1e"
+    },
+    {
+      "path": "assets/documents/book-crew-operation-standard.png",
+      "bytes": 419156,
+      "sha256": "896a07a3ff2b004e9b9b9745661c095be2bb143e5185a6b555859ca60804fd72"
+    },
+    {
+      "path": "assets/documents/book-locomotive-operation.png",
+      "bytes": 230735,
+      "sha256": "ed9ca3b01da2c50349f81b4e13e79107199cef7b98ece734aefe024c2d32f00e"
+    },
+    {
+      "path": "assets/documents/book-operation-organization.png",
+      "bytes": 149920,
+      "sha256": "e8465d4670feadf25e88b15df623574e9cd660bbb3ea5a92f296e5085d5dde59"
+    },
+    {
+      "path": "assets/documents/book-passenger-rules.png",
+      "bytes": 164424,
+      "sha256": "518b2df623186e8f9a60775814ef35c548a044a0f93defef7ed2558551799819"
+    },
+    {
+      "path": "assets/documents/book-technical-rules.png",
+      "bytes": 141967,
+      "sha256": "b8cf97c8b3148a4d5f956b3ca8d22d09d78dd832186042b77d818549a777c8f7"
+    },
+    {
+      "path": "assets/documents/certificate-driver.png",
+      "bytes": 221955,
+      "sha256": "9f7547ac4740d22bd8b42013034a85ba028e9c93f5ea49d5307da0f0c3e64fe2"
+    },
+    {
+      "path": "assets/documents/certificate-training.png",
+      "bytes": 174661,
+      "sha256": "a4294ffa64ccbbd4b52fc0277f5eaaf36235706517de889ca27fd52727f06b49"
+    },
+    {
+      "path": "assets/documents/certificate-work.png",
+      "bytes": 126867,
+      "sha256": "8a3daf2643359532aab6024b4ac9817cb787c1d190e65b88ab1876314e3b55a9"
+    },
+    {
+      "path": "assets/documents/driver-report.png",
+      "bytes": 167896,
+      "sha256": "c1d504458699250dc26532d43451da5303031efb1b34dc9b4bf698e828b93b79"
+    },
+    {
+      "path": "assets/documents/running-reveal.png",
+      "bytes": 25000,
+      "sha256": "cd1e9137c367541c6194ca2fcdeae8355e9fcd50ee2ef0f17a509964a52f8240"
+    },
+    {
+      "path": "assets/documents/upright/book-accident-emergency-rules.png",
+      "bytes": 202367,
+      "sha256": "e192f7d2b721c75c81c38c1acd077e9eee305e551bc506d4a7f48ad2da033b73"
+    },
+    {
+      "path": "assets/documents/upright/book-accident-response.png",
+      "bytes": 195427,
+      "sha256": "44036521c16557910713233d822465bfecef4dedfaa3ecea7c09b34532f4a247"
+    },
+    {
+      "path": "assets/documents/upright/book-crew-handbook.png",
+      "bytes": 191506,
+      "sha256": "657ab34a9b011e8ba8e4b11be67fa39f9968c1c62c0254bd7dcd7dfd48bd674a"
+    },
+    {
+      "path": "assets/documents/upright/book-crew-operation-standard.png",
+      "bytes": 316947,
+      "sha256": "1aa3dbf93bafad1f2e1debeb4fdebcfac77f4e71769a490ee50d19ef45202e6d"
+    },
+    {
+      "path": "assets/documents/upright/book-locomotive-operation.png",
+      "bytes": 195161,
+      "sha256": "366761a7b281acb0f59fcf91168d53d8510313fe376a13f23a36d29eb40fb134"
+    },
+    {
+      "path": "assets/documents/upright/book-operation-organization.png",
+      "bytes": 198771,
+      "sha256": "ac6f692438b253594e2977ae012af4c9d4dd86a9caf8c7318b185c0afdc8d596"
+    },
+    {
+      "path": "assets/documents/upright/book-passenger-rules.png",
+      "bytes": 159432,
+      "sha256": "4ca70b743b2d435903546b3f8e6e62d69f828d9fe51256e3244af42eedc2d620"
+    },
+    {
+      "path": "assets/documents/upright/book-technical-rules.png",
+      "bytes": 186166,
+      "sha256": "254469ad04685a766c0ea242c8a36f2a8f205fbe0f44fec102df715baf3822ff"
+    },
+    {
+      "path": "assets/documents/upright/certificate-driver.png",
+      "bytes": 222750,
+      "sha256": "fa1da78fdea5a7645dabf89bd30ff8f6de90fa95a493e2c27736c3bb5c357ce6"
+    },
+    {
+      "path": "assets/documents/upright/certificate-training.png",
+      "bytes": 183822,
+      "sha256": "d4175d58b918cea6bf38398d451d82c0ee25a01292d60bec61d1a1b8bd27a770"
+    },
+    {
+      "path": "assets/documents/upright/certificate-work.png",
+      "bytes": 150429,
+      "sha256": "543d7f3b45c79afc30a35e751323dd807ee839c59136782823fa4fa15bb97426"
+    },
+    {
+      "path": "assets/index-pWRwvnGr.css",
+      "bytes": 35733,
+      "sha256": "fe5cea53cf747e3424c8c835bfa3f8c2fab2a2b9b94d5669316c71c60d7b076a"
+    },
+    {
+      "path": "assets/index-qEW7KJO_.js",
+      "bytes": 831220,
+      "sha256": "f03ca05892bb2e1b7b1358d1f790925d1e4808c663205482a41d58b3b0b49c0e"
+    },
+    {
+      "path": "assets/props/ic-card.png",
+      "bytes": 216407,
+      "sha256": "d1db403414872729e2bdea6ff77f38c2c3d16efb66cf9c27581c9d79d2939e89"
+    },
+    {
+      "path": "assets/props/recorder.png",
+      "bytes": 43477,
+      "sha256": "a4004a5338bff66477f2cfb398e8b98b9b8cb3ffbfbf88973f6a4bc5ed9288ab"
+    },
+    {
+      "path": "index.html",
+      "bytes": 695,
+      "sha256": "cb1db1021fd986a4b6025a775487d02ad198a51d071acd109df4afd92e4cb505"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 26,
+      "sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1"
+    }
+  ]
+}

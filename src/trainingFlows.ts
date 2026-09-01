@@ -29,6 +29,31 @@ const deputyHint=createHintPicker('deputy');
 const dispatcherHint=createHintPicker('dispatcher');
 
 export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions): () => void {
+  if (__PUBLIC_DEMO__) {
+    const prompts = shuffled([
+      '请结合天气条件，说出一项瞭望注意事项。',
+      '请从纸质揭示中找出一个需要核对的字段。',
+      '请说明发现纸卡信息不一致时应先做什么。',
+      '请说出出乘预想中应包含的一类风险控制措施。',
+    ]).slice(0, 2);
+    host.innerHTML = `
+      <section class="training-panel dialogue-panel" role="dialog" aria-modal="true" aria-label="公开版人人核对演示">
+        <header><div><span>出勤调度室 · 人人核对</span><b>公开轻量体验</b></div><button type="button" data-close>退出</button></header>
+        <main>
+          <div class="npc-dialogue"><i>调</i><div><b>出勤调度员</b><p data-hint aria-live="polite">公开版只演示交互流程，不包含正式评分规则与答案。</p><button type="button" class="npc-ask" data-ask-hint>随机提示</button></div></div>
+          <ol class="demo-question-list">${prompts.map(prompt => `<li>${prompt}</li>`).join('')}</ol>
+          <p class="flow-message" aria-live="polite"></p>
+        </main>
+        <footer><button type="button" class="primary" data-submit>完成演示</button></footer>
+      </section>`;
+    host.querySelector('[data-ask-hint]')?.addEventListener('click', () => {
+      const target = host.querySelector<HTMLElement>('[data-hint]');
+      if (target) target.textContent = dispatcherHint();
+    });
+    host.querySelector('[data-close]')?.addEventListener('click', options.onClose);
+    host.querySelector('[data-submit]')?.addEventListener('click', () => options.onComplete?.());
+    return () => { host.innerHTML = ''; };
+  }
   const questions = shuffled(weatherQuestions).slice(0, 2).map(item => ({...item,
     answers: shuffled(item.answers.map((text,index)=>({text,correct:index===item.correct}))),
   }));
@@ -115,6 +140,15 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
   host.querySelector('[data-close]')?.addEventListener('click', options.onClose);
   host.querySelector('[data-submit]')?.addEventListener('click', () => {
     const value = textarea?.value.trim() ?? '';
+    if (__PUBLIC_DEMO__) {
+      if (value.length < 2) {
+        if (message) message.textContent = '请输入一项出乘预想，或向副司机询问提示。';
+        return;
+      }
+      if (message) message.textContent = '公开版填写演示完成。';
+      options.onComplete?.();
+      return;
+    }
     const hasReveal = /(揭示|限速|命令号|信号机|施工|绿色许可证|特定引导)/.test(value);
     const hasWeather = /(雨|雾|大风|冰雪|低温|高温|天气)/.test(value);
     const hasMeasure = /(瞭望|控速|控制速度|制动|防滑|防空转)/.test(value);

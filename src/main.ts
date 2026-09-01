@@ -22,7 +22,12 @@ import { createPerformanceDiagnostics } from './performanceDiagnostics';
 import { disposeOwnedObject } from './resourceLifetime';
 
 const reviewMode = new URLSearchParams(window.location.search).has('review');
+const mobileMode = new URLSearchParams(window.location.search).has('mobile')
+  || window.matchMedia('(pointer: coarse)').matches
+  || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 document.body.classList.toggle('review-mode', reviewMode);
+document.body.classList.toggle('public-demo', __PUBLIC_DEMO__);
+document.body.classList.toggle('mobile-controls-enabled', mobileMode && !reviewMode);
 
 const app = document.querySelector<HTMLDivElement>('#app');
 if (!app) throw new Error('Missing #app');
@@ -30,6 +35,8 @@ const appRoot: HTMLDivElement = app;
 
 app.innerHTML = `
   <canvas class="viewport" aria-label="出勤一体机三维预览"></canvas>
+  <div class="studio-watermark studio-watermark--top" aria-hidden="true">谭浩宇工作室</div>
+  <div class="studio-watermark studio-watermark--bottom" aria-hidden="true">谭浩宇工作室</div>
   <section class="hud collapsed">
     <button class="hud-toggle" type="button" aria-label="展开场景说明" aria-expanded="false">›</button>
     <p class="eyebrow">乘务作业训练</p>
@@ -57,6 +64,26 @@ app.innerHTML = `
     </nav>
   </div>
   <div class="crosshair" aria-hidden="true"></div>
+  <section class="mobile-entry" ${mobileMode && !reviewMode ? '' : 'hidden'} aria-label="移动端训练入口">
+    <div>
+      <b>横屏进入仿真实训</b>
+      <span>点击后将请求全屏并锁定横屏</span>
+      <button type="button" data-mobile-enter>进入训练</button>
+    </div>
+  </section>
+  <div class="mobile-rotate-message" aria-hidden="true">请将手机横向旋转</div>
+  <button class="mobile-fullscreen" type="button" data-mobile-fullscreen aria-label="进入全屏">⛶</button>
+  <section class="mobile-game-controls" aria-label="移动端游戏控制">
+    <div class="mobile-joystick" data-mobile-joystick aria-label="移动方向">
+      <i></i><b></b>
+    </div>
+    <div class="mobile-action-cluster">
+      <button type="button" class="mobile-action mobile-action--interact" data-mobile-action="interact">交互</button>
+      <button type="button" class="mobile-action mobile-action--primary" data-mobile-action="primary">操作</button>
+      <button type="button" class="mobile-action mobile-action--jump" data-mobile-action="jump">跳跃</button>
+      <button type="button" class="mobile-action mobile-action--sprint" data-mobile-action="sprint">加速</button>
+    </div>
+  </section>
   <div class="kiosk-overlay" hidden></div>
   <div class="scene-overlay" hidden></div>
   <div class="pass">03 / 08　交互与物品</div>
@@ -71,6 +98,9 @@ const hudElement = app.querySelector<HTMLElement>('.hud');
 const hudToggle = app.querySelector<HTMLButtonElement>('.hud-toggle');
 const inventoryDock = app.querySelector<HTMLElement>('.inventory-dock');
 const hotbarToggle = app.querySelector<HTMLButtonElement>('.hotbar-toggle');
+const mobileEntry = app.querySelector<HTMLElement>('.mobile-entry');
+const mobileJoystick = app.querySelector<HTMLElement>('[data-mobile-joystick]');
+const mobileJoystickThumb = mobileJoystick?.querySelector<HTMLElement>('b') ?? null;
 if (!canvasElement || !selectionElement || !promptElement || !kioskOverlayElement || !sceneOverlayElement) throw new Error('Missing view elements');
 const canvas: HTMLCanvasElement = canvasElement;
 const selection: HTMLElement = selectionElement;
@@ -88,6 +118,30 @@ hotbarToggle?.addEventListener('click', () => {
   document.body.classList.toggle('hotbar-open', !collapsed);
   hotbarToggle.textContent = collapsed ? '⌃' : '⌄';
   hotbarToggle.setAttribute('aria-expanded', String(!collapsed));
+});
+
+async function requestMobileImmersive(): Promise<void> {
+  if (!mobileMode) return;
+  try {
+    if (!document.fullscreenElement) await appRoot.requestFullscreen?.({ navigationUI: 'hide' });
+  } catch {
+    // iOS Safari and embedded browsers may not expose Fullscreen API.
+  }
+  try {
+    const orientation = screen.orientation as ScreenOrientation & { lock?: (value: string) => Promise<void> };
+    await orientation.lock?.('landscape');
+  } catch {
+    // Orientation lock is best-effort and normally requires fullscreen.
+  }
+  if (mobileEntry) mobileEntry.hidden = true;
+  document.body.classList.add('mobile-training-started');
+}
+
+app.querySelector<HTMLButtonElement>('[data-mobile-enter]')?.addEventListener('click', () => {
+  void requestMobileImmersive();
+});
+app.querySelector<HTMLButtonElement>('[data-mobile-fullscreen]')?.addEventListener('click', () => {
+  void requestMobileImmersive();
 });
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
@@ -382,7 +436,7 @@ if (!reviewMode) {
   room.add(assistantDriver);
   interactables.push(assistantDriver);
 
-  loadDispatcherModel().then((loadedDispatcher) => {
+  if (!__PUBLIC_DEMO__) loadDispatcherModel().then((loadedDispatcher) => {
     loadedDispatcher.position.set(...dispatcherPosition);
     loadedDispatcher.rotation.y = 0;
     room.remove(dispatcher);
@@ -396,6 +450,10 @@ if (!reviewMode) {
     dispatcher.name = '出勤调度员（低面数占位）';
     dispatcher.userData.interactionLabel = '出勤调度员：开始人人核对';
   });
+  else {
+    dispatcher.name = '出勤调度员（公开轻量版）';
+    dispatcher.userData.interactionLabel = '出勤调度员：开始人人核对';
+  }
 
   for (const x of [-3.6, 0, 3.6]) {
     const light = new THREE.PointLight(0xfff4df, 0.52, 8, 2);
@@ -1004,6 +1062,10 @@ document.addEventListener('pointerlockchange', () => {
 });
 
 const movement = new Set<string>();
+let mobileMoveX = 0;
+let mobileMoveY = 0;
+let mobileSprint = false;
+let mobileJoystickPointer: number | null = null;
 const standingEyeHeight = 1.65;
 let verticalVelocity = 0;
 let grounded = true;
@@ -1015,6 +1077,70 @@ function resolvePlayerMove(current: THREE.Vector3, desired: THREE.Vector3): THRE
   resolved.x=position.x;resolved.z=position.z;
   return resolved;
 }
+
+function updateMobileJoystick(event: PointerEvent): void {
+  if (!mobileJoystick || !mobileJoystickThumb) return;
+  const rect = mobileJoystick.getBoundingClientRect();
+  const radius = Math.max(24, rect.width * 0.32);
+  const dx = event.clientX - (rect.left + rect.width / 2);
+  const dy = event.clientY - (rect.top + rect.height / 2);
+  const length = Math.hypot(dx, dy) || 1;
+  const scale = Math.min(1, radius / length);
+  const x = dx * scale;
+  const y = dy * scale;
+  mobileMoveX = THREE.MathUtils.clamp(x / radius, -1, 1);
+  mobileMoveY = THREE.MathUtils.clamp(-y / radius, -1, 1);
+  mobileJoystickThumb.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function resetMobileJoystick(): void {
+  mobileJoystickPointer = null;
+  mobileMoveX = 0;
+  mobileMoveY = 0;
+  if (mobileJoystickThumb) mobileJoystickThumb.style.transform = 'translate(0, 0)';
+}
+
+mobileJoystick?.addEventListener('pointerdown', (event) => {
+  if (kioskOpen || sceneOverlayOpen) return;
+  mobileJoystickPointer = event.pointerId;
+  mobileJoystick.setPointerCapture(event.pointerId);
+  updateMobileJoystick(event);
+  event.preventDefault();
+});
+mobileJoystick?.addEventListener('pointermove', (event) => {
+  if (mobileJoystickPointer !== event.pointerId) return;
+  updateMobileJoystick(event);
+  event.preventDefault();
+});
+mobileJoystick?.addEventListener('pointerup', resetMobileJoystick);
+mobileJoystick?.addEventListener('pointercancel', resetMobileJoystick);
+
+app.querySelector<HTMLButtonElement>('[data-mobile-action="interact"]')?.addEventListener('click', () => {
+  if (!kioskOpen && !sceneOverlayOpen) interactNearby();
+});
+app.querySelector<HTMLButtonElement>('[data-mobile-action="primary"]')?.addEventListener('click', () => {
+  if (kioskOpen || sceneOverlayOpen) return;
+  if (selectedItem) triggerHeldItemAction();
+  else interactNearby();
+});
+app.querySelector<HTMLButtonElement>('[data-mobile-action="jump"]')?.addEventListener('click', () => {
+  if (kioskOpen || sceneOverlayOpen || !grounded) return;
+  verticalVelocity = 4.8;
+  grounded = false;
+});
+const mobileSprintButton = app.querySelector<HTMLButtonElement>('[data-mobile-action="sprint"]');
+const stopMobileSprint = (): void => {
+  mobileSprint = false;
+  mobileSprintButton?.classList.remove('pressed');
+};
+mobileSprintButton?.addEventListener('pointerdown', (event) => {
+  mobileSprint = true;
+  mobileSprintButton.classList.add('pressed');
+  mobileSprintButton.setPointerCapture(event.pointerId);
+  event.preventDefault();
+});
+mobileSprintButton?.addEventListener('pointerup', stopMobileSprint);
+mobileSprintButton?.addEventListener('pointercancel', stopMobileSprint);
 window.addEventListener('keydown', (event) => {
   const target = event.target as HTMLElement | null;
   const typing = target?.matches('input, textarea, select, [contenteditable="true"]') ?? false;
@@ -1154,13 +1280,15 @@ renderer.setAnimationLoop(() => {
   }
   if (reviewMode) controls.update();
   else if (!kioskOpen && !sceneOverlayOpen) {
-    const forwardInput = Number(movement.has('KeyW') || movement.has('ArrowUp')) - Number(movement.has('KeyS') || movement.has('ArrowDown'));
-    const sideInput = Number(movement.has('KeyD') || movement.has('ArrowRight')) - Number(movement.has('KeyA') || movement.has('ArrowLeft'));
+    const keyboardForward = Number(movement.has('KeyW') || movement.has('ArrowUp')) - Number(movement.has('KeyS') || movement.has('ArrowDown'));
+    const keyboardSide = Number(movement.has('KeyD') || movement.has('ArrowRight')) - Number(movement.has('KeyA') || movement.has('ArrowLeft'));
+    const forwardInput = THREE.MathUtils.clamp(keyboardForward + mobileMoveY, -1, 1);
+    const sideInput = THREE.MathUtils.clamp(keyboardSide + mobileMoveX, -1, 1);
     if (forwardInput || sideInput) {
       const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
       const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
       const move = forward.multiplyScalar(forwardInput).add(right.multiplyScalar(sideInput)).normalize();
-      const sprinting = movement.has('ShiftLeft') || movement.has('ShiftRight');
+      const sprinting = mobileSprint || movement.has('ShiftLeft') || movement.has('ShiftRight');
       const desired = camera.position.clone().addScaledVector(move, delta * (sprinting ? 4.35 : 2.25));
       const resolved = resolvePlayerMove(camera.position, desired);
       camera.position.x = resolved.x;
@@ -1181,7 +1309,7 @@ renderer.setAnimationLoop(() => {
     interactionPrompt.hidden = !nearby;
     const labels: Record<string, string> = { kiosk: '出勤一体机', dispatcher: '出勤调度员', notebook: '副司机', door: '出勤室门', 'rear-door':'派班室后门' };
     if (promptLabel) promptLabel.textContent = nearby ? `已靠近：${labels[nearby]}` : '';
-    if (promptButton) promptButton.textContent = '交互（E）';
+    if (promptButton) promptButton.textContent = mobileMode ? '交互' : '交互（E）';
   }
   renderer.autoClear = true;
   renderer.info.reset();
