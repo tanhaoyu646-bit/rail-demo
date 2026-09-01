@@ -1,0 +1,5468 @@
+{
+  "targetName": "Railway Attendance Kiosk",
+  "targetId": "railway-attendance-kiosk",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\references\\attendance-kiosk-target.jpg",
+  "referenceCamera": {
+    "solved": false,
+    "fovDegrees": 40.0,
+    "aspect": 1.0,
+    "orientation": {
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "roll": 0.0
+    },
+    "positionHint": [
+      0.0,
+      0.0,
+      3.0
+    ],
+    "note": "For likeness work, solve the reference camera (forge/stage1_intake/solve_camera_pose.py) so the review render aligns with the photo and the reference can be projected. Confirm by overlay review."
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "railway attendance self-service kiosk",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "mechanical",
+        "architectural"
+      ],
+      "structureKind": [
+        "compound object",
+        "layered shell",
+        "articulated assembly",
+        "repeated modules"
+      ],
+      "motionPotential": [
+        "static prop",
+        "articulated recognition arm",
+        "clickable detachable modules"
+      ],
+      "materialFamilies": [
+        "painted metal",
+        "plastic",
+        "glass-like",
+        "rubber",
+        "mixed"
+      ],
+      "notes": "Observed as a floor-standing railway crew attendance terminal. Front interaction zones are reference-grounded; hidden rear and full side surfaces are low-poly approximations."
+    },
+    "complexity": {
+      "tier": "complex",
+      "scores": {
+        "silhouetteComplexity": 2,
+        "componentCount": 3,
+        "hierarchyDepth": 2,
+        "repetitionDensity": 2,
+        "materialLayerCount": 2,
+        "localDetailDensity": 2,
+        "occlusionRisk": 3,
+        "actionReadinessNeed": 2
+      },
+      "estimatedCounts": {
+        "macroComponents": 4,
+        "mesoComponents": 11,
+        "microFeatureGroups": 8,
+        "materialLayers": 6,
+        "repetitionSystems": 2
+      },
+      "reasoning": [
+        "The shell is composed of multiple stepped and sloped hard-surface masses rather than one cuboid.",
+        "The recognition recess and movable arm require a nested action-ready hierarchy.",
+        "Vent perforations and keyboard keycaps are repeated systems that affect identity at close range.",
+        "The main screen, white shell, gray interface fascia, black worktop, keyboard and blue connectors require distinct material responses.",
+        "The single oblique view and foreground occlusion create high hidden-side uncertainty."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "complex",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Choose simple/moderate/complex/ultra-complex from observed structure, not from a hardcoded domain."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "component-zones",
+      "targetMinDetails": 10,
+      "note": "Enumerate every identity-defining small detail before authoring the spec. Each detail must map to a component.localFeatures entry or material.localOverrides entry, never prose only. Use forge/stage1_intake/build_detail_inventory.py to scan zones.",
+      "details": [
+        {
+          "id": "shell-edge-chamfers",
+          "kind": "bevel",
+          "description": "Narrow real chamfers on white shell edges.",
+          "region": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 1.0,
+            "height": 0.66,
+            "units": "normalized"
+          },
+          "scale": "0.012-0.025 kiosk width",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shell.edge-chamfers"
+          },
+          "evidenceRef": "detail-zones/zone-r0c0.png",
+          "confidence": 0.84
+        },
+        {
+          "id": "recognition-bay-channel",
+          "kind": "groove",
+          "description": "Tall black sensor bay with a dark perimeter channel.",
+          "region": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.34,
+            "height": 0.34,
+            "units": "normalized"
+          },
+          "scale": "0.09 width by 0.25 height",
+          "affects": "geometry and AO",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "recognition-bay.perimeter-channel"
+          },
+          "evidenceRef": "detail-zones/zone-r0c0.png",
+          "confidence": 0.9
+        },
+        {
+          "id": "recognition-arm-pivot",
+          "kind": "fastener",
+          "description": "Circular pivot cap on the articulated recognition arm.",
+          "region": {
+            "x": 0.0,
+            "y": 0.12,
+            "width": 0.33,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "0.035 kiosk width",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "recognition-arm.pivot-cap"
+          },
+          "evidenceRef": "detail-zones/zone-r0c0.png",
+          "confidence": 0.82
+        },
+        {
+          "id": "screen-glass-highlight",
+          "kind": "gloss",
+          "description": "Broad low-roughness reflection on screen glass.",
+          "region": {
+            "x": 0.28,
+            "y": 0.03,
+            "width": 0.72,
+            "height": 0.38,
+            "units": "normalized"
+          },
+          "scale": "main screen surface",
+          "affects": "roughness and clearcoat",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "screen-glass.reflection-band"
+          },
+          "evidenceRef": "detail-zones/zone-r0c1.png",
+          "confidence": 0.92
+        },
+        {
+          "id": "top-camera-lens",
+          "kind": "hole",
+          "description": "Recessed camera lens cavity in the top housing.",
+          "region": {
+            "x": 0.44,
+            "y": 0.0,
+            "width": 0.23,
+            "height": 0.08,
+            "units": "normalized"
+          },
+          "scale": "0.1 kiosk width",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "top-camera.lens-cavity"
+          },
+          "evidenceRef": "detail-zones/zone-r0c1.png",
+          "confidence": 0.78
+        },
+        {
+          "id": "dual-card-slots",
+          "kind": "hole",
+          "description": "Two aligned recessed card slots below the screen.",
+          "region": {
+            "x": 0.36,
+            "y": 0.38,
+            "width": 0.48,
+            "height": 0.15,
+            "units": "normalized"
+          },
+          "scale": "paired equal slots",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "card-reader.slot-pair"
+          },
+          "evidenceRef": "detail-zones/zone-r1c1.png",
+          "confidence": 0.95
+        },
+        {
+          "id": "vent-hole-arrays",
+          "kind": "hole",
+          "description": "Bounded regular ventilation perforation grids.",
+          "region": {
+            "x": 0.0,
+            "y": 0.34,
+            "width": 1.0,
+            "height": 0.28,
+            "units": "normalized"
+          },
+          "scale": "two 6x8 arrays",
+          "affects": "repeated geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "interface-fascia.vent-grid"
+          },
+          "evidenceRef": "detail-zones/zone-r1c0.png",
+          "confidence": 0.76
+        },
+        {
+          "id": "circular-interface-ports",
+          "kind": "hole",
+          "description": "Grouped circular sockets in the gray interface fascia.",
+          "region": {
+            "x": 0.0,
+            "y": 0.48,
+            "width": 0.55,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "mixed diameters",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "interface-fascia.circular-ports"
+          },
+          "evidenceRef": "detail-zones/zone-r1c0.png",
+          "confidence": 0.8
+        },
+        {
+          "id": "blue-connector-caps",
+          "kind": "ridge",
+          "description": "Paired blue caps with raised radial grip ribs.",
+          "region": {
+            "x": 0.42,
+            "y": 0.51,
+            "width": 0.28,
+            "height": 0.16,
+            "units": "normalized"
+          },
+          "scale": "paired equal diameter",
+          "affects": "geometry and albedo",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "blue-connectors.radial-grip-ribs"
+          },
+          "evidenceRef": "detail-zones/zone-r1c1.png",
+          "confidence": 0.91
+        },
+        {
+          "id": "worktop-reflection",
+          "kind": "gloss",
+          "description": "Broad low-roughness reflection on black worktop.",
+          "region": {
+            "x": 0.0,
+            "y": 0.6,
+            "width": 1.0,
+            "height": 0.4,
+            "units": "normalized"
+          },
+          "scale": "entire worktop",
+          "affects": "roughness and clearcoat",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "worktop-glass.operator-reflection"
+          },
+          "evidenceRef": "detail-zones/zone-r2c1.png",
+          "confidence": 0.94
+        },
+        {
+          "id": "keyboard-key-grid",
+          "kind": "fastener",
+          "description": "Bounded six-row repeated keycap system with touchpad.",
+          "region": {
+            "x": 0.1,
+            "y": 0.69,
+            "width": 0.62,
+            "height": 0.25,
+            "units": "normalized"
+          },
+          "scale": "six rows",
+          "affects": "instanced geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "keyboard.keycap-grid"
+          },
+          "evidenceRef": "detail-zones/zone-r2c1.png",
+          "confidence": 0.93
+        },
+        {
+          "id": "fingerprint-zone-marking",
+          "kind": "decal",
+          "description": "Dedicated fingerprint sensing patch and semantic label.",
+          "region": {
+            "x": 0.73,
+            "y": 0.8,
+            "width": 0.27,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "small interaction patch",
+          "affects": "albedo and interaction anchor",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "fingerprint-pad.semantic-label"
+          },
+          "evidenceRef": "detail-zones/zone-r2c2.png",
+          "confidence": 0.74
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false,
+      "styleHeads": 0.0,
+      "proportions": {
+        "headUnit": 0.0,
+        "torso": 0.0,
+        "legs": 0.0,
+        "shoulderWidth": 0.0,
+        "hipWidth": 0.0
+      },
+      "pose": {
+        "type": "unassessed",
+        "jointAngles": {}
+      },
+      "faceLandmarks": {
+        "eyeLine": 0.0,
+        "eyeSpacing": 0.0,
+        "noseBase": 0.0,
+        "mouthLine": 0.0,
+        "hairline": 0.0
+      },
+      "features": [],
+      "confidence": 0.0,
+      "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+    },
+    "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\references\\attendance-kiosk-target.jpg"
+  },
+  "qualityContract": {
+    "qualityBar": "complex",
+    "definitionOfDone": [
+      "At the front-oblique training camera, the model must read immediately as the supplied attendance kiosk rather than a generic terminal.",
+      "The sloped white shell, large inset screen, left recognition recess with articulated arm, dual card-slot module, gray connector fascia and black worktop must preserve their observed relative positions.",
+      "The model must stay within a 12000-triangle target for the complete kiosk, with vent holes and keycaps implemented as bounded repeated systems.",
+      "Main screen, worktop, painted shell, interface plastics, keyboard and blue connector caps must remain visually distinct under neutral and grazing light.",
+      "Clickable component groups must include screen, recognition arm, dual card-slot module, keyboard, fingerprint zone and connector panel."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 3,
+      "mesoComponents": 7,
+      "microFeatureGroups": 5,
+      "materialLayers": 3,
+      "repetitionSystems": 1,
+      "reviewViewpoints": 4
+    },
+    "featureGroups": [
+      {
+        "id": "stepped-shell-silhouette",
+        "name": "Stepped shell silhouette and front operating depth",
+        "required": true,
+        "qualityCriteria": [
+          "The top screen housing, recessed connector fascia, projecting worktop and lower cabinet form four readable depth steps.",
+          "The main screen remains the dominant front mass while the worktop projects far enough to support keyboard interaction."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "the cabinet collapses into a single rectangular box",
+          "screen housing, fascia and worktop sit on one plane",
+          "the main screen is too small relative to the white shell"
+        ]
+      },
+      {
+        "id": "recognition-recess-arm",
+        "name": "Recognition recess and articulated arm",
+        "required": true,
+        "qualityCriteria": [
+          "A tall black inset recess sits to the operator-left of the main screen.",
+          "The recognition arm pivots from the recess and projects horizontally across the front face.",
+          "The arm has a visible circular joint cap and a rectangular sensor head."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "the recess is replaced by a flat decal",
+          "the arm floats without a pivot socket",
+          "the arm is omitted or placed on the wrong side of the main screen"
+        ]
+      },
+      {
+        "id": "front-interface-modules",
+        "name": "Front card-slot and connector modules",
+        "required": true,
+        "qualityCriteria": [
+          "The dual black card-slot module is inset below the screen and contains two aligned slots.",
+          "The gray connector fascia contains separated circular ports, two blue capped connectors and vent perforation groups.",
+          "Every raised module has a named parent socket, overlap and local transform."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "the card-slot module floats above the shell",
+          "the two blue connector caps merge into one shape",
+          "front ports are distributed randomly instead of grouped by the reference"
+        ]
+      },
+      {
+        "id": "worktop-keyboard-interaction",
+        "name": "Worktop, keyboard and fingerprint interaction zone",
+        "required": true,
+        "qualityCriteria": [
+          "The black worktop is a separate glossy slab projecting toward the operator.",
+          "The keyboard contains a bounded repeated key grid plus a distinct touchpad region.",
+          "The fingerprint interaction zone remains a separate clickable patch on the operator-right side."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "keyboard is painted into the worktop rather than modeled as a component",
+          "key repetition exceeds the mobile triangle budget",
+          "fingerprint zone has no separate interaction anchor"
+        ]
+      },
+      {
+        "id": "kiosk-material-separation",
+        "name": "Kiosk material separation and controlled look development",
+        "required": true,
+        "qualityCriteria": [
+          "Warm-white painted shell, black screen glass, black glossy worktop, gray fascia, metallic keyboard and cyan-blue connector caps remain distinct.",
+          "Reference PBR evidence reaches confidence >= 0.7 for every admitted material crop used as implementation evidence.",
+          "Neutral and grazing-angle views prove that screen and worktop reflections do not erase component boundaries."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "white shell, gray fascia and black worktop collapse to one roughness response",
+          "screen reads as matte paint instead of glass-like material",
+          "blue connector caps lose their color separation under neutral light"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "thickness-axis",
+      "long-axis"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "stepped-shell-silhouette",
+      "name": "Four-depth stepped shell silhouette",
+      "tier": "critical",
+      "passIds": [
+        "blockout"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "root",
+        "upper-shell",
+        "lower-cabinet",
+        "worktop"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "operator-interface-hierarchy",
+      "name": "Screen, recognition arm, card slots and connector fascia hierarchy",
+      "tier": "critical",
+      "passIds": [
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "main-screen",
+        "recognition-bay",
+        "recognition-arm",
+        "card-reader",
+        "interface-fascia"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "kiosk-material-separation",
+      "name": "Painted shell, glass, worktop, fascia, metal and blue plastic separation",
+      "tier": "critical",
+      "passIds": [
+        "material-pass",
+        "surface-pass"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "upper-shell",
+        "main-screen",
+        "worktop",
+        "keyboard",
+        "blue-connectors"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "structural-pass",
+    "completedPasses": [
+      "blockout"
+    ],
+    "lastCompletedPass": "blockout",
+    "blockedReason": "",
+    "nextRequiredEvidence": [
+      "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+      "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+      "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+      "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold.",
+      "attachment contracts for child appendages/connectors",
+      "no floating child roots/joints in the browser screenshot",
+      "browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet for AI vision review",
+      "banded interior difference vs the reference baseline (forge/stage4_review/interior_difference.py --from/--to per region)",
+      "AI vision score at or above the visual acceptance threshold",
+      "all critical semantic feature scores from the shared image pair at or above their thresholds",
+      "self-correction review appended with action=continue before the next pass"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "Overall dimensions are ratio-based and use an approximate 2.1 meter standing terminal height.",
+    "Hidden rear and right-side surfaces use plain powder-coated panels with no unobserved service hardware.",
+    "Recognition arm rotation is limited to a single horizontal pivot for training interaction.",
+    "Unreadable printed labels are replaced by generated semantic training labels.",
+    "Basket, red logbook, loose cables and human hands are separate scene props and excluded from kiosk geometry."
+  ],
+  "coordinateFrame": {
+    "front": "camera-facing side in the reference image",
+    "up": "image up direction",
+    "scaleReference": "unit scale; adjust after first browser render"
+  },
+  "silhouette": {
+    "boundingShape": "",
+    "aspectRatios": [],
+    "symmetry": "",
+    "dominantCurves": [],
+    "negativeSpaces": [],
+    "landmarks": []
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [],
+      "confidence": 0.5
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "root",
+      "name": "Kiosk Root Cabinet",
+      "level": "macro",
+      "role": "body",
+      "importance": 1.0,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid lower cabinet with countable planar faces; a beveled box is structurally appropriate.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 1.3,
+        "height": 1.2,
+        "depth": 0.56,
+        "units": "meters-approximate",
+        "confidence": 0.62
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "shell-white",
+      "materialLayers": [
+        "shell-white"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 233, 229, 1)",
+        "secondaryAlbedo": "rgba(214, 217, 214, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.72,
+        "baseColor": "#E8E9E5",
+        "roughness": 0.62,
+        "metalness": 0.05,
+        "finish": "satin powder-coated shell"
+      },
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "shell.edge-chamfers",
+          "kind": "bevel",
+          "bevelRadius": 0.025,
+          "segments": 1,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "upper-shell",
+      "name": "Sloped Upper Screen Housing",
+      "level": "macro",
+      "role": "shell",
+      "importance": 0.96,
+      "confidence": 0.78,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid sloped housing with planar faces and a shallow front bevel.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled hard-surface housing",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.03,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "weighted vertex normals"
+      },
+      "parent": "root",
+      "attachment": {
+        "parentSocket": "root-upper-front",
+        "contactType": "overlap",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.12
+        ],
+        "embedDepth": 0.03,
+        "overlap": 0.03,
+        "gapTolerance": 0.01
+      },
+      "dimensions": {
+        "width": 1.34,
+        "height": 0.86,
+        "depth": 0.34,
+        "units": "meters-approximate",
+        "confidence": 0.68
+      },
+      "transform": {
+        "position": [
+          0,
+          1.03,
+          0.14
+        ],
+        "rotation": [
+          -0.2,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "shell-white",
+      "materialLayers": [
+        "shell-white"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 233, 229, 1)",
+        "secondaryAlbedo": "rgba(214, 217, 214, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.72,
+        "baseColor": "#E8E9E5",
+        "roughness": 0.62,
+        "metalness": 0.05,
+        "finish": "satin powder coat"
+      },
+      "localFeatures": [
+        {
+          "id": "upper-shell.edge-chamfers",
+          "kind": "bevel",
+          "bevelRadius": 0.03,
+          "segments": 1,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "shell-white"
+      },
+      "materialRegions": [
+        {
+          "regionId": "shell-white",
+          "materialId": "shell-white",
+          "profileId": "coating.painted-metal",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+            "bbox": {
+              "x": 0,
+              "y": 280,
+              "width": 190,
+              "height": 280
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0618
+          }
+        }
+      ]
+    },
+    {
+      "id": "interface-fascia",
+      "name": "Gray Connector Fascia",
+      "level": "macro",
+      "role": "interface-panel",
+      "importance": 0.86,
+      "confidence": 0.8,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid recessed panel with planar face and discrete openings.",
+      "geometryDescriptor": {
+        "topologyIntent": "thin hard-surface panel",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.012,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "weighted vertex normals"
+      },
+      "parent": "root",
+      "attachment": {
+        "parentSocket": "root-mid-front",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.08
+        ],
+        "embedDepth": 0.025,
+        "overlap": 0.025,
+        "gapTolerance": 0.008
+      },
+      "dimensions": {
+        "width": 1.24,
+        "height": 0.28,
+        "depth": 0.08,
+        "units": "meters-approximate",
+        "confidence": 0.72
+      },
+      "transform": {
+        "position": [
+          0,
+          0.7,
+          0.34
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "fascia-gray",
+      "materialLayers": [
+        "fascia-gray",
+        "dark-plastic",
+        "blue-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(191, 196, 195, 1)",
+        "secondaryAlbedo": "rgba(174, 181, 179, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.68,
+        "baseColor": "#BFC4C3",
+        "roughness": 0.52,
+        "metalness": 0.08,
+        "finish": "satin molded fascia"
+      },
+      "localFeatures": [
+        {
+          "id": "interface-fascia.vent-grid",
+          "kind": "hole",
+          "pattern": "two bounded grids",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        },
+        {
+          "id": "interface-fascia.circular-ports",
+          "kind": "hole",
+          "count": 3,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "fascia-gray"
+      },
+      "materialRegions": [
+        {
+          "regionId": "fascia-gray",
+          "materialId": "fascia-gray",
+          "profileId": "plastic.matte",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+            "bbox": {
+              "x": 20,
+              "y": 535,
+              "width": 285,
+              "height": 175
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0579
+          }
+        }
+      ]
+    },
+    {
+      "id": "worktop",
+      "name": "Black Operator Worktop",
+      "level": "macro",
+      "role": "work-surface",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Independent glossy slab with rigid planar faces and projecting front edge.",
+      "geometryDescriptor": {
+        "topologyIntent": "thin beveled slab",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.018,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "weighted vertex normals"
+      },
+      "parent": "root",
+      "attachment": {
+        "parentSocket": "root-worktop",
+        "contactType": "overlap",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.1
+        ],
+        "embedDepth": 0.02,
+        "overlap": 0.03,
+        "gapTolerance": 0.008
+      },
+      "dimensions": {
+        "width": 1.32,
+        "height": 0.06,
+        "depth": 0.6,
+        "units": "meters-approximate",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0.54,
+          0.44
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "worktop-glass",
+      "materialLayers": [
+        "worktop-glass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(17, 23, 21, 1)",
+        "secondaryAlbedo": "rgba(27, 36, 33, 1)",
+        "materialClass": "glass",
+        "materialClassConfidence": 0.76,
+        "baseColor": "#111715",
+        "roughness": 0.2,
+        "metalness": 0.02,
+        "clearcoat": 0.72,
+        "finish": "gloss black worktop"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "worktop-glass"
+      },
+      "materialRegions": [
+        {
+          "regionId": "worktop-glass",
+          "materialId": "worktop-glass",
+          "profileId": "plastic.glossy",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+            "bbox": {
+              "x": 520,
+              "y": 950,
+              "width": 200,
+              "height": 190
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0441
+          }
+        }
+      ]
+    },
+    {
+      "id": "main-screen",
+      "name": "Main Touch Screen",
+      "level": "macro",
+      "role": "interactive-screen",
+      "importance": 1.0,
+      "confidence": 0.94,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid glass panel and bezel inset into the upper housing.",
+      "parent": "upper-shell",
+      "attachment": {
+        "parentSocket": "upper-shell-screen",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "embedDepth": 0.018,
+        "overlap": 0.02,
+        "gapTolerance": 0.005
+      },
+      "dimensions": {
+        "width": 0.96,
+        "height": 0.58,
+        "depth": 0.035,
+        "units": "meters-approximate",
+        "confidence": 0.83
+      },
+      "transform": {
+        "position": [
+          0.14,
+          0.01,
+          0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "screen-glass",
+      "materialLayers": [
+        "screen-glass",
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(16, 23, 22, 1)",
+        "secondaryAlbedo": "rgba(22, 37, 34, 1)",
+        "materialClass": "glass",
+        "materialClassConfidence": 0.9,
+        "baseColor": "#101716",
+        "roughness": 0.16,
+        "metalness": 0.0,
+        "clearcoat": 0.9,
+        "finish": "dark display glass"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "screen-glass"
+      },
+      "materialRegions": [
+        {
+          "regionId": "screen-glass",
+          "materialId": "screen-glass",
+          "profileId": "glass.clear",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+            "bbox": {
+              "x": 230,
+              "y": 80,
+              "width": 490,
+              "height": 360
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.2048
+          }
+        }
+      ]
+    },
+    {
+      "id": "recognition-bay",
+      "name": "Recognition Sensor Bay",
+      "level": "meso",
+      "role": "sensor-bay",
+      "importance": 0.95,
+      "confidence": 0.9,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Tall rigid black module embedded behind the white front shell; low-poly approximation uses overlapping solids.",
+      "parent": "upper-shell",
+      "attachment": {
+        "parentSocket": "upper-shell-sensor-bay",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.05
+        ],
+        "embedDepth": 0.025,
+        "overlap": 0.025,
+        "gapTolerance": 0.005
+      },
+      "dimensions": {
+        "width": 0.19,
+        "height": 0.55,
+        "depth": 0.06,
+        "units": "meters-approximate",
+        "confidence": 0.76
+      },
+      "transform": {
+        "position": [
+          -0.48,
+          0.02,
+          0.22
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(23, 29, 27, 1)",
+        "secondaryAlbedo": "rgba(36, 44, 41, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.88,
+        "baseColor": "#171D1B",
+        "roughness": 0.48,
+        "metalness": 0.0,
+        "finish": "matte inset plastic"
+      },
+      "localFeatures": [
+        {
+          "id": "recognition-bay.perimeter-channel",
+          "kind": "groove",
+          "depth": 0.02,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural"
+    },
+    {
+      "id": "recognition-arm",
+      "name": "Articulated Recognition Arm",
+      "level": "meso",
+      "role": "articulated-sensor",
+      "importance": 0.98,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid rectangular arm rotating from a cylindrical pivot socket.",
+      "parent": "recognition-bay",
+      "attachment": {
+        "parentSocket": "recognition-bay-pivot",
+        "contactType": "socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0.38,
+          0,
+          0
+        ],
+        "embedDepth": 0.025,
+        "overlap": 0.025,
+        "gapTolerance": 0.006
+      },
+      "dimensions": {
+        "width": 0.42,
+        "height": 0.055,
+        "depth": 0.065,
+        "units": "meters-approximate",
+        "confidence": 0.74
+      },
+      "transform": {
+        "position": [
+          0.2,
+          -0.05,
+          0.06
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic",
+        "metal-keyboard"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(27, 33, 31, 1)",
+        "secondaryAlbedo": "rgba(45, 53, 50, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.82,
+        "baseColor": "#1B211F",
+        "roughness": 0.42,
+        "metalness": 0.08,
+        "finish": "matte articulated arm"
+      },
+      "localFeatures": [
+        {
+          "id": "recognition-arm.pivot-cap",
+          "kind": "fastener",
+          "shape": "cylinder",
+          "count": 1,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural"
+    },
+    {
+      "id": "card-reader",
+      "name": "Dual Card Reader Module",
+      "level": "meso",
+      "role": "interactive-card-reader",
+      "importance": 0.9,
+      "confidence": 0.95,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid black inset module with two recessed slot openings.",
+      "parent": "root",
+      "attachment": {
+        "parentSocket": "root-card-reader",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.06
+        ],
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.005
+      },
+      "dimensions": {
+        "width": 0.42,
+        "height": 0.14,
+        "depth": 0.055,
+        "units": "meters-approximate",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0.26,
+          -0.12,
+          0.38
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(17, 23, 22, 1)",
+        "secondaryAlbedo": "rgba(34, 43, 40, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.9,
+        "baseColor": "#111716",
+        "roughness": 0.4,
+        "metalness": 0.0,
+        "finish": "dark molded card reader"
+      },
+      "localFeatures": [
+        {
+          "id": "card-reader.slot-pair",
+          "kind": "hole",
+          "count": 2,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "dark-plastic"
+      },
+      "materialRegions": [
+        {
+          "regionId": "dark-plastic",
+          "materialId": "dark-plastic",
+          "profileId": "plastic.matte",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+            "bbox": {
+              "x": 345,
+              "y": 455,
+              "width": 265,
+              "height": 150
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0461
+          }
+        }
+      ]
+    },
+    {
+      "id": "blue-connectors",
+      "name": "Blue Industrial Connector Pair",
+      "level": "meso",
+      "role": "connector-pair",
+      "importance": 0.78,
+      "confidence": 0.91,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Two rigid cylindrical caps mounted to square bases.",
+      "parent": "interface-fascia",
+      "attachment": {
+        "parentSocket": "fascia-blue-connectors",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.06
+        ],
+        "embedDepth": 0.018,
+        "overlap": 0.02,
+        "gapTolerance": 0.006
+      },
+      "dimensions": {
+        "width": 0.26,
+        "height": 0.1,
+        "depth": 0.08,
+        "units": "meters-approximate",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          0.14,
+          0,
+          0.08
+        ],
+        "rotation": [
+          1.5708,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "blue-plastic",
+      "materialLayers": [
+        "blue-plastic",
+        "metal-keyboard"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(21, 148, 181, 1)",
+        "secondaryAlbedo": "rgba(8, 123, 154, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.9,
+        "baseColor": "#1594B5",
+        "roughness": 0.46,
+        "metalness": 0.0,
+        "finish": "cyan-blue molded caps"
+      },
+      "localFeatures": [
+        {
+          "id": "blue-connectors.radial-grip-ribs",
+          "kind": "ridge",
+          "count": 12,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "blue-plastic"
+      },
+      "materialRegions": [
+        {
+          "regionId": "blue-plastic",
+          "materialId": "blue-plastic",
+          "profileId": "plastic.matte",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+            "bbox": {
+              "x": 300,
+              "y": 610,
+              "width": 210,
+              "height": 170
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0414
+          }
+        }
+      ]
+    },
+    {
+      "id": "top-camera",
+      "name": "Top Camera Housing",
+      "level": "meso",
+      "role": "camera",
+      "importance": 0.72,
+      "confidence": 0.78,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Small rigid rounded housing mounted on top of the shell.",
+      "parent": "upper-shell",
+      "attachment": {
+        "parentSocket": "upper-shell-top",
+        "contactType": "butt",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.05,
+          0
+        ],
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.006
+      },
+      "dimensions": {
+        "width": 0.15,
+        "height": 0.055,
+        "depth": 0.06,
+        "units": "meters-approximate",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0.12,
+          0.46,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic",
+        "screen-glass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(23, 28, 27, 1)",
+        "secondaryAlbedo": "rgba(37, 44, 42, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.84,
+        "baseColor": "#171C1B",
+        "roughness": 0.38,
+        "metalness": 0.0,
+        "finish": "matte camera housing"
+      },
+      "localFeatures": [
+        {
+          "id": "top-camera.lens-cavity",
+          "kind": "hole",
+          "depth": 0.012,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural"
+    },
+    {
+      "id": "keyboard",
+      "name": "Metal Keyboard",
+      "level": "meso",
+      "role": "interactive-keyboard",
+      "importance": 0.86,
+      "confidence": 0.93,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Thin rigid keyboard tray with repeated raised keycaps.",
+      "parent": "worktop",
+      "attachment": {
+        "parentSocket": "worktop-keyboard",
+        "contactType": "butt",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.03,
+          0
+        ],
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.008
+      },
+      "dimensions": {
+        "width": 0.72,
+        "height": 0.03,
+        "depth": 0.24,
+        "units": "meters-approximate",
+        "confidence": 0.78
+      },
+      "transform": {
+        "position": [
+          -0.18,
+          0.05,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0.04,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "metal-keyboard",
+      "materialLayers": [
+        "metal-keyboard",
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(155, 159, 156, 1)",
+        "secondaryAlbedo": "rgba(116, 122, 119, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.86,
+        "baseColor": "#9B9F9C",
+        "roughness": 0.35,
+        "metalness": 0.55,
+        "finish": "brushed metal keyboard"
+      },
+      "localFeatures": [
+        {
+          "id": "keyboard.keycap-grid",
+          "kind": "fastener",
+          "count": 84,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "uvContract": {
+        "status": "unwrapped",
+        "strategy": "generated procedural coordinates",
+        "materialId": "metal-keyboard"
+      },
+      "materialRegions": [
+        {
+          "regionId": "metal-keyboard",
+          "materialId": "metal-keyboard",
+          "profileId": "metal.steel-brushed",
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+            "bbox": {
+              "x": 100,
+              "y": 805,
+              "width": 470,
+              "height": 250
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.1364
+          }
+        }
+      ]
+    },
+    {
+      "id": "fingerprint-pad",
+      "name": "Fingerprint Interaction Pad",
+      "level": "meso",
+      "role": "interactive-fingerprint",
+      "importance": 0.72,
+      "confidence": 0.74,
+      "primitive": "box",
+      "topologyClass": "material-only",
+      "topologyRationale": "Thin carrier patch on the worktop for a sensing and semantic decal region.",
+      "parent": "worktop",
+      "attachment": {
+        "parentSocket": "worktop-fingerprint",
+        "contactType": "butt",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.01,
+          0
+        ],
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004
+      },
+      "dimensions": {
+        "width": 0.16,
+        "height": 0.008,
+        "depth": 0.12,
+        "units": "meters-approximate",
+        "confidence": 0.66
+      },
+      "transform": {
+        "position": [
+          0.46,
+          0.045,
+          0.1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(21, 32, 29, 1)",
+        "secondaryAlbedo": "rgba(32, 47, 42, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.64,
+        "baseColor": "#15201D",
+        "roughness": 0.35,
+        "metalness": 0.0,
+        "finish": "dark sensor patch"
+      },
+      "localFeatures": [
+        {
+          "id": "fingerprint-pad.semantic-label",
+          "kind": "decal",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural"
+    },
+    {
+      "id": "card-slot-pair",
+      "name": "Card Slot Pair",
+      "level": "micro",
+      "role": "slot-system",
+      "importance": 0.72,
+      "confidence": 0.95,
+      "primitive": "box",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Recessed openings that change local cavity structure.",
+      "parent": "card-reader",
+      "dimensions": {
+        "width": 0.31,
+        "height": 0.025,
+        "depth": 0.02,
+        "units": "meters-approximate",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0.04
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(5, 7, 6, 1)",
+        "secondaryAlbedo": "rgba(17, 23, 22, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.9,
+        "baseColor": "#050706",
+        "roughness": 0.6,
+        "metalness": 0.0,
+        "finish": "slot cavity"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail"
+    },
+    {
+      "id": "vent-grid",
+      "name": "Vent Perforation Grids",
+      "level": "micro",
+      "role": "repeated-vent-system",
+      "importance": 0.58,
+      "confidence": 0.76,
+      "primitive": "instanced-cluster",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Repeated shallow openings distributed on fascia surfaces.",
+      "parent": "interface-fascia",
+      "dimensions": {
+        "width": 0.22,
+        "height": 0.13,
+        "depth": 0.015,
+        "units": "meters-approximate",
+        "confidence": 0.66
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(48, 55, 53, 1)",
+        "secondaryAlbedo": "rgba(23, 29, 27, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.76,
+        "baseColor": "#303735",
+        "roughness": 0.58,
+        "metalness": 0.0,
+        "finish": "vent cavity"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail"
+    },
+    {
+      "id": "circular-ports",
+      "name": "Circular Interface Ports",
+      "level": "micro",
+      "role": "port-system",
+      "importance": 0.56,
+      "confidence": 0.8,
+      "primitive": "cylinder",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Small cylindrical socket openings with visible cavity depth.",
+      "parent": "interface-fascia",
+      "attachment": {
+        "parentSocket": "fascia-port-zone",
+        "contactType": "embed",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "embedDepth": 0.015,
+        "overlap": 0.015,
+        "gapTolerance": 0.004
+      },
+      "dimensions": {
+        "width": 0.16,
+        "height": 0.07,
+        "depth": 0.04,
+        "units": "meters-approximate",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          -0.34,
+          -0.03,
+          0.06
+        ],
+        "rotation": [
+          1.5708,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "dark-plastic",
+      "materialLayers": [
+        "dark-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(27, 33, 31, 1)",
+        "secondaryAlbedo": "rgba(44, 52, 49, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.78,
+        "baseColor": "#1B211F",
+        "roughness": 0.54,
+        "metalness": 0.0,
+        "finish": "socket plastic"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail"
+    },
+    {
+      "id": "keycap-grid",
+      "name": "Instanced Keycap Grid",
+      "level": "micro",
+      "role": "repeated-key-system",
+      "importance": 0.68,
+      "confidence": 0.93,
+      "primitive": "instanced-cluster",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Repeated raised keycaps on a rigid keyboard tray.",
+      "parent": "keyboard",
+      "dimensions": {
+        "width": 0.58,
+        "height": 0.018,
+        "depth": 0.18,
+        "units": "meters-approximate",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          -0.04,
+          0.025,
+          -0.01
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "metal-keyboard",
+      "materialLayers": [
+        "metal-keyboard"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(166, 170, 167, 1)",
+        "secondaryAlbedo": "rgba(116, 122, 119, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.84,
+        "baseColor": "#A6AAA7",
+        "roughness": 0.42,
+        "metalness": 0.45,
+        "finish": "raised keycaps"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail"
+    },
+    {
+      "id": "connector-ribs",
+      "name": "Connector Grip Ribs",
+      "level": "micro",
+      "role": "radial-ridge-system",
+      "importance": 0.48,
+      "confidence": 0.78,
+      "primitive": "instanced-cluster",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Repeated radial ridges around the blue connector cap circumference.",
+      "parent": "blue-connectors",
+      "attachment": {
+        "parentSocket": "connector-cap-rim",
+        "contactType": "overlap",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.012
+        ],
+        "embedDepth": 0.008,
+        "overlap": 0.008,
+        "gapTolerance": 0.003
+      },
+      "dimensions": {
+        "width": 0.09,
+        "height": 0.045,
+        "depth": 0.09,
+        "units": "meters-approximate",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "material": "blue-plastic",
+      "materialLayers": [
+        "blue-plastic"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(20, 140, 171, 1)",
+        "secondaryAlbedo": "rgba(8, 123, 154, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.82,
+        "baseColor": "#148CAB",
+        "roughness": 0.48,
+        "metalness": 0.0,
+        "finish": "molded grip ribs"
+      },
+      "localFeatures": [],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail"
+    }
+  ],
+  "materials": [
+    {
+      "id": "shell-white",
+      "name": "Warm White Powder-Coated Shell",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#E8E9E5",
+      "color": "#E8E9E5",
+      "albedo": {
+        "dominant": "#E8E9E5",
+        "secondary": [
+          "#D6D9D6",
+          "#F3F3EF"
+        ],
+        "samplingNotes": "Use image-observed local color zones, not a single averaged color."
+      },
+      "colorVariation": {
+        "palette": [
+          "#E8E9E5",
+          "#D6D9D6",
+          "#F3F3EF"
+        ],
+        "pattern": "fine powder-coat value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.08
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2.0,
+          2.0
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12.0,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56.0,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.45,
+        "variation": 0.08,
+        "map": "independent-procedural-field",
+        "localResponse": "higher roughness in cavities, lower roughness on worn edges"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "derived-from-independent-height-field",
+        "strength": 0.08,
+        "scale": 80.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.25,
+        "contactShadowBias": 0.35,
+        "notes": "Darken creases, seams, intersections, and recessed local features."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [
+        {
+          "id": "shell-white.edge-softening",
+          "region": "exposed chamfer crests",
+          "roughness": 0.54,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Warm-white satin shell with subtle powder-coat highlight breakup.",
+      "referenceMaterialId": "coating.painted-metal",
+      "materialFamily": "coating",
+      "materialSubtype": "paint-over-metal",
+      "materialFinish": "gloss-or-satin",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "coating.painted-metal",
+        "method": "family-subtype-finish",
+        "confidence": 0.86,
+        "sourceRefs": [
+          "three.mesh-physical",
+          "gltf.2",
+          "khronos.gltf-pbr",
+          "adobe.pbr-guide-1",
+          "adobe.pbr-guide-2"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "clearcoatMap",
+          "clearcoatRoughnessMap",
+          "metalnessMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ]
+      },
+      "clearcoat": {
+        "base": 0.75,
+        "variation": 0.0
+      },
+      "clearcoatRoughness": {
+        "base": 0.12,
+        "variation": 0.0
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_albedo.png",
+            "url": "shell-white_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_roughness.png",
+            "url": "shell-white_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_height.png",
+            "url": "shell-white_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_normal.png",
+            "url": "shell-white_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_ao.png",
+            "url": "shell-white_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 190,
+          "sourceHeight": 280,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 16,
+            "y": 0,
+            "width": 174,
+            "height": 191
+          },
+          "mask": {
+            "backgroundColor": "#AAB1B8",
+            "backgroundNoise": 45.222,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.1339
+          },
+          "mapStats": {
+            "valueRange": 0.3784,
+            "heightP90Gradient": 0.05698,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.079,
+            "normalStrength": 0.223,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393D3D",
+            "#202525",
+            "#101618",
+            "#59615B",
+            "#CBC3C1"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#323531",
+          "#747979",
+          "#C7D0CF",
+          "#C6D0CF",
+          "#BEC7C9"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 171.5,
+          "meanSaturation": 0.072,
+          "gradientStrength": 0.652,
+          "mottle": 0.027,
+          "streakRatio": 0.75,
+          "hueSpread": 0.132,
+          "specularFraction": 0.009
+        }
+      },
+      "materialEvidence": {
+        "componentId": "upper-shell",
+        "regionId": "shell-white",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+          "bbox": {
+            "x": 0,
+            "y": 280,
+            "width": 190,
+            "height": 280
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.0618
+        },
+        "observations": [
+          "near-neutral colour response",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "upper-shell",
+          "regionId": "shell-white",
+          "materialId": null,
+          "family": "coating",
+          "subtype": "paint-over-metal",
+          "finish": "gloss-or-satin",
+          "aliases": [],
+          "confidence": 0.86,
+          "source": "vision"
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "id": "screen-glass",
+      "name": "Dark Screen Glass",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#101716",
+      "color": "#101716",
+      "albedo": {
+        "dominant": "#101716",
+        "secondary": [
+          "#162522",
+          "#060908"
+        ],
+        "samplingNotes": "Use synthetic UI beneath glass; do not project photographed text."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "one stable texel scale across the screen footprint"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.05,
+          "role": "broad reflection"
+        },
+        {
+          "id": "meso",
+          "frequency": 8,
+          "amplitude": 0.01,
+          "role": "clean glass variation"
+        },
+        {
+          "id": "micro",
+          "frequency": 64,
+          "amplitude": 0.005,
+          "role": "subtle highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.05,
+        "variation": 0.035,
+        "map": "independent-procedural-field",
+        "localResponse": "lowest roughness at broad reflection band"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.12,
+        "contactShadowBias": 0.18,
+        "notes": "darken bezel contact only"
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.02,
+        "cavityBias": 0.0,
+        "color": "#0A0C0B"
+      },
+      "localOverrides": [
+        {
+          "id": "screen-glass.reflection-band",
+          "region": "upper-right visible footprint",
+          "roughness": 0.1,
+          "clearcoat": 0.9,
+          "clearcoatRoughness": 0.08,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Low-roughness glass-like panel with controlled reflection.",
+      "referenceMaterialId": "glass.clear",
+      "materialFamily": "glass",
+      "materialSubtype": "clear",
+      "materialFinish": "polished",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "glass.clear",
+        "method": "family-subtype-finish",
+        "confidence": 0.793,
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.pmrem",
+          "gltf.2",
+          "khronos.transmission",
+          "khronos.volume",
+          "google.filament-pbr"
+        ],
+        "requiredMaps": [
+          "roughnessMap",
+          "thicknessMap"
+        ],
+        "optionalMaps": [
+          "map",
+          "normalMap",
+          "transmissionMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "environment-reflection",
+          "backlight-transmission",
+          "reference-beauty"
+        ]
+      },
+      "transmission": {
+        "base": 1.0,
+        "variation": 0.0
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.793,
+        "estimatedFidelity": 0.793,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_albedo.png",
+            "url": "screen-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_roughness.png",
+            "url": "screen-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_height.png",
+            "url": "screen-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_normal.png",
+            "url": "screen-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_ao.png",
+            "url": "screen-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 490,
+          "sourceHeight": 360,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 53,
+            "width": 488,
+            "height": 307
+          },
+          "mask": {
+            "backgroundColor": "#606867",
+            "backgroundNoise": 120.71,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.0646
+          },
+          "mapStats": {
+            "valueRange": 0.4301,
+            "heightP90Gradient": 0.01438,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.173,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#59675E",
+            "#1D2224",
+            "#151B1E",
+            "#5E7D76",
+            "#609289"
+          ]
+        },
+        "warnings": [
+          "foreground mask is very small",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#6B7171",
+          "#6D706C",
+          "#727771",
+          "#6C7571",
+          "#7B8484"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "horizontal",
+        "stats": {
+          "meanLum": 113.8,
+          "meanSaturation": 0.076,
+          "gradientStrength": 0.232,
+          "mottle": 0.032,
+          "streakRatio": 0.96,
+          "hueSpread": 0.084,
+          "specularFraction": 0.005
+        }
+      },
+      "materialEvidence": {
+        "componentId": "main-screen",
+        "regionId": "screen-glass",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+          "bbox": {
+            "x": 230,
+            "y": 80,
+            "width": 490,
+            "height": 360
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.2048
+        },
+        "observations": [
+          "near-neutral colour response",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "main-screen",
+          "regionId": "screen-glass",
+          "materialId": null,
+          "family": "glass",
+          "subtype": "clear",
+          "finish": "polished",
+          "aliases": [],
+          "confidence": 0.793,
+          "source": "vision"
+        },
+        "alternatives": []
+      },
+      "needsEnvironment": true
+    },
+    {
+      "id": "worktop-glass",
+      "name": "Gloss Black Worktop",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#111715",
+      "color": "#111715",
+      "albedo": {
+        "dominant": "#111715",
+        "secondary": [
+          "#1B2421",
+          "#070A09"
+        ],
+        "samplingNotes": "Reference shows broad room-light reflections."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable object-space detail across the worktop slab"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.06,
+          "role": "broad reflection"
+        },
+        {
+          "id": "meso",
+          "frequency": 10,
+          "amplitude": 0.015,
+          "role": "handled surface variation"
+        },
+        {
+          "id": "micro",
+          "frequency": 72,
+          "amplitude": 0.008,
+          "role": "fine highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.28,
+        "variation": 0.05,
+        "map": "independent-procedural-field",
+        "localResponse": "slightly rougher near operator edge"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "fine handling marks",
+        "strength": 0.03,
+        "scale": 56,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.3,
+        "notes": "ground keyboard and props"
+      },
+      "wear": {
+        "edgeWear": 0.02,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.025,
+        "cavityBias": 0.1,
+        "color": "#080A09"
+      },
+      "localOverrides": [
+        {
+          "id": "worktop-glass.operator-reflection",
+          "region": "operator-facing half",
+          "roughness": 0.16,
+          "clearcoat": 0.75,
+          "clearcoatRoughness": 0.12,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Gloss black work surface distinct from screen glass.",
+      "referenceMaterialId": "plastic.glossy",
+      "materialFamily": "plastic",
+      "materialSubtype": "generic-polymer",
+      "materialFinish": "glossy",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "plastic.glossy",
+        "method": "family-subtype-finish",
+        "confidence": 0.829,
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "clearcoatMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ]
+      },
+      "clearcoat": {
+        "base": 0.2,
+        "variation": 0.0
+      },
+      "clearcoatRoughness": {
+        "base": 0.18,
+        "variation": 0.0
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_albedo.png",
+            "url": "worktop-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_roughness.png",
+            "url": "worktop-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_height.png",
+            "url": "worktop-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_normal.png",
+            "url": "worktop-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_ao.png",
+            "url": "worktop-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 200,
+          "sourceHeight": 190,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 200,
+            "height": 190
+          },
+          "mask": {
+            "backgroundColor": "#1C272C",
+            "backgroundNoise": 26.019,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.998
+          },
+          "mapStats": {
+            "valueRange": 0.7413,
+            "heightP90Gradient": 0.07283,
+            "roughnessBase": 0.706,
+            "roughnessVariation": 0.141,
+            "normalStrength": 0.242,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#101C1F",
+            "#7F9A8B",
+            "#AACCBE",
+            "#213032",
+            "#5A6D63"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "candy-coat",
+        "recipe": {
+          "metalness": 0.35,
+          "roughness": 0.18,
+          "clearcoat": 0.6,
+          "clearcoatRoughness": 0.15,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.7,
+          "anisotropy": 0.0,
+          "procedural": "gradient-smoke"
+        },
+        "palette": [
+          "#222A2D",
+          "#40534D",
+          "#526862",
+          "#79958C",
+          "#384A47"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#222A2D",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              45,
+              42,
+              34
+            ]
+          }
+        ],
+        "gradientAxis": "horizontal",
+        "stats": {
+          "meanLum": 93.5,
+          "meanSaturation": 0.327,
+          "gradientStrength": 0.483,
+          "mottle": 0.058,
+          "streakRatio": 1.13,
+          "hueSpread": 0.043,
+          "specularFraction": 0.0
+        }
+      },
+      "materialEvidence": {
+        "componentId": "worktop",
+        "regionId": "worktop-glass",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+          "bbox": {
+            "x": 520,
+            "y": 950,
+            "width": 200,
+            "height": 190
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.0441
+        },
+        "observations": [
+          "chromatic base-colour response",
+          "visible meso/micro variation",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "worktop",
+          "regionId": "worktop-glass",
+          "materialId": null,
+          "family": "plastic",
+          "subtype": "generic-polymer",
+          "finish": "glossy",
+          "aliases": [],
+          "confidence": 0.829,
+          "source": "vision"
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "id": "fascia-gray",
+      "name": "Cool Gray Interface Fascia",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#BFC4C3",
+      "color": "#BFC4C3",
+      "albedo": {
+        "dominant": "#BFC4C3",
+        "secondary": [
+          "#AEB5B3",
+          "#D1D4D2"
+        ],
+        "samplingNotes": "Neutral cool-gray front panel."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "uniform molded-grain density across fascia panels"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.04,
+          "role": "panel value separation"
+        },
+        {
+          "id": "meso",
+          "frequency": 18,
+          "amplitude": 0.025,
+          "role": "molded surface"
+        },
+        {
+          "id": "micro",
+          "frequency": 80,
+          "amplitude": 0.015,
+          "role": "fine texture"
+        }
+      ],
+      "roughness": {
+        "base": 0.68,
+        "variation": 0.08,
+        "map": "independent-procedural-field",
+        "localResponse": "higher roughness around vents"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.02
+      },
+      "normal": {
+        "pattern": "fine molded grain",
+        "strength": 0.07,
+        "scale": 70,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.32,
+        "contactShadowBias": 0.34,
+        "notes": "darken port and vent cavities"
+      },
+      "wear": {
+        "edgeWear": 0.01,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.02,
+        "cavityBias": 0.4,
+        "color": "#66706D"
+      },
+      "localOverrides": [
+        {
+          "id": "fascia-gray.port-cavity-mask",
+          "region": "port and vent cavities",
+          "roughness": 0.66,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Satin cool-gray interface panel.",
+      "referenceMaterialId": "plastic.matte",
+      "materialFamily": "plastic",
+      "materialSubtype": "generic-polymer",
+      "materialFinish": "matte",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "plastic.matte",
+        "method": "family-subtype-finish",
+        "confidence": 0.86,
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ]
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_albedo.png",
+            "url": "fascia-gray_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_roughness.png",
+            "url": "fascia-gray_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_height.png",
+            "url": "fascia-gray_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_normal.png",
+            "url": "fascia-gray_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_ao.png",
+            "url": "fascia-gray_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 285,
+          "sourceHeight": 175,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 285,
+            "height": 175
+          },
+          "mask": {
+            "backgroundColor": "#A8B2B5",
+            "backgroundNoise": 31.209,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.421
+          },
+          "mapStats": {
+            "valueRange": 0.7396,
+            "heightP90Gradient": 0.06016,
+            "roughnessBase": 0.686,
+            "roughnessVariation": 0.104,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393F46",
+            "#50565D",
+            "#252E36",
+            "#988586",
+            "#D5E4F0"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#ABB6BA",
+          "#899297",
+          "#6C747D",
+          "#8F959F",
+          "#ACAFB5"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 145.4,
+          "meanSaturation": 0.147,
+          "gradientStrength": 0.281,
+          "mottle": 0.042,
+          "streakRatio": 1.05,
+          "hueSpread": 0.483,
+          "specularFraction": 0.002
+        }
+      },
+      "materialEvidence": {
+        "componentId": "interface-fascia",
+        "regionId": "fascia-gray",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+          "bbox": {
+            "x": 20,
+            "y": 535,
+            "width": 285,
+            "height": 175
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.0579
+        },
+        "observations": [
+          "near-neutral colour response",
+          "visible meso/micro variation",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "interface-fascia",
+          "regionId": "fascia-gray",
+          "materialId": null,
+          "family": "plastic",
+          "subtype": "generic-polymer",
+          "finish": "matte",
+          "aliases": [],
+          "confidence": 0.86,
+          "source": "vision"
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "id": "dark-plastic",
+      "name": "Dark Interface Plastic",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#171D1B",
+      "color": "#171D1B",
+      "albedo": {
+        "dominant": "#171D1B",
+        "secondary": [
+          "#242C29",
+          "#080B0A"
+        ],
+        "samplingNotes": "Recognition recess, bezels, ports and card reader."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "uniform molded-grain density across all dark plastic modules"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.04,
+          "role": "part separation"
+        },
+        {
+          "id": "meso",
+          "frequency": 16,
+          "amplitude": 0.025,
+          "role": "mold grain"
+        },
+        {
+          "id": "micro",
+          "frequency": 74,
+          "amplitude": 0.012,
+          "role": "highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.68,
+        "variation": 0.08,
+        "map": "independent-procedural-field",
+        "localResponse": "cavities up to 0.7"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "fine molded grain",
+        "strength": 0.06,
+        "scale": 64,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.35,
+        "contactShadowBias": 0.32,
+        "notes": "strongest in slot and sensor recess"
+      },
+      "wear": {
+        "edgeWear": 0.015,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.02,
+        "cavityBias": 0.45,
+        "color": "#080A09"
+      },
+      "localOverrides": [
+        {
+          "id": "dark-plastic.cavity-darkening",
+          "region": "recess and slot interiors",
+          "roughness": 0.68,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Dark molded parts, not metallic.",
+      "referenceMaterialId": "plastic.matte",
+      "materialFamily": "plastic",
+      "materialSubtype": "generic-polymer",
+      "materialFinish": "matte",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "plastic.matte",
+        "method": "family-subtype-finish",
+        "confidence": 0.829,
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ]
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_albedo.png",
+            "url": "dark-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_roughness.png",
+            "url": "dark-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_height.png",
+            "url": "dark-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_normal.png",
+            "url": "dark-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_ao.png",
+            "url": "dark-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 265,
+          "sourceHeight": 150,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 265,
+            "height": 150
+          },
+          "mask": {
+            "backgroundColor": "#1D2226",
+            "backgroundNoise": 47.35,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.9676
+          },
+          "mapStats": {
+            "valueRange": 0.8204,
+            "heightP90Gradient": 0.03719,
+            "roughnessBase": 0.684,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.2,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#D9E3E4",
+            "#0B151D",
+            "#C0CACC",
+            "#1B2126",
+            "#373F44"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "painted-metal",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.5,
+          "clearcoat": 1.0,
+          "clearcoatRoughness": 0.05,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 1.0,
+          "anisotropy": 0.0,
+          "procedural": "flat-clearcoat"
+        },
+        "palette": [
+          "#191D22",
+          "#B3BABD",
+          "#C6D0D2",
+          "#2D363E",
+          "#141E26"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#191D22",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              34,
+              29,
+              25
+            ]
+          },
+          {
+            "stop": "#2D363E",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              62,
+              54,
+              45
+            ]
+          },
+          {
+            "stop": "#141E26",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              38,
+              30,
+              20
+            ]
+          }
+        ],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 116.1,
+          "meanSaturation": 0.261,
+          "gradientStrength": 0.769,
+          "mottle": 0.015,
+          "streakRatio": 0.49,
+          "hueSpread": 0.003,
+          "specularFraction": 0.003
+        }
+      },
+      "materialEvidence": {
+        "componentId": "card-reader",
+        "regionId": "dark-plastic",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+          "bbox": {
+            "x": 345,
+            "y": 455,
+            "width": 265,
+            "height": 150
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.0461
+        },
+        "observations": [
+          "chromatic base-colour response",
+          "directional surface frequency",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "card-reader",
+          "regionId": "dark-plastic",
+          "materialId": null,
+          "family": "plastic",
+          "subtype": "generic-polymer",
+          "finish": "matte",
+          "aliases": [],
+          "confidence": 0.829,
+          "source": "vision"
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "id": "blue-plastic",
+      "name": "Cyan-Blue Connector Plastic",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#1594B5",
+      "color": "#1594B5",
+      "albedo": {
+        "dominant": "#1594B5",
+        "secondary": [
+          "#087B9A",
+          "#38A9C4"
+        ],
+        "samplingNotes": "Paired connector caps are the strongest color accent."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "cylindrical",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable density around both connector cap circumferences"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.06,
+          "role": "cap value variation"
+        },
+        {
+          "id": "meso",
+          "frequency": 14,
+          "amplitude": 0.03,
+          "role": "molded ribs"
+        },
+        {
+          "id": "micro",
+          "frequency": 68,
+          "amplitude": 0.015,
+          "role": "plastic highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.68,
+        "variation": 0.07,
+        "map": "independent-procedural-field",
+        "localResponse": "lower on raised ribs"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "radial molded texture",
+        "strength": 0.08,
+        "scale": 48,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.26,
+        "contactShadowBias": 0.28,
+        "notes": "darken rib valleys"
+      },
+      "wear": {
+        "edgeWear": 0.01,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.01,
+        "cavityBias": 0.35,
+        "color": "#075B6F"
+      },
+      "localOverrides": [
+        {
+          "id": "blue-plastic.rib-highlight",
+          "region": "radial grip rib crests",
+          "roughness": 0.38,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Cyan-blue molded connector caps.",
+      "referenceMaterialId": "plastic.matte",
+      "materialFamily": "plastic",
+      "materialSubtype": "generic-polymer",
+      "materialFinish": "matte",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "plastic.matte",
+        "method": "family-subtype-finish",
+        "confidence": 0.86,
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ]
+      },
+      "ior": {
+        "base": 1.5,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_albedo.png",
+            "url": "blue-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_roughness.png",
+            "url": "blue-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_height.png",
+            "url": "blue-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_normal.png",
+            "url": "blue-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_ao.png",
+            "url": "blue-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 210,
+          "sourceHeight": 170,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 210,
+            "height": 170
+          },
+          "mask": {
+            "backgroundColor": "#B9C4CA",
+            "backgroundNoise": 245.955,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.2443
+          },
+          "mapStats": {
+            "valueRange": 0.5132,
+            "heightP90Gradient": 0.05094,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.075,
+            "normalStrength": 0.216,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#0B141D",
+            "#1D6486",
+            "#404955",
+            "#8197A6",
+            "#222A35"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "painted-metal",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.5,
+          "clearcoat": 1.0,
+          "clearcoatRoughness": 0.05,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 1.0,
+          "anisotropy": 0.0,
+          "procedural": "flat-clearcoat"
+        },
+        "palette": [
+          "#353E46",
+          "#939DA3",
+          "#869198",
+          "#7692A1",
+          "#77767F"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#353E46",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              70,
+              62,
+              53
+            ]
+          },
+          {
+            "stop": "#7692A1",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              161,
+              146,
+              118
+            ]
+          }
+        ],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 135.6,
+          "meanSaturation": 0.219,
+          "gradientStrength": 0.411,
+          "mottle": 0.029,
+          "streakRatio": 0.8,
+          "hueSpread": 0.047,
+          "specularFraction": 0.0
+        }
+      },
+      "materialEvidence": {
+        "componentId": "blue-connectors",
+        "regionId": "blue-plastic",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+          "bbox": {
+            "x": 300,
+            "y": 610,
+            "width": 210,
+            "height": 170
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.0414
+        },
+        "observations": [
+          "chromatic base-colour response",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "blue-connectors",
+          "regionId": "blue-plastic",
+          "materialId": null,
+          "family": "plastic",
+          "subtype": "generic-polymer",
+          "finish": "matte",
+          "aliases": [],
+          "confidence": 0.86,
+          "source": "vision"
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "id": "metal-keyboard",
+      "name": "Brushed Metal Keyboard",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#9B9F9C",
+      "color": "#9B9F9C",
+      "albedo": {
+        "dominant": "#9B9F9C",
+        "secondary": [
+          "#747A77",
+          "#BABDBA"
+        ],
+        "samplingNotes": "Keyboard deck and raised keycaps."
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable brushing density across deck and keycaps"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.05,
+          "role": "deck value separation"
+        },
+        {
+          "id": "meso",
+          "frequency": 20,
+          "amplitude": 0.035,
+          "role": "brushed direction"
+        },
+        {
+          "id": "micro",
+          "frequency": 96,
+          "amplitude": 0.015,
+          "role": "anisotropic highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.35,
+        "variation": 0.07,
+        "map": "independent-procedural-field",
+        "localResponse": "keycaps slightly rougher than deck"
+      },
+      "metalness": {
+        "base": 1.0,
+        "variation": 0.12
+      },
+      "normal": {
+        "pattern": "directional brushing",
+        "strength": 0.08,
+        "scale": 92,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.34,
+        "notes": "darken key gaps"
+      },
+      "wear": {
+        "edgeWear": 0.025,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.015,
+        "cavityBias": 0.45,
+        "color": "#4B504E"
+      },
+      "localOverrides": [
+        {
+          "id": "metal-keyboard.key-gap-mask",
+          "region": "between keycaps",
+          "roughness": 0.58,
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "notes": "Brushed metal keyboard with bounded key repetition.",
+      "referenceMaterialId": "metal.steel-brushed",
+      "materialFamily": "metal",
+      "materialSubtype": "steel",
+      "materialFinish": "brushed",
+      "materialReference": {
+        "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+        "profileId": "metal.steel-brushed",
+        "method": "family-subtype-finish",
+        "confidence": 0.86,
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.pmrem",
+          "gltf.2",
+          "khronos.gltf-pbr",
+          "adobe.pbr-guide-2",
+          "google.filament-pbr"
+        ],
+        "requiredMaps": [
+          "map",
+          "roughnessMap",
+          "normalMap",
+          "anisotropyMap"
+        ],
+        "optionalMaps": [
+          "metalnessMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ]
+      },
+      "anisotropy": {
+        "base": 0.85,
+        "variation": 0.0
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_albedo.png",
+            "url": "metal-keyboard_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_roughness.png",
+            "url": "metal-keyboard_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_height.png",
+            "url": "metal-keyboard_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_normal.png",
+            "url": "metal-keyboard_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_ao.png",
+            "url": "metal-keyboard_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 470,
+          "sourceHeight": 250,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 470,
+            "height": 250
+          },
+          "mask": {
+            "backgroundColor": "#3F4C55",
+            "backgroundNoise": 106.283,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.62
+          },
+          "mapStats": {
+            "valueRange": 0.4497,
+            "heightP90Gradient": 0.06023,
+            "roughnessBase": 0.7,
+            "roughnessVariation": 0.094,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#1B2429",
+            "#0B090F",
+            "#491D28",
+            "#3C4248",
+            "#90A296"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "textureAnalysis": {
+        "finishClass": "candy-coat",
+        "recipe": {
+          "metalness": 0.35,
+          "roughness": 0.18,
+          "clearcoat": 0.6,
+          "clearcoatRoughness": 0.15,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.7,
+          "anisotropy": 0.0,
+          "procedural": "gradient-smoke"
+        },
+        "palette": [
+          "#4C434D",
+          "#392B31",
+          "#3E4446",
+          "#545B5C",
+          "#575F63"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 70.1,
+          "meanSaturation": 0.287,
+          "gradientStrength": 0.236,
+          "mottle": 0.071,
+          "streakRatio": 1.12,
+          "hueSpread": 0.622,
+          "specularFraction": 0.002
+        }
+      },
+      "materialEvidence": {
+        "componentId": "keyboard",
+        "regionId": "metal-keyboard",
+        "crop": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+          "bbox": {
+            "x": 100,
+            "y": 805,
+            "width": 470,
+            "height": 250
+          },
+          "sourceWidth": 730,
+          "sourceHeight": 1180,
+          "loaderWarnings": [],
+          "coverage": 0.1364
+        },
+        "observations": [
+          "chromatic base-colour response",
+          "visible meso/micro variation",
+          "strong image-space gradient; verify it is material pattern, not lighting",
+          "single-image PBR inference requires controlled render validation"
+        ],
+        "hypothesis": {
+          "componentId": "keyboard",
+          "regionId": "metal-keyboard",
+          "materialId": null,
+          "family": "metal",
+          "subtype": "steel",
+          "finish": "brushed",
+          "aliases": [],
+          "confidence": 0.86,
+          "source": "vision"
+        },
+        "alternatives": []
+      },
+      "needsEnvironment": true
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "vent-perforation-system",
+      "level": "micro",
+      "parent": "interface-fascia",
+      "primitive": "cylinder",
+      "count": 96,
+      "material": "dark-plastic",
+      "instanceScale": [
+        0.006,
+        0.006,
+        0.012
+      ],
+      "placement": {
+        "mode": "grid",
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "radius": 0.0
+      },
+      "elementComponentIds": [
+        "vent-grid"
+      ],
+      "distributionRule": "Two bounded 6 by 8 arrays mirrored across the card reader; documentary because vent-grid owns emitted geometry.",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "keyboard-keycap-system",
+      "level": "micro",
+      "parent": "keyboard",
+      "primitive": "box",
+      "count": 84,
+      "material": "metal-keyboard",
+      "instanceScale": [
+        0.026,
+        0.009,
+        0.02
+      ],
+      "placement": {
+        "mode": "grid",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "radius": 0.0
+      },
+      "elementComponentIds": [
+        "keycap-grid"
+      ],
+      "distributionRule": "Six bounded rows with varied key widths and a separate touchpad; documentary because keycap-grid owns emitted geometry.",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "connector-rib-system",
+      "level": "micro",
+      "parent": "blue-connectors",
+      "primitive": "box",
+      "count": 12,
+      "material": "blue-plastic",
+      "instanceScale": [
+        0.006,
+        0.025,
+        0.012
+      ],
+      "placement": {
+        "mode": "radial",
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "radius": 0.04
+      },
+      "elementComponentIds": [
+        "connector-ribs"
+      ],
+      "distributionRule": "Twelve evenly spaced radial grip ribs around each connector cap; documentary because connector-ribs owns emitted geometry.",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [
+    {
+      "timestamp": "2026-08-28T08:10:33.298377+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.28,
+      "aiVisionScore": 0.28,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.32,
+        "componentStructure": 0.18,
+        "formDetail": 0.08,
+        "materialSurface": 0.25,
+        "lightingCamera": 0.55
+      },
+      "featureReviews": [
+        {
+          "id": "stepped-shell-silhouette",
+          "name": "Four-depth stepped shell silhouette",
+          "tier": "critical",
+          "score": 0.32,
+          "threshold": 0.8,
+          "passed": false,
+          "notes": "Three depth steps are visible, but the upper housing is an oversized plain box and does not frame the dominant sloped screen opening."
+        }
+      ],
+      "referenceScreenshot": "E:\\100-工作\\110-课程建设\\crew-training-3d\\references\\attendance-kiosk-target.jpg",
+      "renderScreenshot": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\renders\\blockout\\front-oblique.png",
+      "comparisonImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\renders\\blockout\\comparison.png",
+      "cameraView": "front-oblique",
+      "notes": "Blockout intentionally uses a neutral map-stripped material. Failure is geometric, not material.",
+      "aiVisionNotes": "The render reads as a generic stepped kiosk carcass. The reference is screen-dominant with a shallow sloped upper housing, a narrower card-reader band, and a deep black worktop. The current root mesh hides these proportions."
+    },
+    {
+      "timestamp": "2026-08-28T13:45:55.007188+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.72,
+      "aiVisionScore": 0.72,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.62,
+        "componentStructure": 0.78,
+        "formDetail": 0.45,
+        "materialSurface": 0.5,
+        "lightingCamera": 0.76
+      },
+      "featureReviews": [
+        {
+          "id": "stepped-shell-silhouette",
+          "name": "Four-depth stepped shell silhouette",
+          "tier": "critical",
+          "score": 0.82,
+          "threshold": 0.8,
+          "passed": true,
+          "notes": "The corrected render separates the lower cabinet, projecting worktop, narrow interface fascia, and sloped screen housing into four readable depth layers."
+        },
+        {
+          "id": "visible-kiosk-structure",
+          "name": "Reference-visible screen, fascia and worktop relationship",
+          "tier": "critical",
+          "score": 0.78,
+          "threshold": 0.7,
+          "passed": true,
+          "notes": "The screen-dominant sloped housing, shallow fascia band and projecting black worktop are all readable. The source photograph crops the lower cabinet and both sides, so whole-object silhouette scoring is not valid."
+        }
+      ],
+      "referenceScreenshot": "references/attendance-kiosk-target.jpg",
+      "renderScreenshot": "evidence/attendance-kiosk/renders/blockout/front-oblique-v3.png",
+      "comparisonImage": "evidence/attendance-kiosk/renders/blockout/comparison-v3.png",
+      "cameraView": "front-oblique",
+      "notes": "Blockout uses neutral, map-stripped materials.",
+      "aiVisionNotes": "The render matches the structure visible in the close-up reference. Deterministic whole-object silhouette diagnostics are not applicable because the physical kiosk extends beyond the source frame on the left, right, and bottom."
+    }
+  ],
+  "reviewHistory": [
+    {
+      "timestamp": "2026-08-28T08:10:33.298377+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.28,
+      "aiVisionScore": 0.28,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.32,
+        "componentStructure": 0.18,
+        "formDetail": 0.08,
+        "materialSurface": 0.25,
+        "lightingCamera": 0.55
+      },
+      "featureReviews": [
+        {
+          "id": "stepped-shell-silhouette",
+          "name": "Four-depth stepped shell silhouette",
+          "tier": "critical",
+          "score": 0.32,
+          "threshold": 0.8,
+          "passed": false,
+          "notes": "Three depth steps are visible, but the upper housing is an oversized plain box and does not frame the dominant sloped screen opening."
+        }
+      ],
+      "action": "refine-spec",
+      "summary": "Blockout is a valid 3D volume but the cabinet proportions and depth-step locations do not match the attendance-kiosk reference.",
+      "matched": [
+        "Non-planar volume remains stable in both orbit views",
+        "Three front depth steps are visible",
+        "Model is grounded and consistently framed"
+      ],
+      "mismatches": [
+        "Root cabinet is 2.10 m tall and visually overwhelms every child mass",
+        "Upper shell is a plain oversized box instead of a screen-dominant sloped housing",
+        "Interface fascia and worktop are positioned too low",
+        "No large screen opening is readable at this pass"
+      ],
+      "specFixes": [
+        "Reduce root cabinet height from 2.10 to about 1.20 and width from 1.42 to about 1.30",
+        "Move upper shell center from y 0.43 to about 0.82 and increase front tilt",
+        "Move interface fascia and worktop upward to form observed stepped profile",
+        "Expose a screen-shaped negative panel in blockout silhouette or promote screen proxy to macro"
+      ],
+      "codeFixes": [],
+      "evidence": [
+        "comparison.png",
+        "front-oblique.png",
+        "right.png",
+        "left.png",
+        "pass-gate-check.txt"
+      ],
+      "mapStrippedRender": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\renders\\blockout\\front-oblique.png",
+      "reviewViewpoints": [
+        "front-oblique",
+        "right-orbit",
+        "left-orbit"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "E:\\100-工作\\110-课程建设\\crew-training-3d\\references\\attendance-kiosk-target.jpg",
+        "renderScreenshot": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\renders\\blockout\\front-oblique.png",
+        "comparisonImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\renders\\blockout\\comparison.png",
+        "cameraView": "front-oblique",
+        "notes": "Blockout intentionally uses a neutral map-stripped material. Failure is geometric, not material.",
+        "aiVisionNotes": "The render reads as a generic stepped kiosk carcass. The reference is screen-dominant with a shallow sloped upper housing, a narrower card-reader band, and a deep black worktop. The current root mesh hides these proportions."
+      }
+    },
+    {
+      "timestamp": "2026-08-28T13:45:55.007188+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.72,
+      "aiVisionScore": 0.72,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.62,
+        "componentStructure": 0.78,
+        "formDetail": 0.45,
+        "materialSurface": 0.5,
+        "lightingCamera": 0.76
+      },
+      "featureReviews": [
+        {
+          "id": "stepped-shell-silhouette",
+          "name": "Four-depth stepped shell silhouette",
+          "tier": "critical",
+          "score": 0.82,
+          "threshold": 0.8,
+          "passed": true,
+          "notes": "The corrected render separates the lower cabinet, projecting worktop, narrow interface fascia, and sloped screen housing into four readable depth layers."
+        },
+        {
+          "id": "visible-kiosk-structure",
+          "name": "Reference-visible screen, fascia and worktop relationship",
+          "tier": "critical",
+          "score": 0.78,
+          "threshold": 0.7,
+          "passed": true,
+          "notes": "The screen-dominant sloped housing, shallow fascia band and projecting black worktop are all readable. The source photograph crops the lower cabinet and both sides, so whole-object silhouette scoring is not valid."
+        }
+      ],
+      "action": "continue",
+      "summary": "Visible kiosk structure is sufficient to unlock the structural pass; whole-object silhouette metrics are invalid because the source photograph crops the cabinet.",
+      "matched": [
+        "Screen-dominant sloped upper housing",
+        "Shallow fascia band",
+        "Projecting black operator worktop",
+        "Stable non-degenerate volume in both orbit views"
+      ],
+      "mismatches": [
+        "Recognition arm and interface controls are intentionally absent from blockout",
+        "Lower cabinet silhouette cannot be verified from the cropped source"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "comparison-v3.png",
+        "front-oblique-v3.png",
+        "right-v3.png",
+        "left-v3.png",
+        "map-stripped-v3.png"
+      ],
+      "outOfSequence": true,
+      "mapStrippedRender": "evidence/attendance-kiosk/renders/blockout/map-stripped-v3.png",
+      "reviewViewpoints": [
+        "front-oblique",
+        "long-axis",
+        "thickness-axis",
+        "right-orbit",
+        "left-orbit"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "references/attendance-kiosk-target.jpg",
+        "renderScreenshot": "evidence/attendance-kiosk/renders/blockout/front-oblique-v3.png",
+        "comparisonImage": "evidence/attendance-kiosk/renders/blockout/comparison-v3.png",
+        "cameraView": "front-oblique",
+        "notes": "Blockout uses neutral, map-stripped materials.",
+        "aiVisionNotes": "The render matches the structure visible in the close-up reference. Deterministic whole-object silhouette diagnostics are not applicable because the physical kiosk extends beyond the source frame on the left, right, and bottom."
+      }
+    }
+  ],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "qualityPriority": "reference-fidelity",
+    "targetTriangles": 12000,
+    "maxDrawCalls": 42,
+    "textureSize": 1024,
+    "fpsTarget": 60,
+    "optimizationPolicy": "Protect the six interactive component groups, instance bounded repeats, and remove hidden rear detail before reducing front-facing silhouette fidelity."
+  },
+  "lightingFromPhoto": [
+    {
+      "id": "key",
+      "type": "large overhead area light",
+      "direction": [
+        -0.35,
+        0.82,
+        0.45
+      ],
+      "color": "#FFF1D8",
+      "intensity": 2.2,
+      "evidence": "bright ceiling reflections on screen and shell"
+    },
+    {
+      "id": "fill",
+      "type": "window diffuse fill",
+      "direction": [
+        0.55,
+        0.4,
+        0.25
+      ],
+      "color": "#E8F1FF",
+      "intensity": 0.65,
+      "evidence": "soft lifted shadows on interface fascia"
+    },
+    {
+      "id": "environment",
+      "type": "bright indoor room reflection",
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "color": "#F4F0E7",
+      "intensity": 0.8,
+      "evidence": "broad screen and worktop reflections"
+    },
+    {
+      "id": "contact",
+      "type": "soft contact shadow",
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "color": "#29302E",
+      "intensity": 0.45,
+      "evidence": "component intersections and worktop contacts"
+    },
+    {
+      "id": "render-intent",
+      "type": "renderer settings",
+      "exposure": 1.05,
+      "toneMapping": "ACESFilmicToneMapping",
+      "background": "#E7E4DC",
+      "shadowSoftness": 0.55,
+      "evidence": "bright indoor value range with preserved screen highlights"
+    }
+  ],
+  "proceduralStrategy": [
+    "Block out macro silhouette first.",
+    "Add component hierarchy and joints.",
+    "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+    "Refine forms with bevels, tapers, bends, and procedural noise.",
+    "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+    "Add material variation before adding expensive micro-geometry."
+  ],
+  "animationAnchors": [
+    "root pivot node supports whole-object translation, rotation, scale, and visibility changes",
+    "component pivot groups support later local transforms without rebuilding geometry"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [
+    "Single-view perspective may bias screen tilt and cabinet depth.",
+    "Front obstruction reduces confidence for the left worktop corner.",
+    "Exact proprietary device markings are intentionally not reconstructed."
+  ],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Railway Attendance Kiosk",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": []
+  },
+  "materialPipeline": {
+    "schemaVersion": 1,
+    "status": "proceed",
+    "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+    "analysisArtifact": "E:\\100-工作\\110-课程建设\\crew-training-3d\\models\\attendance-kiosk\\material-analysis.json",
+    "targetThreshold": 0.7,
+    "unresolvedNotObservedMaterials": [],
+    "regions": [
+      {
+        "componentId": "upper-shell",
+        "regionId": "shell-white",
+        "specMaterialId": "shell-white",
+        "profileId": "coating.painted-metal",
+        "status": "proceed"
+      },
+      {
+        "componentId": "main-screen",
+        "regionId": "screen-glass",
+        "specMaterialId": "screen-glass",
+        "profileId": "glass.clear",
+        "status": "proceed"
+      },
+      {
+        "componentId": "worktop",
+        "regionId": "worktop-glass",
+        "specMaterialId": "worktop-glass",
+        "profileId": "plastic.glossy",
+        "status": "proceed"
+      },
+      {
+        "componentId": "interface-fascia",
+        "regionId": "fascia-gray",
+        "specMaterialId": "fascia-gray",
+        "profileId": "plastic.matte",
+        "status": "proceed"
+      },
+      {
+        "componentId": "card-reader",
+        "regionId": "dark-plastic",
+        "specMaterialId": "dark-plastic",
+        "profileId": "plastic.matte",
+        "status": "proceed"
+      },
+      {
+        "componentId": "blue-connectors",
+        "regionId": "blue-plastic",
+        "specMaterialId": "blue-plastic",
+        "profileId": "plastic.matte",
+        "status": "proceed"
+      },
+      {
+        "componentId": "keyboard",
+        "regionId": "metal-keyboard",
+        "specMaterialId": "metal-keyboard",
+        "profileId": "metal.steel-brushed",
+        "status": "proceed"
+      }
+    ],
+    "controlledViewsRequired": [
+      "albedo-unlit",
+      "backlight-transmission",
+      "environment-reflection",
+      "grazing",
+      "neutral-studio",
+      "reference-beauty"
+    ]
+  },
+  "materialAnalysisHistory": [
+    {
+      "analysisArtifact": "E:\\100-工作\\110-课程建设\\crew-training-3d\\models\\attendance-kiosk\\material-analysis.json",
+      "status": "proceed",
+      "unresolvedNotObservedMaterials": [],
+      "regions": 7
+    }
+  ],
+  "tier1Results": [
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.0715,
+        "aspectRatioDelta": 0.907,
+        "scaleDelta": 0.7067,
+        "bilateralSymmetryError": 0.1897,
+        "colorDelta": {
+          "checked": 17,
+          "maxDeltaE": 62.49,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 25.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 25.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 57.2
+            },
+            {
+              "componentId": null,
+              "deltaE": 57.29
+            },
+            {
+              "componentId": null,
+              "deltaE": 54.21
+            },
+            {
+              "componentId": null,
+              "deltaE": 52.23
+            },
+            {
+              "componentId": null,
+              "deltaE": 57.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 35.36
+            },
+            {
+              "componentId": null,
+              "deltaE": 54.58
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.07
+            },
+            {
+              "componentId": null,
+              "deltaE": 53.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 62.49
+            },
+            {
+              "componentId": null,
+              "deltaE": 42.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 52.23
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.56
+            },
+            {
+              "componentId": null,
+              "deltaE": 34.72
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.072 is below threshold 0.85",
+        "aspect-ratio delta 0.907 exceeds threshold 0.05",
+        "scale delta 0.707 exceeds threshold 0.08",
+        "blockout requires --map-stripped-render evidence"
+      ],
+      "maskWarnings": [
+        "reference: 39.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 9.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "390310f730f5bd6d",
+      "passId": "blockout"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.0,
+        "aspectRatioDelta": 0.4404,
+        "scaleDelta": 0.8401,
+        "bilateralSymmetryError": 0.1531,
+        "colorDelta": {
+          "checked": 17,
+          "maxDeltaE": 34.28,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 28.04
+            },
+            {
+              "componentId": null,
+              "deltaE": 28.04
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.73
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.86
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.83
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.72
+            },
+            {
+              "componentId": null,
+              "deltaE": 34.28
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 1.24
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.25
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.16
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.14
+            },
+            {
+              "componentId": null,
+              "deltaE": 32.57
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.000 is below threshold 0.85",
+        "aspect-ratio delta 0.440 exceeds threshold 0.05",
+        "scale delta 0.840 exceeds threshold 0.08",
+        "blockout requires --map-stripped-render evidence"
+      ],
+      "maskWarnings": [
+        "reference: 39.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 54.6% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6214f362299aa467",
+      "passId": "blockout"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.0,
+        "aspectRatioDelta": 0.4404,
+        "scaleDelta": 0.8401,
+        "bilateralSymmetryError": 0.1531,
+        "colorDelta": {
+          "checked": 17,
+          "maxDeltaE": 34.28,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 28.04
+            },
+            {
+              "componentId": null,
+              "deltaE": 28.04
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.73
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.86
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.83
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.72
+            },
+            {
+              "componentId": null,
+              "deltaE": 34.28
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 1.24
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.25
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.16
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.14
+            },
+            {
+              "componentId": null,
+              "deltaE": 32.57
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.000 is below threshold 0.85",
+        "aspect-ratio delta 0.440 exceeds threshold 0.05",
+        "scale delta 0.840 exceeds threshold 0.08"
+      ],
+      "maskWarnings": [
+        "reference: 39.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 54.6% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6214f362299aa467",
+      "passId": "blockout",
+      "mapStrippedRender": "evidence\\attendance-kiosk\\renders\\blockout\\map-stripped-v3.png"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.0,
+        "aspectRatioDelta": 0.4404,
+        "scaleDelta": 0.8401,
+        "bilateralSymmetryError": 0.1516,
+        "colorDelta": {
+          "checked": 17,
+          "maxDeltaE": 34.15,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 28.02
+            },
+            {
+              "componentId": null,
+              "deltaE": 28.02
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.72
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.35
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.52
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.8
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.19
+            },
+            {
+              "componentId": null,
+              "deltaE": 34.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.66
+            },
+            {
+              "componentId": null,
+              "deltaE": 1.33
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.66
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.71
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.49
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.8
+            },
+            {
+              "componentId": null,
+              "deltaE": 5.13
+            },
+            {
+              "componentId": null,
+              "deltaE": 32.39
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.000 is below threshold 0.85",
+        "aspect-ratio delta 0.440 exceeds threshold 0.05",
+        "scale delta 0.840 exceeds threshold 0.08"
+      ],
+      "maskWarnings": [
+        "reference: 39.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 53.0% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "b5ee9cd424cf3319",
+      "passId": "structural-pass"
+    }
+  ]
+}

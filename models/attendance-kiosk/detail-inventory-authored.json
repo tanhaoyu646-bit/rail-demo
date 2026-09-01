@@ -1,0 +1,142 @@
+{
+  "sourceImage": "E:/100-工作/110-课程建设/crew-training-3d/references/attendance-kiosk-target.jpg",
+  "zonesDir": "E:/100-工作/110-课程建设/crew-training-3d/evidence/attendance-kiosk/intake/detail-zones",
+  "detailInventory": {
+    "scanMethod": "grid-3x3",
+    "targetMinDetails": 10,
+    "details": [
+      {
+        "id": "shell-edge-chamfers",
+        "kind": "bevel",
+        "description": "White shell outer edges carry a narrow real chamfer that catches a continuous highlight.",
+        "region": {"x": 0.0, "y": 0.0, "width": 1.0, "height": 0.66, "units": "normalized"},
+        "scale": "0.012-0.025 of kiosk width",
+        "affects": "geometry",
+        "mapsTo": {"type": "component.localFeatures", "ref": "shell.edge-chamfers"},
+        "evidenceRef": "detail-zones/zone-r0c0.png",
+        "confidence": 0.84
+      },
+      {
+        "id": "recognition-recess",
+        "kind": "groove",
+        "description": "Tall black recognition module is recessed behind the white front shell with a visible dark perimeter channel.",
+        "region": {"x": 0.0, "y": 0.0, "width": 0.34, "height": 0.34, "units": "normalized"},
+        "scale": "0.09 kiosk width by 0.25 kiosk height",
+        "affects": "geometry and AO",
+        "mapsTo": {"type": "component.localFeatures", "ref": "recognition-recess.perimeter-groove"},
+        "evidenceRef": "detail-zones/zone-r0c0.png",
+        "confidence": 0.9
+      },
+      {
+        "id": "recognition-arm-pivot",
+        "kind": "fastener",
+        "description": "Recognition arm includes one circular pivot cap near its root and a rectangular sensor head at the recess.",
+        "region": {"x": 0.0, "y": 0.12, "width": 0.33, "height": 0.20, "units": "normalized"},
+        "scale": "pivot diameter about 0.035 kiosk width",
+        "affects": "geometry and articulation",
+        "mapsTo": {"type": "component.localFeatures", "ref": "recognition-arm.pivot-cap"},
+        "evidenceRef": "detail-zones/zone-r0c0.png",
+        "confidence": 0.82
+      },
+      {
+        "id": "screen-glass-highlight",
+        "kind": "gloss",
+        "description": "Main screen glass has a broad low-roughness reflection and a dark inset bezel.",
+        "region": {"x": 0.28, "y": 0.03, "width": 0.72, "height": 0.38, "units": "normalized"},
+        "scale": "main screen surface",
+        "affects": "roughness and clearcoat",
+        "mapsTo": {"type": "material.localOverrides", "ref": "screen-glass.reflection-band"},
+        "evidenceRef": "detail-zones/zone-r0c1.png",
+        "confidence": 0.92
+      },
+      {
+        "id": "top-camera-lens",
+        "kind": "hole",
+        "description": "Small black camera housing on top contains a recessed circular lens cavity.",
+        "region": {"x": 0.44, "y": 0.0, "width": 0.23, "height": 0.08, "units": "normalized"},
+        "scale": "housing width about 0.10 kiosk width",
+        "affects": "geometry",
+        "mapsTo": {"type": "component.localFeatures", "ref": "top-camera.lens-cavity"},
+        "evidenceRef": "detail-zones/zone-r0c1.png",
+        "confidence": 0.78
+      },
+      {
+        "id": "dual-card-slots",
+        "kind": "hole",
+        "description": "Two aligned horizontal card slots are recessed into one black rectangular module below the main screen.",
+        "region": {"x": 0.36, "y": 0.38, "width": 0.48, "height": 0.15, "units": "normalized"},
+        "scale": "two slots with equal width and spacing",
+        "affects": "geometry and cavity material",
+        "mapsTo": {"type": "component.localFeatures", "ref": "card-reader.slot-pair"},
+        "evidenceRef": "detail-zones/zone-r1c1.png",
+        "confidence": 0.95
+      },
+      {
+        "id": "vent-hole-arrays",
+        "kind": "hole",
+        "description": "Small ventilation perforations form compact regular grids on both sides of the card-reader band.",
+        "region": {"x": 0.0, "y": 0.34, "width": 1.0, "height": 0.28, "units": "normalized"},
+        "scale": "bounded grids, approximately 6 by 8 visible points per side",
+        "affects": "repeated geometry",
+        "mapsTo": {"type": "component.localFeatures", "ref": "interface-fascia.vent-grid"},
+        "evidenceRef": "detail-zones/zone-r1c0.png",
+        "confidence": 0.76
+      },
+      {
+        "id": "circular-interface-ports",
+        "kind": "hole",
+        "description": "Multiple circular sockets puncture the gray connector fascia, including two small cable ports and one larger capped port.",
+        "region": {"x": 0.0, "y": 0.48, "width": 0.55, "height": 0.20, "units": "normalized"},
+        "scale": "mixed diameters with shallow black interiors",
+        "affects": "geometry",
+        "mapsTo": {"type": "component.localFeatures", "ref": "interface-fascia.circular-ports"},
+        "evidenceRef": "detail-zones/zone-r1c0.png",
+        "confidence": 0.8
+      },
+      {
+        "id": "blue-connector-caps",
+        "kind": "ridge",
+        "description": "Two cyan-blue circular connector caps have raised radial grip ribs and square mounting plates.",
+        "region": {"x": 0.42, "y": 0.51, "width": 0.28, "height": 0.16, "units": "normalized"},
+        "scale": "paired, equal diameter, regular horizontal spacing",
+        "affects": "geometry and albedo",
+        "mapsTo": {"type": "component.localFeatures", "ref": "blue-connectors.radial-grip-ribs"},
+        "evidenceRef": "detail-zones/zone-r1c1.png",
+        "confidence": 0.91
+      },
+      {
+        "id": "worktop-reflection",
+        "kind": "gloss",
+        "description": "Black operator worktop carries a broad low-roughness reflection and a slightly darker front edge.",
+        "region": {"x": 0.0, "y": 0.60, "width": 1.0, "height": 0.40, "units": "normalized"},
+        "scale": "entire worktop slab",
+        "affects": "roughness and clearcoat",
+        "mapsTo": {"type": "material.localOverrides", "ref": "worktop-glass.operator-reflection"},
+        "evidenceRef": "detail-zones/zone-r2c1.png",
+        "confidence": 0.94
+      },
+      {
+        "id": "keyboard-key-grid",
+        "kind": "fastener",
+        "description": "Metallic keyboard uses a dense bounded grid of raised rectangular keycaps plus a separate touchpad region.",
+        "region": {"x": 0.10, "y": 0.69, "width": 0.62, "height": 0.25, "units": "normalized"},
+        "scale": "approximately 6 rows with varied key widths",
+        "affects": "instanced repeated geometry",
+        "mapsTo": {"type": "component.localFeatures", "ref": "keyboard.keycap-grid"},
+        "evidenceRef": "detail-zones/zone-r2c1.png",
+        "confidence": 0.93
+      },
+      {
+        "id": "fingerprint-zone-marking",
+        "kind": "decal",
+        "description": "Operator-right worktop has a dedicated fingerprint interaction label and dark sensing patch.",
+        "region": {"x": 0.73, "y": 0.80, "width": 0.27, "height": 0.20, "units": "normalized"},
+        "scale": "small rectangular interaction zone",
+        "affects": "albedo and interaction anchor",
+        "mapsTo": {"type": "material.localOverrides", "ref": "fingerprint-pad.semantic-label"},
+        "evidenceRef": "detail-zones/zone-r2c2.png",
+        "confidence": 0.74
+      }
+    ]
+  }
+}

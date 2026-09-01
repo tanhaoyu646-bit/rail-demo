@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import ts from 'typescript';
+import * as THREE from 'three';
+async function module(name){let code=await readFile(new URL(`../src/${name}.ts`,import.meta.url),'utf8');code=code.replace(/'(three(?:\/[^']+)?)'/g,(_,s)=>JSON.stringify(import.meta.resolve(s)));return import(`data:text/javascript;base64,${Buffer.from(ts.transpileModule(code,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText).toString('base64')}`);}
+const gradient={addColorStop(){}};
+const ctx=new Proxy({}, {get:(o,k)=>o[k]??(k==='createRadialGradient'?()=>gradient:()=>{}),set:(o,k,v)=>(o[k]=v,true)});
+globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>ctx})};
+const {createRoomFurniture,createSeatedDeputy,createRearDoorDetails,counterBounds,dispatcherPosition,deputyForwardOffset}=await module('sceneEnvironment');
+const {collidesWithRoom,resolveRoomMove}=await module('roomCollision');
+const f=createRoomFurniture(),body=f.desk.getObjectByName('全封闭前柜体');assert.ok(body);
+assert.equal(f.desk.getObjectByName('抽屉柜体'),undefined);
+assert.ok(f.deskTop.material.map,'Marble surface is textured');
+f.desk.updateMatrixWorld(true);
+const b=new THREE.Box3().setFromObject(f.desk,true);
+assert.ok(b.min.x>=counterBounds.minX&&b.max.x<=counterBounds.maxX);
+assert.ok(b.min.z>=counterBounds.minZ&&b.max.z<=counterBounds.maxZ+.001);
+const under=new THREE.Raycaster(new THREE.Vector3(2.75,.45,0),new THREE.Vector3(0,0,-1));
+assert.ok(under.intersectObject(body,true).length,'Counter front must hide the incomplete lower body');
+const deskProxy={name:'counter',...counterBounds,enabled:()=>true};
+const approach=resolveRoomMove({x:2.75,z:0},{x:2.75,z:-3.5},[deskProxy]);
+assert.ok(approach.z>=counterBounds.maxZ+.28-.001,'Cannot walk through the counter or staff area');
+const flank=resolveRoomMove({x:-1,z:-3},{x:3,z:-3},[deskProxy]);
+assert.ok(flank.x<=counterBounds.minX-.28+.001,'Cannot enter from the counter return');
+assert.equal(collidesWithRoom(2.75,-1.10,[deskProxy]),false,'Dispatcher interaction spawn is outside collision');
+assert.ok(Math.hypot(2.75-dispatcherPosition[0],-1.10-dispatcherPosition[2],1.65-1.35)<2.1);
+const deputy=createSeatedDeputy();
+assert.equal(deputy.position.z,1.12+deputyForwardOffset);
+assert.ok(Math.abs(deputy.position.z-f.bench.position.z)<.05,'Seated deputy moves with bench');
+for(const [name,hingeX,z,width,angle] of [['original',-5.18,-3.91,1.1,-Math.PI/2],['rear',-.65,7.96,1.30,-Math.PI/2]]){
+ const pivot=new THREE.Group();pivot.position.set(hingeX,0,z);
+ const leaf=new THREE.Mesh(new THREE.BoxGeometry(width,2.22,.07));leaf.position.set(width/2,1.11,0);pivot.add(leaf);
+ const room=new THREE.Group();room.add(pivot);if(name==='rear')createRearDoorDetails(room,pivot);
+ const proxy=()=>{room.updateMatrixWorld(true);const b=new THREE.Box3().setFromObject(leaf);return {name,minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z,enabled:()=>true}};
+ const x=hingeX+width/2,start={x,z:z-1},end={x,z:z+1};
+ const closed=resolveRoomMove(start,end,[proxy()]);assert.ok(closed.z<z-.28,'Closed leaf blocks crossing');
+ pivot.rotation.y=angle;
+ const open=resolveRoomMove(start,end,[proxy()]);assert.ok(Math.abs(open.z-end.z)<.001,'Open leaf leaves a usable doorway');
+ const back=resolveRoomMove(end,start,[proxy()]);assert.ok(Math.abs(back.z-start.z)<.001,'Can return through the open doorway');
+}
+assert.ok(resolveRoomMove({x:0,z:7.4},{x:0,z:9.4},[]).z>8,'Old z=6.5 clamp must not block rear exit');
+const main=await readFile(new URL('../src/main.ts',import.meta.url),'utf8');
+assert.ok(main.includes("target === 'rear-door'"));
+assert.ok(main.includes('movingDoorColliders'));
+console.log('PASS: full counter coverage, closed staff area, synchronized deputy/bench, safe NPC approach, both doors block/open/return, rear outdoor travel.');

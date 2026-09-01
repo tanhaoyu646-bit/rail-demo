@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "kind": "glb-reference",
+  "path": "E:\\010工作台\\谷歌浏览器下载文件\\出勤3D物件\\司机手账.glb",
+  "sha256": "ce921e3e184d692e29e428ba67b1e0e6e43276fc7a87eecf75112b7069cfd723",
+  "bytes": 73876756,
+  "binary": {
+    "version": 2,
+    "declaredLength": 73876756,
+    "jsonChunkBytes": 1955,
+    "binChunkBytes": 73874772,
+    "chunks": [
+      {
+        "type": "JSON",
+        "bytes": 1956
+      },
+      {
+        "type": "BIN\u0000",
+        "bytes": 73874772
+      }
+    ]
+  },
+  "asset": {
+    "version": "2.0",
+    "generator": "Khronos glTF Blender I/O v4.0.43"
+  },
+  "scene": {
+    "defaultScene": 0,
+    "sceneCount": 1,
+    "nodeCount": 1,
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "materialCount": 1,
+    "skinCount": 0,
+    "animationCount": 0
+  },
+  "nodes": [
+    {
+      "index": 0,
+      "name": "node_0",
+      "mesh": 0,
+      "skin": null,
+      "children": []
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "node_0",
+      "primitiveCount": 1,
+      "primitives": [
+        {
+          "index": 0,
+          "mode": 4,
+          "attributes": [
+            "NORMAL",
+            "POSITION",
+            "TEXCOORD_0"
+          ],
+          "material": 0,
+          "positionBounds": {
+            "min": [
+              -0.34261900186538696,
+              -0.017264999449253082,
+              -0.9935320019721985
+            ],
+            "max": [
+              0.3409149944782257,
+              0.0241870004683733,
+              0.0
+            ]
+          }
+        }
+      ],
+      "bounds": {
+        "space": "mesh-local-untransformed",
+        "min": [
+          -0.34261900186538696,
+          -0.017264999449253082,
+          -0.9935320019721985
+        ],
+        "max": [
+          0.3409149944782257,
+          0.0241870004683733,
+          0.0
+        ],
+        "size": [
+          0.6835339963436127,
+          0.04145199991762638,
+          0.9935320019721985
+        ],
+        "center": [
+          -0.0008520036935806274,
+          0.003461000509560108,
+          -0.49676600098609924
+        ]
+      }
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "Material.001",
+      "alphaMode": "OPAQUE"
+    }
+  ],
+  "skins": [],
+  "bounds": {
+    "space": "mesh-local-untransformed",
+    "min": [
+      -0.34261900186538696,
+      -0.017264999449253082,
+      -0.9935320019721985
+    ],
+    "max": [
+      0.3409149944782257,
+      0.0241870004683733,
+      0.0
+    ],
+    "size": [
+      0.6835339963436127,
+      0.04145199991762638,
+      0.9935320019721985
+    ],
+    "center": [
+      -0.0008520036935806274,
+      0.003461000509560108,
+      -0.49676600098609924
+    ]
+  },
+  "semanticDecomposition": {
+    "schemaVersion": 1,
+    "status": "insufficient",
+    "reliableSemanticBoundary": "multipart-glb-required",
+    "reason": "The metadata exposes one merged drawable and no semantic material boundary. Connected-component or curvature analysis may produce hypotheses, but cannot prove which region is head, clothing, weapon, or tail.",
+    "metadataEvidence": {
+      "nodeCount": 1,
+      "meshCount": 1,
+      "primitiveCount": 1,
+      "materialCount": 1,
+      "textureCount": 3,
+      "namedNodes": [
+        "node_0"
+      ],
+      "namedMeshes": [
+        "node_0"
+      ],
+      "namedMaterials": [
+        "Material.001"
+      ]
+    },
+    "strategies": [
+      {
+        "id": "named-node",
+        "status": "not-proven"
+      },
+      {
+        "id": "primitive-material-boundary",
+        "status": "not-proven"
+      },
+      {
+        "id": "uv-texture-boundary",
+        "status": "available"
+      },
+      {
+        "id": "connected-component-hypothesis",
+        "status": "candidate-only"
+      },
+      {
+        "id": "curvature-normal-region-growing-hypothesis",
+        "status": "candidate-only"
+      },
+      {
+        "id": "multiview-id-mask",
+        "status": "required-for-runtime-region-evidence"
+      },
+      {
+        "id": "multipart-glb",
+        "status": "required"
+      }
+    ],
+    "claimsAllowed": [
+      "scene and drawable inventory",
+      "material/primitive boundaries explicitly present in the GLB",
+      "browser-rendered ID-mask evidence when captured"
+    ],
+    "claimsForbiddenUntilEvidence": [
+      "exact semantic labels inferred from a merged mesh",
+      "per-region material equality without region crops or ID masks",
+      "multipart topology reconstructed from metadata alone"
+    ]
+  },
+  "referenceReadiness": "pass",
+  "warnings": [
+    "GLB contains no skin; this is acceptable for static reference geometry but not animation evidence",
+    "GLB metadata has no reliable semantic part boundaries; request multipart GLB or capture ID masks"
+  ],
+  "note": "Metadata only. Render the GLB through the target Three.js route before using it as a visual baseline; do not copy its topology into a procedural factory."
+}

@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import ts from 'typescript';
+import * as THREE from 'three';
+
+const source = (await readFile(new URL('../src/kioskCardInsertion.ts', import.meta.url), 'utf8'))
+  .replace("'three'", JSON.stringify(import.meta.resolve('three')));
+const js = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } }).outputText;
+const { cardDockPose, createKioskCardSlot, KioskCardInsertion, kioskSlotWidth } = await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`);
+const layout = { width: .17, tip: new THREE.Vector3(0, -.185, 0),
+  pivotQuaternion: new THREE.Quaternion().setFromEuler(new THREE.Euler(-1.16, 0, Math.PI)), greenLength: .108 };
+layout.tip.applyQuaternion(layout.pivotQuaternion).add(new THREE.Vector3(0, .065, 0));
+const scene = new THREE.Scene();
+const reader = new THREE.Mesh(new THREE.BoxGeometry(.42, .14, .055));
+reader.position.set(-2.84, .5, -2.17); reader.rotation.set(.08, .35, 0);
+scene.add(reader);
+const slot = createKioskCardSlot(reader);
+const pose = cardDockPose(slot, layout, -.08);
+const tip = layout.tip.clone().multiplyScalar(pose.scale).applyQuaternion(pose.quaternion).add(pose.position);
+const localTip = slot.worldToLocal(tip.clone());
+assert.ok(Math.abs(localTip.x) < 1e-10 && Math.abs(localTip.y) < 1e-10);
+assert.ok(Math.abs(localTip.z + .08) < 1e-10, 'Green leading edge lands inside the actual slot');
+const green = new THREE.Vector3(0, -1, 0).applyQuaternion(layout.pivotQuaternion).applyQuaternion(pose.quaternion);
+const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(slot.getWorldQuaternion(new THREE.Quaternion()));
+assert.ok(green.dot(forward) > .99999, 'Card feed direction follows rotated kiosk slot');
+assert.ok(layout.width * pose.scale < kioskSlotWidth, 'Card width must fit between guide rails');
+const camera = new THREE.PerspectiveCamera(50, 16/9, .01, 10);
+const viewRoot = new THREE.Group();
+const item = new THREE.Group(); item.userData.cardInsertion = layout;
+item.position.set(.25, -.17, -.88); item.scale.setScalar(.92); viewRoot.add(item);
+const rest = item.position.clone();
+const motion = new KioskCardInsertion(slot, scene, camera, viewRoot);
+const cancelled = motion.insert(item); motion.update(.1); motion.cancel();
+assert.equal(await cancelled, false); assert.equal(item.parent, viewRoot); assert.ok(item.position.equals(rest));
+const inserted = motion.insert(item);
+const initialTip = layout.tip.clone().multiply(item.scale).applyQuaternion(item.quaternion).add(item.position);
+assert.ok(slot.worldToLocal(initialTip).z > 0, 'Initial green end must remain in front of the cabinet, not start inside it');
+for (let i = 0; i < 100; i++) motion.update(.03);
+assert.equal(await inserted, true); assert.equal(motion.hasCard, true); assert.equal(item.parent, scene);
+motion.takeBack(); assert.equal(motion.hasCard, false); assert.equal(item.parent, null);
+console.log('PASS: slot-space tip alignment, green forward, fitted width, cancellation, mounted world occlusion and takeback.');

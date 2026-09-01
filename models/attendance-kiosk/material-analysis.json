@@ -1,0 +1,3214 @@
+{
+  "schemaVersion": 1,
+  "kind": "img2threejs.material-analysis",
+  "referenceId": "attendance-kiosk-front-oblique",
+  "manifest": "E:\\100-工作\\110-课程建设\\crew-training-3d\\models\\attendance-kiosk\\material-regions.json",
+  "registry": "C:\\Users\\Tan\\.codex\\skills\\img2threejs\\docs\\materials\\material-reference.json",
+  "targetThreshold": 0.7,
+  "notObservedMaterials": [],
+  "unresolvedNotObservedMaterials": [],
+  "regions": [
+    {
+      "componentId": "upper-shell",
+      "regionId": "shell-white",
+      "materialSpecId": "shell-white",
+      "hypothesis": {
+        "componentId": "upper-shell",
+        "regionId": "shell-white",
+        "materialId": null,
+        "family": "coating",
+        "subtype": "paint-over-metal",
+        "finish": "gloss-or-satin",
+        "aliases": [],
+        "confidence": 0.86,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "coating.painted-metal",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.86,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+            "bbox": {
+              "x": 0,
+              "y": 280,
+              "width": 190,
+              "height": 280
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0618
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.86,
+            "estimatedFidelity": 0.86,
+            "targetThreshold": 0.7,
+            "materialId": "shell-white",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white",
+            "palette": [
+              "#393D3D",
+              "#202525",
+              "#101618",
+              "#59615B",
+              "#CBC3C1"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_albedo.png",
+                "url": "shell-white_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_roughness.png",
+                "url": "shell-white_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_height.png",
+                "url": "shell-white_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_normal.png",
+                "url": "shell-white_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_ao.png",
+                "url": "shell-white_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 190,
+              "sourceHeight": 280,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 16,
+                "y": 0,
+                "width": 174,
+                "height": 191
+              },
+              "mask": {
+                "backgroundColor": "#AAB1B8",
+                "backgroundNoise": 45.222,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.1339
+              },
+              "mapStats": {
+                "valueRange": 0.3784,
+                "heightP90Gradient": 0.05698,
+                "roughnessBase": 0.68,
+                "roughnessVariation": 0.079,
+                "normalStrength": 0.223,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#393D3D",
+                "#202525",
+                "#101618",
+                "#59615B",
+                "#CBC3C1"
+              ]
+            },
+            "warnings": [
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "worn-composite",
+            "recipe": {
+              "metalness": 0.0,
+              "roughness": 0.9,
+              "clearcoat": 0.0,
+              "clearcoatRoughness": 0.0,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 0.5,
+              "anisotropy": 0.0,
+              "procedural": "mottle"
+            },
+            "palette": [
+              "#323531",
+              "#747979",
+              "#C7D0CF",
+              "#C6D0CF",
+              "#BEC7C9"
+            ],
+            "paletteHueRisk": [],
+            "gradientAxis": "vertical",
+            "stats": {
+              "meanLum": 171.5,
+              "meanSaturation": 0.072,
+              "gradientStrength": 0.652,
+              "mottle": 0.027,
+              "streakRatio": 0.75,
+              "hueSpread": 0.132,
+              "specularFraction": 0.009
+            }
+          }
+        },
+        "profileId": "coating.painted-metal",
+        "family": "coating",
+        "subtype": "paint-over-metal",
+        "finish": "gloss-or-satin",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.45,
+          "clearcoat": 0.75,
+          "clearcoatRoughness": 0.12,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "clearcoatMap",
+          "clearcoatRoughnessMap",
+          "metalnessMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ],
+        "sourceRefs": [
+          "three.mesh-physical",
+          "gltf.2",
+          "khronos.gltf-pbr",
+          "adobe.pbr-guide-1",
+          "adobe.pbr-guide-2"
+        ],
+        "visualCues": [
+          "diffuse paint colour under a separate glossy coat",
+          "chips may expose metallic substrate"
+        ]
+      },
+      "observations": [
+        "near-neutral colour response",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+        "bbox": {
+          "x": 0,
+          "y": 280,
+          "width": 190,
+          "height": 280
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.0618
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#323531",
+          "#747979",
+          "#C7D0CF",
+          "#C6D0CF",
+          "#BEC7C9"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 171.5,
+          "meanSaturation": 0.072,
+          "gradientStrength": 0.652,
+          "mottle": 0.027,
+          "streakRatio": 0.75,
+          "hueSpread": 0.132,
+          "specularFraction": 0.009
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "materialId": "shell-white",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white",
+        "palette": [
+          "#393D3D",
+          "#202525",
+          "#101618",
+          "#59615B",
+          "#CBC3C1"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_albedo.png",
+            "url": "shell-white_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_roughness.png",
+            "url": "shell-white_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_height.png",
+            "url": "shell-white_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_normal.png",
+            "url": "shell-white_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_ao.png",
+            "url": "shell-white_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 190,
+          "sourceHeight": 280,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 16,
+            "y": 0,
+            "width": 174,
+            "height": 191
+          },
+          "mask": {
+            "backgroundColor": "#AAB1B8",
+            "backgroundNoise": 45.222,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.1339
+          },
+          "mapStats": {
+            "valueRange": 0.3784,
+            "heightP90Gradient": 0.05698,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.079,
+            "normalStrength": 0.223,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393D3D",
+            "#202525",
+            "#101618",
+            "#59615B",
+            "#CBC3C1"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\00-shell-white.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_albedo.png",
+            "url": "shell-white_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_roughness.png",
+            "url": "shell-white_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_height.png",
+            "url": "shell-white_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_normal.png",
+            "url": "shell-white_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_ao.png",
+            "url": "shell-white_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 190,
+          "sourceHeight": 280,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 16,
+            "y": 0,
+            "width": 174,
+            "height": 191
+          },
+          "mask": {
+            "backgroundColor": "#AAB1B8",
+            "backgroundNoise": 45.222,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.1339
+          },
+          "mapStats": {
+            "valueRange": 0.3784,
+            "heightP90Gradient": 0.05698,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.079,
+            "normalStrength": 0.223,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393D3D",
+            "#202525",
+            "#101618",
+            "#59615B",
+            "#CBC3C1"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_albedo.png",
+          "url": "shell-white_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_roughness.png",
+          "url": "shell-white_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_height.png",
+          "url": "shell-white_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_normal.png",
+          "url": "shell-white_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-00-shell-white\\shell-white_ao.png",
+          "url": "shell-white_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "main-screen",
+      "regionId": "screen-glass",
+      "materialSpecId": "screen-glass",
+      "hypothesis": {
+        "componentId": "main-screen",
+        "regionId": "screen-glass",
+        "materialId": null,
+        "family": "glass",
+        "subtype": "clear",
+        "finish": "polished",
+        "aliases": [],
+        "confidence": 0.793,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "glass.clear",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.793,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+            "bbox": {
+              "x": 230,
+              "y": 80,
+              "width": 490,
+              "height": 360
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.2048
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.793,
+            "estimatedFidelity": 0.793,
+            "targetThreshold": 0.7,
+            "materialId": "screen-glass",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass",
+            "palette": [
+              "#59675E",
+              "#1D2224",
+              "#151B1E",
+              "#5E7D76",
+              "#609289"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_albedo.png",
+                "url": "screen-glass_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_roughness.png",
+                "url": "screen-glass_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_height.png",
+                "url": "screen-glass_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_normal.png",
+                "url": "screen-glass_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_ao.png",
+                "url": "screen-glass_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 490,
+              "sourceHeight": 360,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 53,
+                "width": 488,
+                "height": 307
+              },
+              "mask": {
+                "backgroundColor": "#606867",
+                "backgroundNoise": 120.71,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.0646
+              },
+              "mapStats": {
+                "valueRange": 0.4301,
+                "heightP90Gradient": 0.01438,
+                "roughnessBase": 0.68,
+                "roughnessVariation": 0.05,
+                "normalStrength": 0.173,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#59675E",
+                "#1D2224",
+                "#151B1E",
+                "#5E7D76",
+                "#609289"
+              ]
+            },
+            "warnings": [
+              "foreground mask is very small",
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "worn-composite",
+            "recipe": {
+              "metalness": 0.0,
+              "roughness": 0.9,
+              "clearcoat": 0.0,
+              "clearcoatRoughness": 0.0,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 0.5,
+              "anisotropy": 0.0,
+              "procedural": "mottle"
+            },
+            "palette": [
+              "#6B7171",
+              "#6D706C",
+              "#727771",
+              "#6C7571",
+              "#7B8484"
+            ],
+            "paletteHueRisk": [],
+            "gradientAxis": "horizontal",
+            "stats": {
+              "meanLum": 113.8,
+              "meanSaturation": 0.076,
+              "gradientStrength": 0.232,
+              "mottle": 0.032,
+              "streakRatio": 0.96,
+              "hueSpread": 0.084,
+              "specularFraction": 0.005
+            }
+          }
+        },
+        "profileId": "glass.clear",
+        "family": "glass",
+        "subtype": "clear",
+        "finish": "polished",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.05,
+          "transmission": 1.0,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "roughnessMap",
+          "thicknessMap"
+        ],
+        "optionalMaps": [
+          "map",
+          "normalMap",
+          "transmissionMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "environment-reflection",
+          "backlight-transmission",
+          "reference-beauty"
+        ],
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.pmrem",
+          "gltf.2",
+          "khronos.transmission",
+          "khronos.volume",
+          "google.filament-pbr"
+        ],
+        "visualCues": [
+          "background distortion",
+          "bright interface reflection",
+          "visible thickness or absorption"
+        ]
+      },
+      "observations": [
+        "near-neutral colour response",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+        "bbox": {
+          "x": 230,
+          "y": 80,
+          "width": 490,
+          "height": 360
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.2048
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#6B7171",
+          "#6D706C",
+          "#727771",
+          "#6C7571",
+          "#7B8484"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "horizontal",
+        "stats": {
+          "meanLum": 113.8,
+          "meanSaturation": 0.076,
+          "gradientStrength": 0.232,
+          "mottle": 0.032,
+          "streakRatio": 0.96,
+          "hueSpread": 0.084,
+          "specularFraction": 0.005
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.793,
+        "estimatedFidelity": 0.793,
+        "targetThreshold": 0.7,
+        "materialId": "screen-glass",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass",
+        "palette": [
+          "#59675E",
+          "#1D2224",
+          "#151B1E",
+          "#5E7D76",
+          "#609289"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_albedo.png",
+            "url": "screen-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_roughness.png",
+            "url": "screen-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_height.png",
+            "url": "screen-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_normal.png",
+            "url": "screen-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_ao.png",
+            "url": "screen-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 490,
+          "sourceHeight": 360,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 53,
+            "width": 488,
+            "height": 307
+          },
+          "mask": {
+            "backgroundColor": "#606867",
+            "backgroundNoise": 120.71,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.0646
+          },
+          "mapStats": {
+            "valueRange": 0.4301,
+            "heightP90Gradient": 0.01438,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.173,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#59675E",
+            "#1D2224",
+            "#151B1E",
+            "#5E7D76",
+            "#609289"
+          ]
+        },
+        "warnings": [
+          "foreground mask is very small",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\01-screen-glass.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.793,
+        "estimatedFidelity": 0.793,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_albedo.png",
+            "url": "screen-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_roughness.png",
+            "url": "screen-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_height.png",
+            "url": "screen-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_normal.png",
+            "url": "screen-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_ao.png",
+            "url": "screen-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 490,
+          "sourceHeight": 360,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 53,
+            "width": 488,
+            "height": 307
+          },
+          "mask": {
+            "backgroundColor": "#606867",
+            "backgroundNoise": 120.71,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.0646
+          },
+          "mapStats": {
+            "valueRange": 0.4301,
+            "heightP90Gradient": 0.01438,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.173,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#59675E",
+            "#1D2224",
+            "#151B1E",
+            "#5E7D76",
+            "#609289"
+          ]
+        },
+        "warnings": [
+          "foreground mask is very small",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_albedo.png",
+          "url": "screen-glass_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_roughness.png",
+          "url": "screen-glass_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_height.png",
+          "url": "screen-glass_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_normal.png",
+          "url": "screen-glass_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-01-screen-glass\\screen-glass_ao.png",
+          "url": "screen-glass_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "worktop",
+      "regionId": "worktop-glass",
+      "materialSpecId": "worktop-glass",
+      "hypothesis": {
+        "componentId": "worktop",
+        "regionId": "worktop-glass",
+        "materialId": null,
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "glossy",
+        "aliases": [],
+        "confidence": 0.829,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "plastic.glossy",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.829,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+            "bbox": {
+              "x": 520,
+              "y": 950,
+              "width": 200,
+              "height": 190
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0441
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.829,
+            "estimatedFidelity": 0.829,
+            "targetThreshold": 0.7,
+            "materialId": "worktop-glass",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass",
+            "palette": [
+              "#101C1F",
+              "#7F9A8B",
+              "#AACCBE",
+              "#213032",
+              "#5A6D63"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_albedo.png",
+                "url": "worktop-glass_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_roughness.png",
+                "url": "worktop-glass_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_height.png",
+                "url": "worktop-glass_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_normal.png",
+                "url": "worktop-glass_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_ao.png",
+                "url": "worktop-glass_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 200,
+              "sourceHeight": 190,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 200,
+                "height": 190
+              },
+              "mask": {
+                "backgroundColor": "#1C272C",
+                "backgroundNoise": 26.019,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.998
+              },
+              "mapStats": {
+                "valueRange": 0.7413,
+                "heightP90Gradient": 0.07283,
+                "roughnessBase": 0.706,
+                "roughnessVariation": 0.141,
+                "normalStrength": 0.242,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#101C1F",
+                "#7F9A8B",
+                "#AACCBE",
+                "#213032",
+                "#5A6D63"
+              ]
+            },
+            "warnings": [
+              "image is not clearly isolated from background; using most pixels as material evidence",
+              "object/background separation is weak",
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "candy-coat",
+            "recipe": {
+              "metalness": 0.35,
+              "roughness": 0.18,
+              "clearcoat": 0.6,
+              "clearcoatRoughness": 0.15,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 0.7,
+              "anisotropy": 0.0,
+              "procedural": "gradient-smoke"
+            },
+            "palette": [
+              "#222A2D",
+              "#40534D",
+              "#526862",
+              "#79958C",
+              "#384A47"
+            ],
+            "paletteHueRisk": [
+              {
+                "stop": "#222A2D",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  45,
+                  42,
+                  34
+                ]
+              }
+            ],
+            "gradientAxis": "horizontal",
+            "stats": {
+              "meanLum": 93.5,
+              "meanSaturation": 0.327,
+              "gradientStrength": 0.483,
+              "mottle": 0.058,
+              "streakRatio": 1.13,
+              "hueSpread": 0.043,
+              "specularFraction": 0.0
+            }
+          }
+        },
+        "profileId": "plastic.glossy",
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "glossy",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.28,
+          "clearcoat": 0.2,
+          "clearcoatRoughness": 0.18,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "clearcoatMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ],
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "visualCues": [
+          "untinted or light-coloured specular over coloured diffuse body",
+          "smooth molded surface"
+        ]
+      },
+      "observations": [
+        "chromatic base-colour response",
+        "visible meso/micro variation",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+        "bbox": {
+          "x": 520,
+          "y": 950,
+          "width": 200,
+          "height": 190
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.0441
+      },
+      "textureAnalysis": {
+        "finishClass": "candy-coat",
+        "recipe": {
+          "metalness": 0.35,
+          "roughness": 0.18,
+          "clearcoat": 0.6,
+          "clearcoatRoughness": 0.15,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.7,
+          "anisotropy": 0.0,
+          "procedural": "gradient-smoke"
+        },
+        "palette": [
+          "#222A2D",
+          "#40534D",
+          "#526862",
+          "#79958C",
+          "#384A47"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#222A2D",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              45,
+              42,
+              34
+            ]
+          }
+        ],
+        "gradientAxis": "horizontal",
+        "stats": {
+          "meanLum": 93.5,
+          "meanSaturation": 0.327,
+          "gradientStrength": 0.483,
+          "mottle": 0.058,
+          "streakRatio": 1.13,
+          "hueSpread": 0.043,
+          "specularFraction": 0.0
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "materialId": "worktop-glass",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass",
+        "palette": [
+          "#101C1F",
+          "#7F9A8B",
+          "#AACCBE",
+          "#213032",
+          "#5A6D63"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_albedo.png",
+            "url": "worktop-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_roughness.png",
+            "url": "worktop-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_height.png",
+            "url": "worktop-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_normal.png",
+            "url": "worktop-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_ao.png",
+            "url": "worktop-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 200,
+          "sourceHeight": 190,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 200,
+            "height": 190
+          },
+          "mask": {
+            "backgroundColor": "#1C272C",
+            "backgroundNoise": 26.019,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.998
+          },
+          "mapStats": {
+            "valueRange": 0.7413,
+            "heightP90Gradient": 0.07283,
+            "roughnessBase": 0.706,
+            "roughnessVariation": 0.141,
+            "normalStrength": 0.242,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#101C1F",
+            "#7F9A8B",
+            "#AACCBE",
+            "#213032",
+            "#5A6D63"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\02-worktop-glass.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_albedo.png",
+            "url": "worktop-glass_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_roughness.png",
+            "url": "worktop-glass_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_height.png",
+            "url": "worktop-glass_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_normal.png",
+            "url": "worktop-glass_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_ao.png",
+            "url": "worktop-glass_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 200,
+          "sourceHeight": 190,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 200,
+            "height": 190
+          },
+          "mask": {
+            "backgroundColor": "#1C272C",
+            "backgroundNoise": 26.019,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.998
+          },
+          "mapStats": {
+            "valueRange": 0.7413,
+            "heightP90Gradient": 0.07283,
+            "roughnessBase": 0.706,
+            "roughnessVariation": 0.141,
+            "normalStrength": 0.242,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#101C1F",
+            "#7F9A8B",
+            "#AACCBE",
+            "#213032",
+            "#5A6D63"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_albedo.png",
+          "url": "worktop-glass_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_roughness.png",
+          "url": "worktop-glass_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_height.png",
+          "url": "worktop-glass_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_normal.png",
+          "url": "worktop-glass_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-02-worktop-glass\\worktop-glass_ao.png",
+          "url": "worktop-glass_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "interface-fascia",
+      "regionId": "fascia-gray",
+      "materialSpecId": "fascia-gray",
+      "hypothesis": {
+        "componentId": "interface-fascia",
+        "regionId": "fascia-gray",
+        "materialId": null,
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "aliases": [],
+        "confidence": 0.86,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "plastic.matte",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.86,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+            "bbox": {
+              "x": 20,
+              "y": 535,
+              "width": 285,
+              "height": 175
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0579
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.86,
+            "estimatedFidelity": 0.86,
+            "targetThreshold": 0.7,
+            "materialId": "fascia-gray",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray",
+            "palette": [
+              "#393F46",
+              "#50565D",
+              "#252E36",
+              "#988586",
+              "#D5E4F0"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_albedo.png",
+                "url": "fascia-gray_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_roughness.png",
+                "url": "fascia-gray_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_height.png",
+                "url": "fascia-gray_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_normal.png",
+                "url": "fascia-gray_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_ao.png",
+                "url": "fascia-gray_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 285,
+              "sourceHeight": 175,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 285,
+                "height": 175
+              },
+              "mask": {
+                "backgroundColor": "#A8B2B5",
+                "backgroundNoise": 31.209,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.421
+              },
+              "mapStats": {
+                "valueRange": 0.7396,
+                "heightP90Gradient": 0.06016,
+                "roughnessBase": 0.686,
+                "roughnessVariation": 0.104,
+                "normalStrength": 0.227,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#393F46",
+                "#50565D",
+                "#252E36",
+                "#988586",
+                "#D5E4F0"
+              ]
+            },
+            "warnings": [
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "worn-composite",
+            "recipe": {
+              "metalness": 0.0,
+              "roughness": 0.9,
+              "clearcoat": 0.0,
+              "clearcoatRoughness": 0.0,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 0.5,
+              "anisotropy": 0.0,
+              "procedural": "mottle"
+            },
+            "palette": [
+              "#ABB6BA",
+              "#899297",
+              "#6C747D",
+              "#8F959F",
+              "#ACAFB5"
+            ],
+            "paletteHueRisk": [],
+            "gradientAxis": "vertical",
+            "stats": {
+              "meanLum": 145.4,
+              "meanSaturation": 0.147,
+              "gradientStrength": 0.281,
+              "mottle": 0.042,
+              "streakRatio": 1.05,
+              "hueSpread": 0.483,
+              "specularFraction": 0.002
+            }
+          }
+        },
+        "profileId": "plastic.matte",
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.68,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ],
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "visualCues": [
+          "coloured diffuse body",
+          "broad neutral highlight",
+          "mold seams or fine stipple"
+        ]
+      },
+      "observations": [
+        "near-neutral colour response",
+        "visible meso/micro variation",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+        "bbox": {
+          "x": 20,
+          "y": 535,
+          "width": 285,
+          "height": 175
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.0579
+      },
+      "textureAnalysis": {
+        "finishClass": "worn-composite",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.9,
+          "clearcoat": 0.0,
+          "clearcoatRoughness": 0.0,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.5,
+          "anisotropy": 0.0,
+          "procedural": "mottle"
+        },
+        "palette": [
+          "#ABB6BA",
+          "#899297",
+          "#6C747D",
+          "#8F959F",
+          "#ACAFB5"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 145.4,
+          "meanSaturation": 0.147,
+          "gradientStrength": 0.281,
+          "mottle": 0.042,
+          "streakRatio": 1.05,
+          "hueSpread": 0.483,
+          "specularFraction": 0.002
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "materialId": "fascia-gray",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray",
+        "palette": [
+          "#393F46",
+          "#50565D",
+          "#252E36",
+          "#988586",
+          "#D5E4F0"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_albedo.png",
+            "url": "fascia-gray_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_roughness.png",
+            "url": "fascia-gray_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_height.png",
+            "url": "fascia-gray_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_normal.png",
+            "url": "fascia-gray_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_ao.png",
+            "url": "fascia-gray_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 285,
+          "sourceHeight": 175,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 285,
+            "height": 175
+          },
+          "mask": {
+            "backgroundColor": "#A8B2B5",
+            "backgroundNoise": 31.209,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.421
+          },
+          "mapStats": {
+            "valueRange": 0.7396,
+            "heightP90Gradient": 0.06016,
+            "roughnessBase": 0.686,
+            "roughnessVariation": 0.104,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393F46",
+            "#50565D",
+            "#252E36",
+            "#988586",
+            "#D5E4F0"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\03-fascia-gray.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_albedo.png",
+            "url": "fascia-gray_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_roughness.png",
+            "url": "fascia-gray_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_height.png",
+            "url": "fascia-gray_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_normal.png",
+            "url": "fascia-gray_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_ao.png",
+            "url": "fascia-gray_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 285,
+          "sourceHeight": 175,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 285,
+            "height": 175
+          },
+          "mask": {
+            "backgroundColor": "#A8B2B5",
+            "backgroundNoise": 31.209,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.421
+          },
+          "mapStats": {
+            "valueRange": 0.7396,
+            "heightP90Gradient": 0.06016,
+            "roughnessBase": 0.686,
+            "roughnessVariation": 0.104,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#393F46",
+            "#50565D",
+            "#252E36",
+            "#988586",
+            "#D5E4F0"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_albedo.png",
+          "url": "fascia-gray_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_roughness.png",
+          "url": "fascia-gray_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_height.png",
+          "url": "fascia-gray_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_normal.png",
+          "url": "fascia-gray_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-03-fascia-gray\\fascia-gray_ao.png",
+          "url": "fascia-gray_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "card-reader",
+      "regionId": "dark-plastic",
+      "materialSpecId": "dark-plastic",
+      "hypothesis": {
+        "componentId": "card-reader",
+        "regionId": "dark-plastic",
+        "materialId": null,
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "aliases": [],
+        "confidence": 0.829,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "plastic.matte",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.829,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+            "bbox": {
+              "x": 345,
+              "y": 455,
+              "width": 265,
+              "height": 150
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0461
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.829,
+            "estimatedFidelity": 0.829,
+            "targetThreshold": 0.7,
+            "materialId": "dark-plastic",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic",
+            "palette": [
+              "#D9E3E4",
+              "#0B151D",
+              "#C0CACC",
+              "#1B2126",
+              "#373F44"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_albedo.png",
+                "url": "dark-plastic_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_roughness.png",
+                "url": "dark-plastic_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_height.png",
+                "url": "dark-plastic_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_normal.png",
+                "url": "dark-plastic_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_ao.png",
+                "url": "dark-plastic_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 265,
+              "sourceHeight": 150,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 265,
+                "height": 150
+              },
+              "mask": {
+                "backgroundColor": "#1D2226",
+                "backgroundNoise": 47.35,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.9676
+              },
+              "mapStats": {
+                "valueRange": 0.8204,
+                "heightP90Gradient": 0.03719,
+                "roughnessBase": 0.684,
+                "roughnessVariation": 0.05,
+                "normalStrength": 0.2,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#D9E3E4",
+                "#0B151D",
+                "#C0CACC",
+                "#1B2126",
+                "#373F44"
+              ]
+            },
+            "warnings": [
+              "image is not clearly isolated from background; using most pixels as material evidence",
+              "object/background separation is weak",
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "painted-metal",
+            "recipe": {
+              "metalness": 0.0,
+              "roughness": 0.5,
+              "clearcoat": 1.0,
+              "clearcoatRoughness": 0.05,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 1.0,
+              "anisotropy": 0.0,
+              "procedural": "flat-clearcoat"
+            },
+            "palette": [
+              "#191D22",
+              "#B3BABD",
+              "#C6D0D2",
+              "#2D363E",
+              "#141E26"
+            ],
+            "paletteHueRisk": [
+              {
+                "stop": "#191D22",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  34,
+                  29,
+                  25
+                ]
+              },
+              {
+                "stop": "#2D363E",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  62,
+                  54,
+                  45
+                ]
+              },
+              {
+                "stop": "#141E26",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  38,
+                  30,
+                  20
+                ]
+              }
+            ],
+            "gradientAxis": "vertical",
+            "stats": {
+              "meanLum": 116.1,
+              "meanSaturation": 0.261,
+              "gradientStrength": 0.769,
+              "mottle": 0.015,
+              "streakRatio": 0.49,
+              "hueSpread": 0.003,
+              "specularFraction": 0.003
+            }
+          }
+        },
+        "profileId": "plastic.matte",
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.68,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ],
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "visualCues": [
+          "coloured diffuse body",
+          "broad neutral highlight",
+          "mold seams or fine stipple"
+        ]
+      },
+      "observations": [
+        "chromatic base-colour response",
+        "directional surface frequency",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+        "bbox": {
+          "x": 345,
+          "y": 455,
+          "width": 265,
+          "height": 150
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.0461
+      },
+      "textureAnalysis": {
+        "finishClass": "painted-metal",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.5,
+          "clearcoat": 1.0,
+          "clearcoatRoughness": 0.05,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 1.0,
+          "anisotropy": 0.0,
+          "procedural": "flat-clearcoat"
+        },
+        "palette": [
+          "#191D22",
+          "#B3BABD",
+          "#C6D0D2",
+          "#2D363E",
+          "#141E26"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#191D22",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              34,
+              29,
+              25
+            ]
+          },
+          {
+            "stop": "#2D363E",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              62,
+              54,
+              45
+            ]
+          },
+          {
+            "stop": "#141E26",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              38,
+              30,
+              20
+            ]
+          }
+        ],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 116.1,
+          "meanSaturation": 0.261,
+          "gradientStrength": 0.769,
+          "mottle": 0.015,
+          "streakRatio": 0.49,
+          "hueSpread": 0.003,
+          "specularFraction": 0.003
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "materialId": "dark-plastic",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic",
+        "palette": [
+          "#D9E3E4",
+          "#0B151D",
+          "#C0CACC",
+          "#1B2126",
+          "#373F44"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_albedo.png",
+            "url": "dark-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_roughness.png",
+            "url": "dark-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_height.png",
+            "url": "dark-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_normal.png",
+            "url": "dark-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_ao.png",
+            "url": "dark-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 265,
+          "sourceHeight": 150,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 265,
+            "height": 150
+          },
+          "mask": {
+            "backgroundColor": "#1D2226",
+            "backgroundNoise": 47.35,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.9676
+          },
+          "mapStats": {
+            "valueRange": 0.8204,
+            "heightP90Gradient": 0.03719,
+            "roughnessBase": 0.684,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.2,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#D9E3E4",
+            "#0B151D",
+            "#C0CACC",
+            "#1B2126",
+            "#373F44"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\04-dark-plastic.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.829,
+        "estimatedFidelity": 0.829,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_albedo.png",
+            "url": "dark-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_roughness.png",
+            "url": "dark-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_height.png",
+            "url": "dark-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_normal.png",
+            "url": "dark-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_ao.png",
+            "url": "dark-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 265,
+          "sourceHeight": 150,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 265,
+            "height": 150
+          },
+          "mask": {
+            "backgroundColor": "#1D2226",
+            "backgroundNoise": 47.35,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.9676
+          },
+          "mapStats": {
+            "valueRange": 0.8204,
+            "heightP90Gradient": 0.03719,
+            "roughnessBase": 0.684,
+            "roughnessVariation": 0.05,
+            "normalStrength": 0.2,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#D9E3E4",
+            "#0B151D",
+            "#C0CACC",
+            "#1B2126",
+            "#373F44"
+          ]
+        },
+        "warnings": [
+          "image is not clearly isolated from background; using most pixels as material evidence",
+          "object/background separation is weak",
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_albedo.png",
+          "url": "dark-plastic_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_roughness.png",
+          "url": "dark-plastic_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_height.png",
+          "url": "dark-plastic_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_normal.png",
+          "url": "dark-plastic_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-04-dark-plastic\\dark-plastic_ao.png",
+          "url": "dark-plastic_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "blue-connectors",
+      "regionId": "blue-plastic",
+      "materialSpecId": "blue-plastic",
+      "hypothesis": {
+        "componentId": "blue-connectors",
+        "regionId": "blue-plastic",
+        "materialId": null,
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "aliases": [],
+        "confidence": 0.86,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "plastic.matte",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.86,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+            "bbox": {
+              "x": 300,
+              "y": 610,
+              "width": 210,
+              "height": 170
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.0414
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.86,
+            "estimatedFidelity": 0.86,
+            "targetThreshold": 0.7,
+            "materialId": "blue-plastic",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic",
+            "palette": [
+              "#0B141D",
+              "#1D6486",
+              "#404955",
+              "#8197A6",
+              "#222A35"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_albedo.png",
+                "url": "blue-plastic_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_roughness.png",
+                "url": "blue-plastic_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_height.png",
+                "url": "blue-plastic_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_normal.png",
+                "url": "blue-plastic_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_ao.png",
+                "url": "blue-plastic_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 210,
+              "sourceHeight": 170,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 210,
+                "height": 170
+              },
+              "mask": {
+                "backgroundColor": "#B9C4CA",
+                "backgroundNoise": 245.955,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.2443
+              },
+              "mapStats": {
+                "valueRange": 0.5132,
+                "heightP90Gradient": 0.05094,
+                "roughnessBase": 0.68,
+                "roughnessVariation": 0.075,
+                "normalStrength": 0.216,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#0B141D",
+                "#1D6486",
+                "#404955",
+                "#8197A6",
+                "#222A35"
+              ]
+            },
+            "warnings": [
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "painted-metal",
+            "recipe": {
+              "metalness": 0.0,
+              "roughness": 0.5,
+              "clearcoat": 1.0,
+              "clearcoatRoughness": 0.05,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 1.0,
+              "anisotropy": 0.0,
+              "procedural": "flat-clearcoat"
+            },
+            "palette": [
+              "#353E46",
+              "#939DA3",
+              "#869198",
+              "#7692A1",
+              "#77767F"
+            ],
+            "paletteHueRisk": [
+              {
+                "stop": "#353E46",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  70,
+                  62,
+                  53
+                ]
+              },
+              {
+                "stop": "#7692A1",
+                "hueRisk": "blue-collapse",
+                "suggestedRgb": [
+                  161,
+                  146,
+                  118
+                ]
+              }
+            ],
+            "gradientAxis": "vertical",
+            "stats": {
+              "meanLum": 135.6,
+              "meanSaturation": 0.219,
+              "gradientStrength": 0.411,
+              "mottle": 0.029,
+              "streakRatio": 0.8,
+              "hueSpread": 0.047,
+              "specularFraction": 0.0
+            }
+          }
+        },
+        "profileId": "plastic.matte",
+        "family": "plastic",
+        "subtype": "generic-polymer",
+        "finish": "matte",
+        "renderPrior": {
+          "metalness": 0.0,
+          "roughness": 0.68,
+          "ior": 1.5
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap"
+        ],
+        "optionalMaps": [
+          "normalMap",
+          "aoMap"
+        ],
+        "validationViews": [
+          "albedo-unlit",
+          "neutral-studio",
+          "grazing"
+        ],
+        "sourceRefs": [
+          "three.mesh-standard",
+          "adobe.pbr-guide-1",
+          "google.filament-pbr",
+          "mit.material-recognition"
+        ],
+        "visualCues": [
+          "coloured diffuse body",
+          "broad neutral highlight",
+          "mold seams or fine stipple"
+        ]
+      },
+      "observations": [
+        "chromatic base-colour response",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+        "bbox": {
+          "x": 300,
+          "y": 610,
+          "width": 210,
+          "height": 170
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.0414
+      },
+      "textureAnalysis": {
+        "finishClass": "painted-metal",
+        "recipe": {
+          "metalness": 0.0,
+          "roughness": 0.5,
+          "clearcoat": 1.0,
+          "clearcoatRoughness": 0.05,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 1.0,
+          "anisotropy": 0.0,
+          "procedural": "flat-clearcoat"
+        },
+        "palette": [
+          "#353E46",
+          "#939DA3",
+          "#869198",
+          "#7692A1",
+          "#77767F"
+        ],
+        "paletteHueRisk": [
+          {
+            "stop": "#353E46",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              70,
+              62,
+              53
+            ]
+          },
+          {
+            "stop": "#7692A1",
+            "hueRisk": "blue-collapse",
+            "suggestedRgb": [
+              161,
+              146,
+              118
+            ]
+          }
+        ],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 135.6,
+          "meanSaturation": 0.219,
+          "gradientStrength": 0.411,
+          "mottle": 0.029,
+          "streakRatio": 0.8,
+          "hueSpread": 0.047,
+          "specularFraction": 0.0
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "materialId": "blue-plastic",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic",
+        "palette": [
+          "#0B141D",
+          "#1D6486",
+          "#404955",
+          "#8197A6",
+          "#222A35"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_albedo.png",
+            "url": "blue-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_roughness.png",
+            "url": "blue-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_height.png",
+            "url": "blue-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_normal.png",
+            "url": "blue-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_ao.png",
+            "url": "blue-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 210,
+          "sourceHeight": 170,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 210,
+            "height": 170
+          },
+          "mask": {
+            "backgroundColor": "#B9C4CA",
+            "backgroundNoise": 245.955,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.2443
+          },
+          "mapStats": {
+            "valueRange": 0.5132,
+            "heightP90Gradient": 0.05094,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.075,
+            "normalStrength": 0.216,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#0B141D",
+            "#1D6486",
+            "#404955",
+            "#8197A6",
+            "#222A35"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\05-blue-plastic.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_albedo.png",
+            "url": "blue-plastic_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_roughness.png",
+            "url": "blue-plastic_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_height.png",
+            "url": "blue-plastic_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_normal.png",
+            "url": "blue-plastic_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_ao.png",
+            "url": "blue-plastic_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 210,
+          "sourceHeight": 170,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 210,
+            "height": 170
+          },
+          "mask": {
+            "backgroundColor": "#B9C4CA",
+            "backgroundNoise": 245.955,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.2443
+          },
+          "mapStats": {
+            "valueRange": 0.5132,
+            "heightP90Gradient": 0.05094,
+            "roughnessBase": 0.68,
+            "roughnessVariation": 0.075,
+            "normalStrength": 0.216,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#0B141D",
+            "#1D6486",
+            "#404955",
+            "#8197A6",
+            "#222A35"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_albedo.png",
+          "url": "blue-plastic_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_roughness.png",
+          "url": "blue-plastic_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_height.png",
+          "url": "blue-plastic_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_normal.png",
+          "url": "blue-plastic_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-05-blue-plastic\\blue-plastic_ao.png",
+          "url": "blue-plastic_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    },
+    {
+      "componentId": "keyboard",
+      "regionId": "metal-keyboard",
+      "materialSpecId": "metal-keyboard",
+      "hypothesis": {
+        "componentId": "keyboard",
+        "regionId": "metal-keyboard",
+        "materialId": null,
+        "family": "metal",
+        "subtype": "steel",
+        "finish": "brushed",
+        "aliases": [],
+        "confidence": 0.86,
+        "source": "vision"
+      },
+      "assignment": {
+        "materialId": "metal.steel-brushed",
+        "status": "proceed",
+        "source": "vision",
+        "confidence": 0.86,
+        "method": "family-subtype-finish",
+        "alternatives": [],
+        "evidence": {
+          "crop": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+            "bbox": {
+              "x": 100,
+              "y": 805,
+              "width": 470,
+              "height": 250
+            },
+            "sourceWidth": 730,
+            "sourceHeight": 1180,
+            "loaderWarnings": [],
+            "coverage": 0.1364
+          },
+          "pbr": {
+            "ok": true,
+            "verdict": "pass",
+            "confidence": 0.86,
+            "estimatedFidelity": 0.86,
+            "targetThreshold": 0.7,
+            "materialId": "metal-keyboard",
+            "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+            "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard",
+            "palette": [
+              "#1B2429",
+              "#0B090F",
+              "#491D28",
+              "#3C4248",
+              "#90A296"
+            ],
+            "maps": {
+              "albedo": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_albedo.png",
+                "url": "metal-keyboard_albedo.png",
+                "channel": "albedo",
+                "source": "reference-pixel-extraction"
+              },
+              "roughness": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_roughness.png",
+                "url": "metal-keyboard_roughness.png",
+                "channel": "roughness",
+                "source": "reference-pixel-extraction"
+              },
+              "height": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_height.png",
+                "url": "metal-keyboard_height.png",
+                "channel": "height",
+                "source": "reference-pixel-extraction"
+              },
+              "normal": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_normal.png",
+                "url": "metal-keyboard_normal.png",
+                "channel": "normal",
+                "source": "reference-pixel-extraction"
+              },
+              "ao": {
+                "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_ao.png",
+                "url": "metal-keyboard_ao.png",
+                "channel": "ao",
+                "source": "reference-pixel-extraction"
+              }
+            },
+            "diagnostics": {
+              "sourceWidth": 470,
+              "sourceHeight": 250,
+              "mapSize": 512,
+              "cropBBoxPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 470,
+                "height": 250
+              },
+              "mask": {
+                "backgroundColor": "#3F4C55",
+                "backgroundNoise": 106.283,
+                "transparentPixelFraction": 0.0,
+                "foregroundCoverage": 0.62
+              },
+              "mapStats": {
+                "valueRange": 0.4497,
+                "heightP90Gradient": 0.06023,
+                "roughnessBase": 0.7,
+                "roughnessVariation": 0.094,
+                "normalStrength": 0.227,
+                "blurRadius": 10
+              },
+              "palette": [
+                "#1B2429",
+                "#0B090F",
+                "#491D28",
+                "#3C4248",
+                "#90A296"
+              ]
+            },
+            "warnings": [
+              "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+            ],
+            "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+          },
+          "texture": {
+            "finishClass": "candy-coat",
+            "recipe": {
+              "metalness": 0.35,
+              "roughness": 0.18,
+              "clearcoat": 0.6,
+              "clearcoatRoughness": 0.15,
+              "transmission": 0.0,
+              "ior": 1.5,
+              "envMapIntensity": 0.7,
+              "anisotropy": 0.0,
+              "procedural": "gradient-smoke"
+            },
+            "palette": [
+              "#4C434D",
+              "#392B31",
+              "#3E4446",
+              "#545B5C",
+              "#575F63"
+            ],
+            "paletteHueRisk": [],
+            "gradientAxis": "vertical",
+            "stats": {
+              "meanLum": 70.1,
+              "meanSaturation": 0.287,
+              "gradientStrength": 0.236,
+              "mottle": 0.071,
+              "streakRatio": 1.12,
+              "hueSpread": 0.622,
+              "specularFraction": 0.002
+            }
+          }
+        },
+        "profileId": "metal.steel-brushed",
+        "family": "metal",
+        "subtype": "steel",
+        "finish": "brushed",
+        "renderPrior": {
+          "metalness": 1.0,
+          "roughness": 0.35,
+          "anisotropy": 0.85
+        },
+        "requiredMaps": [
+          "map",
+          "roughnessMap",
+          "normalMap",
+          "anisotropyMap"
+        ],
+        "optionalMaps": [
+          "metalnessMap"
+        ],
+        "validationViews": [
+          "neutral-studio",
+          "grazing",
+          "environment-reflection",
+          "reference-beauty"
+        ],
+        "sourceRefs": [
+          "three.mesh-physical",
+          "three.pmrem",
+          "gltf.2",
+          "khronos.gltf-pbr",
+          "adobe.pbr-guide-2",
+          "google.filament-pbr"
+        ],
+        "visualCues": [
+          "elongated highlight aligned to brushing",
+          "neutral conductor reflection",
+          "parallel micro-scratches"
+        ]
+      },
+      "observations": [
+        "chromatic base-colour response",
+        "visible meso/micro variation",
+        "strong image-space gradient; verify it is material pattern, not lighting",
+        "single-image PBR inference requires controlled render validation"
+      ],
+      "crop": {
+        "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+        "bbox": {
+          "x": 100,
+          "y": 805,
+          "width": 470,
+          "height": 250
+        },
+        "sourceWidth": 730,
+        "sourceHeight": 1180,
+        "loaderWarnings": [],
+        "coverage": 0.1364
+      },
+      "textureAnalysis": {
+        "finishClass": "candy-coat",
+        "recipe": {
+          "metalness": 0.35,
+          "roughness": 0.18,
+          "clearcoat": 0.6,
+          "clearcoatRoughness": 0.15,
+          "transmission": 0.0,
+          "ior": 1.5,
+          "envMapIntensity": 0.7,
+          "anisotropy": 0.0,
+          "procedural": "gradient-smoke"
+        },
+        "palette": [
+          "#4C434D",
+          "#392B31",
+          "#3E4446",
+          "#545B5C",
+          "#575F63"
+        ],
+        "paletteHueRisk": [],
+        "gradientAxis": "vertical",
+        "stats": {
+          "meanLum": 70.1,
+          "meanSaturation": 0.287,
+          "gradientStrength": 0.236,
+          "mottle": 0.071,
+          "streakRatio": 1.12,
+          "hueSpread": 0.622,
+          "specularFraction": 0.002
+        }
+      },
+      "pbrReport": {
+        "ok": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "materialId": "metal-keyboard",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+        "outDir": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard",
+        "palette": [
+          "#1B2429",
+          "#0B090F",
+          "#491D28",
+          "#3C4248",
+          "#90A296"
+        ],
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_albedo.png",
+            "url": "metal-keyboard_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_roughness.png",
+            "url": "metal-keyboard_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_height.png",
+            "url": "metal-keyboard_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_normal.png",
+            "url": "metal-keyboard_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_ao.png",
+            "url": "metal-keyboard_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 470,
+          "sourceHeight": 250,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 470,
+            "height": 250
+          },
+          "mask": {
+            "backgroundColor": "#3F4C55",
+            "backgroundNoise": 106.283,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.62
+          },
+          "mapStats": {
+            "valueRange": 0.4497,
+            "heightP90Gradient": 0.06023,
+            "roughnessBase": 0.7,
+            "roughnessVariation": 0.094,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#1B2429",
+            "#0B090F",
+            "#491D28",
+            "#3C4248",
+            "#90A296"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ],
+        "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+      },
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\06-metal-keyboard.png",
+        "extractor": "stage1_intake/extract_pbr_evidence.py",
+        "method": "single-image pixel evidence with de-lighting estimate; not photogrammetry",
+        "usable": true,
+        "verdict": "pass",
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "hardLimit": "A single image cannot uniquely recover true albedo/roughness/normal/AO; maps are reference-derived estimates.",
+        "maps": {
+          "albedo": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_albedo.png",
+            "url": "metal-keyboard_albedo.png",
+            "channel": "albedo",
+            "source": "reference-pixel-extraction"
+          },
+          "roughness": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_roughness.png",
+            "url": "metal-keyboard_roughness.png",
+            "channel": "roughness",
+            "source": "reference-pixel-extraction"
+          },
+          "height": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_height.png",
+            "url": "metal-keyboard_height.png",
+            "channel": "height",
+            "source": "reference-pixel-extraction"
+          },
+          "normal": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_normal.png",
+            "url": "metal-keyboard_normal.png",
+            "channel": "normal",
+            "source": "reference-pixel-extraction"
+          },
+          "ao": {
+            "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_ao.png",
+            "url": "metal-keyboard_ao.png",
+            "channel": "ao",
+            "source": "reference-pixel-extraction"
+          }
+        },
+        "diagnostics": {
+          "sourceWidth": 470,
+          "sourceHeight": 250,
+          "mapSize": 512,
+          "cropBBoxPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 470,
+            "height": 250
+          },
+          "mask": {
+            "backgroundColor": "#3F4C55",
+            "backgroundNoise": 106.283,
+            "transparentPixelFraction": 0.0,
+            "foregroundCoverage": 0.62
+          },
+          "mapStats": {
+            "valueRange": 0.4497,
+            "heightP90Gradient": 0.06023,
+            "roughnessBase": 0.7,
+            "roughnessVariation": 0.094,
+            "normalStrength": 0.227,
+            "blurRadius": 10
+          },
+          "palette": [
+            "#1B2429",
+            "#0B090F",
+            "#491D28",
+            "#3C4248",
+            "#90A296"
+          ]
+        },
+        "warnings": [
+          "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+        ]
+      },
+      "maps": {
+        "albedo": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_albedo.png",
+          "url": "metal-keyboard_albedo.png",
+          "channel": "albedo",
+          "source": "reference-pixel-extraction"
+        },
+        "roughness": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_roughness.png",
+          "url": "metal-keyboard_roughness.png",
+          "channel": "roughness",
+          "source": "reference-pixel-extraction"
+        },
+        "height": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_height.png",
+          "url": "metal-keyboard_height.png",
+          "channel": "height",
+          "source": "reference-pixel-extraction"
+        },
+        "normal": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_normal.png",
+          "url": "metal-keyboard_normal.png",
+          "channel": "normal",
+          "source": "reference-pixel-extraction"
+        },
+        "ao": {
+          "path": "E:\\100-工作\\110-课程建设\\crew-training-3d\\evidence\\attendance-kiosk\\materials\\pbr-06-metal-keyboard\\metal-keyboard_ao.png",
+          "url": "metal-keyboard_ao.png",
+          "channel": "ao",
+          "source": "reference-pixel-extraction"
+        }
+      }
+    }
+  ],
+  "status": "proceed",
+  "limitations": [
+    "PBR extraction is reference-derived inference, not inverse rendering.",
+    "A crop must be checked against the component visible footprint before accepting material scores."
+  ],
+  "artifact": "E:\\100-工作\\110-课程建设\\crew-training-3d\\models\\attendance-kiosk\\material-analysis.json"
+}

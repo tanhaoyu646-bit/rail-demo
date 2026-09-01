@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-08-29",
+  "method": {
+    "sourcePolicy": "read-only; optimized copies only",
+    "textureMaxDimension": 1024,
+    "steps": ["gltf-transform copy", "resize PNG textures", "gltf-transform optimize", "quantize", "simplify"]
+  },
+  "assets": [
+    {
+      "name": "recorder",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/录音笔.glb",
+      "sourceBytes": 70679848,
+      "sourceSha256": "C4969C66A5BE62289D31A9FF66444FCDD17E938F6B28DA4FAF9CFB79E3B7D9C0",
+      "outputPath": "public/assets/models/props/recorder-lite.glb",
+      "outputBytes": 3276504,
+      "outputSha256": "5FE540558FADB1DADA7C2658AD019B46913773E396B9E6081665DE9F10F59551",
+      "reductionPercent": 95.36
+    },
+    {
+      "name": "ic-card",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/IC卡（无卡套）.glb",
+      "sourceBytes": 78526500,
+      "sourceSha256": "F58953E950DCBDC6936632FCCD8AB1E7EDFAE3D8F3A33EF755FC69034EF61057",
+      "outputPath": "public/assets/models/props/ic-card-lite.glb",
+      "outputBytes": 3947568,
+      "outputSha256": "4A01DCFDF5EEEC27D20DB5F518BBB93CE0674AD26554EC778845E094D079A12D",
+      "reductionPercent": 94.97
+    },
+    {
+      "name": "duty-report-unassigned",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/ef43546c59063cc0b1a167b7cde63dd0.glb",
+      "sourceBytes": 84104580,
+      "sourceSha256": "05823DAD19D8C10E62C76182932084F8163E36B6CDE245E186ACAEC28F96649C",
+      "outputPath": "public/assets/models/props/duty-report-lite.glb",
+      "outputBytes": 3957064,
+      "outputSha256": "E160A90E7986FFB906734798A50132BE29AF86EE265F628BBA39061CDA0E9919",
+      "reductionPercent": 95.30,
+      "runtimeUse": "not assigned to delivery reveal because the visual semantics do not match reliably"
+    },
+    {
+      "name": "driver-notebook-closed",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/司机手账.glb",
+      "sourceBytes": 73876756,
+      "sourceSha256": "CE921E3E184D692E29E428BA67B1E0E6E43276FC7A87EECF75112B7069CFD723",
+      "outputPath": "public/assets/models/props/driver-notebook-closed-lite.glb",
+      "outputBytes": 3504664,
+      "outputSha256": "F9C416F14D16DE0CB4A873DA9421DA3199E7C18CE9323C2CD1CFE72456A95E0F",
+      "reductionPercent": 95.26
+    },
+    {
+      "name": "driver-notebook-open",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/司机手账打开.glb",
+      "sourceBytes": 81891920,
+      "sourceSha256": "692D734E4C285314E759371FA3420F0177A641C03E68590C6C09E235F2043EB0",
+      "outputPath": "public/assets/models/props/driver-notebook-open-lite.glb",
+      "outputBytes": 4127196,
+      "outputSha256": "6AE9BB76483CBA96EC58A71937882370C67D056A71108ED3409A66B51C7C7BFA",
+      "reductionPercent": 94.96
+    },
+    {
+      "name": "work-card",
+      "sourcePath": "E:/010工作台/谷歌浏览器下载文件/出勤3D物件/工作证.glb",
+      "sourceBytes": 84420428,
+      "sourceSha256": "F908F0C1B8521B18C124929F17DE0A74C0F95F91816AA40CE6B95638606709CD",
+      "outputPath": "public/assets/models/props/work-card-lite.glb",
+      "outputBytes": 4212112,
+      "outputSha256": "D7A4FC3A2C9092D0DB474C813E807C3A77D15945DFB92158FE30401DD04B3318",
+      "reductionPercent": 95.01
+    }
+  ]
+}

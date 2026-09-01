@@ -1,0 +1,57 @@
+{
+  "glb": "working\\uploaded-hand-optimized\\uploaded-hand-lite.glb",
+  "size_bytes": 10032632,
+  "mesh_objects": 1,
+  "triangles": 60000,
+  "materials": 1,
+  "images": 3,
+  "textured_materials": 1,
+  "base_color_texture_bound_materials": 1,
+  "actions": 0,
+  "bbox_metres": {
+    "min": [
+      -0.25899,
+      -0.396218,
+      -0.000322
+    ],
+    "max": [
+      0.284938,
+      0.256601,
+      0.853749
+    ],
+    "size": [
+      0.543928,
+      0.652819,
+      0.854071
+    ]
+  },
+  "mesh_records": [
+    {
+      "name": "node_0",
+      "triangles": 60000,
+      "bbox": {
+        "min": [
+          -0.25899,
+          -0.396218,
+          -0.000322
+        ],
+        "max": [
+          0.284938,
+          0.256601,
+          0.853749
+        ],
+        "size": [
+          0.543928,
+          0.652819,
+          0.854071
+        ],
+        "center": [
+          0.012974,
+          -0.069808,
+          0.426713
+        ]
+      }
+    }
+  ],
+  "reimport_success": true
+}

@@ -1,0 +1,21 @@
+{
+  "name": "crew-training-3d",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "prebuild:release": "node scripts/clean-release-hashes.mjs",
+    "build:release": "tsc --noEmit && vite build --outDir release-current --emptyOutDir",
+    "fix:factory": "node scripts/fix-generated-dimensions.mjs models/attendance-kiosk/object-sculpt-spec.json src/createAttendanceKioskModel.ts structural-pass"
+  },
+  "dependencies": {
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.179.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3"
+  }
+}

@@ -1,0 +1,85 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import ts from 'typescript';
+import * as THREE from 'three';
+const source=name=>readFile(new URL(`../src/${name}.ts`,import.meta.url),'utf8');
+const url=code=>`data:text/javascript;base64,${Buffer.from(ts.transpileModule(code,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText).toString('base64')}`;
+const dataUrl=url(await source('cardRevealData'));
+const {createTrainingScenario,cardMatchesPaper,shuffled,seededRandom,introduceDifference,paperRevealRecords}=await import(dataUrl);
+const faults={none:0,published:0,card:0}, contents=new Set(), positions=new Set();
+for(let i=0;i<1000;i++) {
+  const s=createTrainingScenario(`trial-${i}`,'random');faults[s.fault]++;
+  assert.deepEqual(s,createTrainingScenario(`trial-${i}`,'random'));
+  assert.equal(cardMatchesPaper(s.published,s.paper),s.fault!=='published');
+  assert.equal(cardMatchesPaper(introduceDifference(s.paper,`trial-${i}`),s.paper),false);
+  assert.equal(new Set(s.paper.map(r=>r.order)).size,s.paper.length);
+  assert.ok(s.paper.every(r=>r.start<r.end&&r.content.includes(r.location)&&r.content.includes(r.line)&&r.content.includes(r.direction)));
+  contents.add(s.paper.map(r=>r.content).join('|'));
+  const order=shuffled(Array.from({length:11},(_,i)=>i),seededRandom(`${s.studentId}:documents`));
+  assert.equal(new Set(order).size,11);positions.add(order.join(','));
+  assert.deepEqual(order,shuffled(Array.from({length:11},(_,i)=>i),seededRandom(`${s.studentId}:documents`)));
+}
+assert.ok(faults.none>600&&faults.none<800);assert.ok(faults.published>100&&faults.card>100);
+assert.ok(contents.size>150&&positions.size>990);
+
+const {TrainingWorkflow,createDialoguePicker}=await import(url(await source('trainingWorkflow')));
+const flow=new TrainingWorkflow();
+assert.equal(flow.actionFor('deputy'),'dialogue');assert.equal(flow.actionFor('dispatcher'),'dialogue');
+assert.equal(flow.complete('meeting'),false);flow.pendingDifference='published';
+assert.equal(flow.actionFor('dispatcher'),'review');assert.equal(flow.complete('kiosk'),false);
+flow.pendingDifference=null;assert.equal(flow.complete('kiosk'),true);
+assert.equal(flow.actionFor('deputy'),'meeting');assert.equal(flow.actionFor('dispatcher'),'dialogue');
+assert.equal(flow.complete('dispatcher'),false);assert.equal(flow.complete('meeting'),true);
+assert.equal(flow.actionFor('deputy'),'dialogue');assert.equal(flow.actionFor('dispatcher'),'check');
+assert.equal(flow.complete('meeting'),false);assert.equal(flow.complete('dispatcher'),true);
+assert.equal(flow.actionFor('dispatcher'),'dialogue');assert.equal(flow.complete('cab'),true);
+assert.equal(flow.complete('cab'),false);
+const pick=createDialoguePicker(seededRandom('dialogue'));
+assert.equal(new Set(Array.from({length:3},()=>pick('dispatcher','meeting'))).size,3);
+
+let texts=[];const ctx=new Proxy({clearRect:()=>{texts=[];},fillText:(text,x,y)=>texts.push({text:String(text),x,y}),measureText:text=>({width:[...text].length*14})},{get:(o,k)=>o[k]??(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
+globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>ctx})};
+globalThis.window={location:{search:'?kioskStep=2'}};globalThis.Image=class{};
+const layoutUrl=url((await source('revealPaperLayout')).replace("'./cardRevealData'",JSON.stringify(dataUrl)));
+const {revealPaperRows}=await import(layoutUrl);
+const runtimeUrl=url((await source('kioskScreenRuntime')).replace("'three'",JSON.stringify(import.meta.resolve('three'))).replace("'./cardRevealData'",JSON.stringify(dataUrl)).replace("'./revealPaperLayout'",JSON.stringify(layoutUrl)).replaceAll('import.meta.env',"({DEV:true,BASE_URL:'/'})"));
+const {KioskScreenRuntime}=await import(runtimeUrl);
+let step,printed=false,completed=false,reported=null;
+const options={onClose(){},onComplete(){completed=true;},onPrinted(){printed=true;},onStartBreath(){},onStepChange:s=>step=s,onRevealViewChange(){},getSelectedItem:()=> 'ic-card',onInsertCard:async()=>true,onTakeCard(){},onReportDifference:s=>reported=s};
+const runtime=new KioskScreenRuntime({...options,publishedRecords:introduceDifference(paperRevealRecords,'bad')});
+const click=(runtime,label)=>{const found=texts.find(t=>t.text===label);assert.ok(found,`visible button: ${label}`);runtime.handlePointer(found.x/1024,found.y/618,'up');};
+const correct=['铁路职工工作证','机车车辆驾驶证','岗位培训合格证','铁路技术管理规程','铁路机车操作规则'];
+const originalOrder=texts.filter(t=>correct.includes(t.text)).map(t=>[t.text,t.x,t.y]);
+click(runtime,'确认');assert.equal(step,2,'Empty selection cannot pass');
+for(const name of correct)click(runtime,name);
+assert.deepEqual(texts.filter(t=>correct.includes(t.text)).map(t=>[t.text,t.x,t.y]),originalOrder,'No reshuffle on redraw');
+click(runtime,'确认');assert.equal(step,3);click(runtime,'启动打印');assert.ok(printed);click(runtime,'确认');assert.equal(step,4);
+runtime.focusRevealView('paper');assert.equal(runtime.markPaperRevealLine(0),false);
+click(runtime,'确认');assert.equal(step,4);click(runtime,'报告不一致');assert.equal(reported,'published');
+assert.equal(runtime.resolveReportedDifference('published'),true);assert.equal(runtime.resolveReportedDifference('published'),false);
+for(let i=0;i<revealPaperRows.length;i++)assert.equal(runtime.markPaperRevealLine(i),true);
+click(runtime,'确认');assert.equal(step,5);await runtime.insertCard();click(runtime,'写卡');click(runtime,'验卡');assert.equal(step,6);
+assert.ok(texts.some(t=>t.text===`共 [${paperRevealRecords.length}] 条`));click(runtime,'确定');runtime.focusRevealView('paper');
+for(let i=0;i<revealPaperRows.length;i++)runtime.markPaperRevealLine(i);click(runtime,'确认');assert.ok(completed);
+
+globalThis.window.location.search='?kioskStep=5';
+const cardRuntime=new KioskScreenRuntime(options);
+cardRuntime.cardFaultPending=true; // Exercise fault injection; no need for live hardware.
+await cardRuntime.insertCard();click(cardRuntime,'写卡');click(cardRuntime,'验卡');click(cardRuntime,'确定');
+cardRuntime.focusRevealView('paper');assert.equal(cardRuntime.markPaperRevealLine(0),false);
+click(cardRuntime,'报告不一致');assert.equal(reported,'card');assert.ok(cardRuntime.resolveReportedDifference('card'));assert.equal(step,5);
+click(cardRuntime,'写卡');click(cardRuntime,'验卡');click(cardRuntime,'确定');cardRuntime.focusRevealView('paper');
+assert.ok(cardRuntime.markPaperRevealLine(0),'Second write is clean; never an infinite random-error loop');
+
+const {disposeOwnedObject}=await import(url((await source('resourceLifetime')).replace("'three'",JSON.stringify(import.meta.resolve('three')))));
+const root=new THREE.Group(),shared=new THREE.Group(); shared.userData.sharedResources=true;
+const geometry=new THREE.BoxGeometry(),texture=new THREE.Texture(),material=new THREE.MeshBasicMaterial({map:texture});
+let disposed=0,closed=0,sharedDisposed=0;texture.image={close:()=>closed++};
+geometry.addEventListener('dispose',()=>disposed++);material.addEventListener('dispose',()=>disposed++);texture.addEventListener('dispose',()=>disposed++);
+root.add(new THREE.Mesh(geometry,material),new THREE.Mesh(geometry,material));
+const sharedGeometry=new THREE.BoxGeometry(),sharedMaterial=new THREE.MeshBasicMaterial();
+sharedGeometry.addEventListener('dispose',()=>sharedDisposed++);sharedMaterial.addEventListener('dispose',()=>sharedDisposed++);
+shared.add(new THREE.Mesh(sharedGeometry,sharedMaterial));root.add(shared);
+disposeOwnedObject(root);disposeOwnedObject(root);assert.equal(disposed,3);assert.equal(closed,1);assert.equal(sharedDisposed,0);
+assert.equal(shared.children.length,1);assert.equal(root.children.length,0);
+console.log('PASS: 1000 reproducible random exercises',faults,`(${contents.size} contents, ${positions.size} document orders); stage gating, dialogue variety, mismatch/report/correct/recheck, full card loop, shared-safe idempotent disposal.`);

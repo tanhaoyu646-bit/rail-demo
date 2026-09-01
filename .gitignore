@@ -1,0 +1,26 @@
+# Dependencies and build outputs
+node_modules/
+dist/
+release-current/
+output/
+
+# Large source/intermediate assets and local review material
+work/
+working/
+evidence/
+.img2threejs/
+design-demos/
+
+# Local diagnostics and editor/OS files
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local environment files and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
