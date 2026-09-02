@@ -26,7 +26,7 @@ const mobileMode = new URLSearchParams(window.location.search).has('mobile')
   || window.matchMedia('(pointer: coarse)').matches
   || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 document.body.classList.toggle('review-mode', reviewMode);
-document.body.classList.toggle('public-demo', __PUBLIC_DEMO__);
+document.body.classList.toggle('public-demo', __PUBLIC_HOSTED__);
 document.body.classList.toggle('mobile-controls-enabled', mobileMode && !reviewMode);
 
 const app = document.querySelector<HTMLDivElement>('#app');

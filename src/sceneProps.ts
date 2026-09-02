@@ -483,9 +483,11 @@ async function addFpsHands(group: THREE.Group, id: InventoryItemId, variant: Hel
   }
   if (new URLSearchParams(window.location.search).get('hand') !== 'procedural') {
     try {
-      const { createPhotoFpsHand } = await import('./uploadedPhotoHand');
-      group.add(await createPhotoFpsHand(id, variant));
-      group.userData.handSource = 'uploaded-hand-photo-reference';
+      // Restore the original scanned 3D hand that preceded the photo-plane test.
+      // Its small contact intersections remain preferable to a visibly cut 2D arm.
+      const { createUploadedFpsHand } = await import('./uploadedFpsHand');
+      group.add(await createUploadedFpsHand(id, variant));
+      group.userData.handSource = 'uploaded-hand-20260831';
       return;
     } catch (error) {
       console.warn('上传手模加载失败，保留备用手部。', error);

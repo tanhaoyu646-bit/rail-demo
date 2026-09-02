@@ -8,6 +8,7 @@
     "dev:full": "vite --host 0.0.0.0 --port 4175",
     "build": "tsc --noEmit && vite build",
     "build:demo": "node scripts/prepare-public-demo.mjs && tsc --noEmit && vite build --mode demo && node scripts/audit-public-demo.mjs",
+    "build:hosted": "tsc --noEmit && vite build --mode hosted",
     "prebuild:release": "node scripts/clean-release-hashes.mjs",
     "build:release": "tsc --noEmit && vite build --outDir release-current --emptyOutDir",
     "fix:factory": "node scripts/fix-generated-dimensions.mjs models/attendance-kiosk/object-sculpt-spec.json src/createAttendanceKioskModel.ts structural-pass"
