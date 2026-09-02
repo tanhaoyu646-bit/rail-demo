@@ -451,8 +451,18 @@ if (!reviewMode) {
     dispatcher.userData.interactionLabel = '出勤调度员：开始人人核对';
   });
   else {
-    dispatcher.name = '出勤调度员（公开轻量版）';
-    dispatcher.userData.interactionLabel = '出勤调度员：开始人人核对';
+    // Reuse the detailed procedural railway worker in the public build. It
+    // preserves the pre-lightweight silhouette without publishing the private GLB.
+    const publicDispatcher = createSeatedDeputy();
+    publicDispatcher.name = '出勤调度员（公开低面数模型）';
+    publicDispatcher.userData.interactionLabel = '出勤调度员：开始人人核对';
+    publicDispatcher.position.set(...dispatcherPosition);
+    room.remove(dispatcher);
+    const placeholderIndex = interactables.indexOf(dispatcher);
+    if (placeholderIndex >= 0) interactables.splice(placeholderIndex, 1);
+    room.add(publicDispatcher);
+    dispatcherObject = publicDispatcher;
+    interactables.push(publicDispatcher);
   }
 
   for (const x of [-3.6, 0, 3.6]) {
