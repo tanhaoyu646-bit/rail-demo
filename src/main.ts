@@ -844,6 +844,17 @@ function openNotebookFlow(): void {
   });
 }
 
+// Development-only entry used to verify the notebook form at real mobile viewport sizes.
+if (import.meta.env.DEV && new URLSearchParams(window.location.search).get('openNotebook') === '1') {
+  window.setTimeout(() => {
+    if (sceneOverlayOpen || kioskOpen) return;
+    sceneOverlayOpen = true;
+    sceneOverlay.hidden = false;
+    document.body.classList.add('scene-flow-active');
+    sceneFlowCleanup = mountNotebookFlow(sceneOverlay, { onClose: closeSceneOverlay });
+  }, 0);
+}
+
 function openLkjFlow(explicitPrototype = false): void {
   // No physical cab exists yet: keep the explicit prototype preview, never bind it to nearby E.
   if (!explicitPrototype || reviewMode || sceneOverlayOpen || kioskOpen) return;

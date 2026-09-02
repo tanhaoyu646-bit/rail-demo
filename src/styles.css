@@ -789,7 +789,52 @@ body.kiosk-active .interaction-prompt { display: none; }
   }
 }
 
-@media (orientation: landscape) and (pointer: coarse) {
+@media (orientation: landscape) {
+  body.scene-flow-active .studio-watermark--top { z-index: 23; }
+  body.mobile-controls-enabled .scene-overlay.notebook-overlay {
+    top: var(--notebook-viewport-top, 0px);
+    bottom: auto;
+    height: var(--notebook-viewport-height, 100dvh);
+    min-height: 0;
+    padding: max(4px, env(safe-area-inset-top)) max(5px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(5px, env(safe-area-inset-left));
+    backdrop-filter: blur(5px);
+  }
+  body.mobile-controls-enabled .notebook-panel {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 10px;
+  }
+  body.mobile-controls-enabled .notebook-panel > header { min-height: 48px; padding: 6px max(64px, calc(env(safe-area-inset-right) + 56px)) 6px 12px; }
+  body.mobile-controls-enabled .notebook-panel > header span { display: none; }
+  body.mobile-controls-enabled .notebook-panel > header b { font-size: 16px; }
+  body.mobile-controls-enabled .notebook-panel > header button { padding: 7px 12px; font-size: 13px; }
+  body.mobile-controls-enabled .notebook-panel > main { display: flex; flex-direction: column; min-height: 0; overflow: hidden; padding: 5px 8px; }
+  body.mobile-controls-enabled .notebook-panel .npc-dialogue { flex: 0 0 auto; gap: 8px; margin-bottom: 5px; padding: 5px 8px; border-radius: 8px; }
+  body.mobile-controls-enabled .notebook-panel .npc-dialogue > i { display: none; }
+  body.mobile-controls-enabled .notebook-panel .npc-dialogue > div { display: flex; flex: 1; align-items: center; gap: 8px; min-width: 0; }
+  body.mobile-controls-enabled .notebook-panel .npc-dialogue b { flex: 0 0 auto; font-size: 12px; }
+  body.mobile-controls-enabled .notebook-panel .npc-dialogue p { flex: 1; overflow: hidden; margin: 0; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+  body.mobile-controls-enabled .notebook-panel .npc-ask { flex: 0 0 auto; margin: 0; padding: 5px 9px; font-size: 11px; }
+  body.mobile-controls-enabled .notebook-panel .notebook-spread { flex: 1; min-height: 0; padding: 3px; }
+  body.mobile-controls-enabled .notebook-panel .form-page { display: flex; flex-direction: column; min-height: 0; padding: 6px 10px; }
+  body.mobile-controls-enabled .notebook-panel .book-page h3 { display: none; }
+  body.mobile-controls-enabled .notebook-panel .book-page dl { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 3px 10px; margin-bottom: 3px; font-size: 11px; }
+  body.mobile-controls-enabled .notebook-panel .book-page dl div { min-height: 18px; }
+  body.mobile-controls-enabled .notebook-panel .notebook-writing-tools { margin: 2px 0 4px; }
+  body.mobile-controls-enabled .notebook-panel .notebook-writing-tools label { font-size: 12px; }
+  body.mobile-controls-enabled .notebook-panel .notebook-writing-tools button { padding: 5px 9px; font-size: 11px; }
+  body.mobile-controls-enabled .notebook-panel .book-page textarea { flex: 1; min-height: 82px; padding: 8px 10px; resize: none; font-size: 16px; line-height: 1.4; }
+  body.mobile-controls-enabled .notebook-panel .draft-status { margin: 2px 0 0; font-size: 10px; }
+  body.mobile-controls-enabled .notebook-panel .flow-message { min-height: 15px; margin: 2px 0; font-size: 11px; }
+  body.mobile-controls-enabled .notebook-panel > footer { min-height: 48px; padding: 5px 10px; }
+  body.mobile-controls-enabled .notebook-panel > footer button { padding: 8px 14px; font-size: 13px; }
+  body.mobile-controls-enabled .notebook-panel.writing-focused .npc-dialogue,
+  body.mobile-controls-enabled .notebook-panel.writing-focused .book-page dl,
+  body.mobile-controls-enabled .notebook-panel.writing-focused .notebook-writing-tools label,
+  body.mobile-controls-enabled .notebook-panel.writing-focused .draft-status { display: none; }
+  body.mobile-controls-enabled .notebook-panel.writing-focused .notebook-writing-tools { justify-content: flex-end; margin: 0 0 3px; }
+  body.mobile-controls-enabled .notebook-panel.writing-focused .book-page textarea { min-height: 64px; font-size: 16px; }
   body.mobile-controls-enabled .mission {
     top: max(8px, env(safe-area-inset-top));
     bottom: auto;

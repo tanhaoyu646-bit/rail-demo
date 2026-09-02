@@ -118,6 +118,7 @@ export function mountPersonDialogue(host: HTMLElement, options: OverlayOptions &
 }
 
 export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): () => void {
+  host.classList.add('notebook-overlay');
   host.innerHTML = `
     <section class="training-panel notebook-panel" role="dialog" aria-modal="true" aria-label="司机手帐填写">
       <header><div><span>副司机 · 出乘小组会</span><b>出乘预想填写</b></div><button type="button" data-close aria-label="关闭出乘预想填写界面">关闭</button></header>
@@ -132,17 +133,37 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
     </section>`;
   const textarea = host.querySelector<HTMLTextAreaElement>('textarea');
   const message = host.querySelector<HTMLElement>('.flow-message');
+  const panel = host.querySelector<HTMLElement>('.notebook-panel');
+  const focusButton = host.querySelector<HTMLButtonElement>('[data-expand-writing]');
+  const mobileLayout = document.body.classList.contains('mobile-controls-enabled');
+  const setWritingFocused = (expanded: boolean) => {
+    panel?.classList.toggle('writing-focused', expanded);
+    if (focusButton) {
+      focusButton.textContent = expanded ? '返回信息' : '专注填写';
+      focusButton.setAttribute('aria-pressed', String(expanded));
+    }
+  };
+  const syncVisualViewport = () => {
+    const viewport = window.visualViewport;
+    host.style.setProperty('--notebook-viewport-height', `${Math.round(viewport?.height ?? window.innerHeight)}px`);
+    host.style.setProperty('--notebook-viewport-top', `${Math.round(viewport?.offsetTop ?? 0)}px`);
+  };
+  syncVisualViewport();
+  window.visualViewport?.addEventListener('resize', syncVisualViewport);
+  window.visualViewport?.addEventListener('scroll', syncVisualViewport);
   host.querySelector('[data-ask-hint]')?.addEventListener('click',()=>{const target=host.querySelector('[data-hint]');if(target)target.textContent=deputyHint();});
   if (textarea) {
     textarea.value = notebookDraft;
     textarea.addEventListener('input', () => { notebookDraft = textarea.value; });
+    textarea.addEventListener('focus', () => {
+      if (mobileLayout) setWritingFocused(true);
+      window.setTimeout(syncVisualViewport, 80);
+    });
   }
-  host.querySelector('[data-expand-writing]')?.addEventListener('click', event => {
-    const expanded = host.querySelector('.notebook-panel')?.classList.toggle('writing-focused') ?? false;
-    const button = event.currentTarget as HTMLButtonElement;
-    button.textContent = expanded ? '返回小组会' : '专注填写';
-    button.setAttribute('aria-pressed', String(expanded));
-    textarea?.focus();
+  focusButton?.addEventListener('click', () => {
+    const expanded = !(panel?.classList.contains('writing-focused') ?? false);
+    setWritingFocused(expanded);
+    if (expanded) textarea?.focus();
   });
   const closeButton = host.querySelector<HTMLButtonElement>('[data-close]');
   let closing = false;
@@ -187,6 +208,11 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
     closeButton?.removeEventListener('click', close);
     closeButton?.removeEventListener('pointerup', closeFromTouch);
     window.removeEventListener('keydown', closeFromKeyboard);
+    window.visualViewport?.removeEventListener('resize', syncVisualViewport);
+    window.visualViewport?.removeEventListener('scroll', syncVisualViewport);
+    host.classList.remove('notebook-overlay');
+    host.style.removeProperty('--notebook-viewport-height');
+    host.style.removeProperty('--notebook-viewport-top');
     host.innerHTML = '';
   };
 }

@@ -1,7 +1,7 @@
 {
-  "createdAt": "2026-09-02T04:44:54.334Z",
+  "createdAt": "2026-09-02T05:32:41.708Z",
   "fileCount": 33,
-  "totalBytes": 8938500,
+  "totalBytes": 8942911,
   "forbidden": [],
   "sourceMaps": [],
   "requiredWatermarkCount": 1,
@@ -133,14 +133,14 @@
       "sha256": "543d7f3b45c79afc30a35e751323dd807ee839c59136782823fa4fa15bb97426"
     },
     {
-      "path": "assets/index-ByOciUVw.css",
-      "bytes": 36105,
-      "sha256": "4c8671c24e1fcf73cc6da2cd31c870ac6c8ab8537f74ba7cf77f266ca451205a"
+      "path": "assets/index-BhMtz8Q_.css",
+      "bytes": 39684,
+      "sha256": "75a68edc17910ac634635ae70ba08fa3664c377c25397d35d518d7af0c9ef959"
     },
     {
-      "path": "assets/index-UNdkzC5W.js",
-      "bytes": 833195,
-      "sha256": "bc578c67d5b81c9d3febc0c1e479827650f7af59e55e33541ff4fe0c52007f67"
+      "path": "assets/index-CGJ_Mg2y.js",
+      "bytes": 833991,
+      "sha256": "1dcf286d763ba27bcd9cd3164a8f631c9a19798c80852f2c57977b271d13d286"
     },
     {
       "path": "assets/props/ic-card-front-reference.png",
@@ -164,8 +164,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 695,
-      "sha256": "0870342c51836c7268d1bb3f0795b6f890a4436df0a4f4afbdffbe43526e0841"
+      "bytes": 731,
+      "sha256": "55cf743f76527aa33b4cb7467e85d155904eaa00a9b4ded68056f53feed77d69"
     },
     {
       "path": "robots.txt",
