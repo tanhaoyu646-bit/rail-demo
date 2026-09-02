@@ -64,7 +64,7 @@ const report = {
   files: records,
 };
 writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
-if (forbidden.length || sourceMaps.length || requiredWatermarkCount < 2 || leakedAnswerFragments.length) {
+if (forbidden.length || sourceMaps.length || requiredWatermarkCount < 1 || leakedAnswerFragments.length) {
   throw new Error(`Public demo audit failed; inspect ${reportPath}`);
 }
 console.log(JSON.stringify({ reportPath, fileCount: report.fileCount, totalBytes: report.totalBytes }));

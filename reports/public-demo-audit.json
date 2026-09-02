@@ -1,10 +1,10 @@
 {
-  "createdAt": "2026-09-02T03:50:00.098Z",
+  "createdAt": "2026-09-02T04:44:54.334Z",
   "fileCount": 33,
-  "totalBytes": 8937850,
+  "totalBytes": 8938500,
   "forbidden": [],
   "sourceMaps": [],
-  "requiredWatermarkCount": 2,
+  "requiredWatermarkCount": 1,
   "leakedAnswerFragments": [],
   "files": [
     {
@@ -133,14 +133,14 @@
       "sha256": "543d7f3b45c79afc30a35e751323dd807ee839c59136782823fa4fa15bb97426"
     },
     {
-      "path": "assets/index-CIXX7IBB.js",
-      "bytes": 832917,
-      "sha256": "eadb72672c0d9af3849f05cbf569363c72f19d610841031724affbc8eb892905"
+      "path": "assets/index-ByOciUVw.css",
+      "bytes": 36105,
+      "sha256": "4c8671c24e1fcf73cc6da2cd31c870ac6c8ab8537f74ba7cf77f266ca451205a"
     },
     {
-      "path": "assets/index-pWRwvnGr.css",
-      "bytes": 35733,
-      "sha256": "fe5cea53cf747e3424c8c835bfa3f8c2fab2a2b9b94d5669316c71c60d7b076a"
+      "path": "assets/index-UNdkzC5W.js",
+      "bytes": 833195,
+      "sha256": "bc578c67d5b81c9d3febc0c1e479827650f7af59e55e33541ff4fe0c52007f67"
     },
     {
       "path": "assets/props/ic-card-front-reference.png",
@@ -165,7 +165,7 @@
     {
       "path": "index.html",
       "bytes": 695,
-      "sha256": "0b072c7fba4d94d88d10ac8fbd8aa2213d6946bd6928bbabb8fd32f5542eec5e"
+      "sha256": "0870342c51836c7268d1bb3f0795b6f890a4436df0a4f4afbdffbe43526e0841"
     },
     {
       "path": "robots.txt",

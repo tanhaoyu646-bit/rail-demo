@@ -14,7 +14,7 @@ $publishFiles = Get-ChildItem -LiteralPath $distRoot -Recurse -File
 if ($publishFiles.Extension -contains '.map') { throw '完整托管包中存在 source map，停止发布。' }
 $bundleText = ($publishFiles | Where-Object Extension -in '.js', '.css', '.html' |
   ForEach-Object { Get-Content -Raw -LiteralPath $_.FullName }) -join "`n"
-if (([regex]::Matches($bundleText, '谭浩宇工作室').Count) -lt 2) { throw '双水印检查未通过。' }
+if (([regex]::Matches($bundleText, '谭浩宇工作室').Count) -lt 1) { throw '左上角工作室水印检查未通过。' }
 if ($bundleText -match 'right-hand-pinch-reference|uploaded-hand-photo-reference') { throw '检测到已废弃的二维手部资源。' }
 $requiredAssets = @(
   'assets/models/hands/uploaded-hand-20260831.glb',

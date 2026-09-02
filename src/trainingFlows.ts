@@ -120,7 +120,7 @@ export function mountPersonDialogue(host: HTMLElement, options: OverlayOptions &
 export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): () => void {
   host.innerHTML = `
     <section class="training-panel notebook-panel" role="dialog" aria-modal="true" aria-label="司机手帐填写">
-      <header><div><span>副司机 · 出乘小组会</span><b>出乘预想填写</b></div><button type="button" data-close>收起手帐</button></header>
+      <header><div><span>副司机 · 出乘小组会</span><b>出乘预想填写</b></div><button type="button" data-close aria-label="关闭出乘预想填写界面">关闭</button></header>
       <main>
         <div class="npc-dialogue"><i>副</i><div><b>副司机</b><p data-hint aria-live="polite">本次出乘预想由你填写。需要帮助时可以问我。</p><button type="button" class="npc-ask" data-ask-hint>询问副司机</button></div></div>
         <div class="notebook-spread">
@@ -144,7 +144,24 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
     button.setAttribute('aria-pressed', String(expanded));
     textarea?.focus();
   });
-  host.querySelector('[data-close]')?.addEventListener('click', options.onClose);
+  const closeButton = host.querySelector<HTMLButtonElement>('[data-close]');
+  let closing = false;
+  const close = (event?: Event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    if (closing) return;
+    closing = true;
+    options.onClose();
+  };
+  const closeFromTouch = (event: PointerEvent) => {
+    if (event.pointerType !== 'mouse') close(event);
+  };
+  const closeFromKeyboard = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') close(event);
+  };
+  closeButton?.addEventListener('click', close);
+  closeButton?.addEventListener('pointerup', closeFromTouch);
+  window.addEventListener('keydown', closeFromKeyboard);
   host.querySelector('[data-submit]')?.addEventListener('click', () => {
     const value = textarea?.value.trim() ?? '';
     if (__PUBLIC_DEMO__) {
@@ -166,7 +183,12 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
     if (message) message.textContent = '司机手帐填写通过。';
     options.onComplete?.();
   });
-  return () => { host.innerHTML = ''; };
+  return () => {
+    closeButton?.removeEventListener('click', close);
+    closeButton?.removeEventListener('pointerup', closeFromTouch);
+    window.removeEventListener('keydown', closeFromKeyboard);
+    host.innerHTML = '';
+  };
 }
 
 export function mountLkjFlow(host: HTMLElement, options: OverlayOptions): () => void {

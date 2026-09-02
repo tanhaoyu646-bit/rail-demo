@@ -36,7 +36,6 @@ const appRoot: HTMLDivElement = app;
 app.innerHTML = `
   <canvas class="viewport" aria-label="出勤一体机三维预览"></canvas>
   <div class="studio-watermark studio-watermark--top" aria-hidden="true">谭浩宇工作室</div>
-  <div class="studio-watermark studio-watermark--bottom" aria-hidden="true">谭浩宇工作室</div>
   <section class="hud collapsed">
     <button class="hud-toggle" type="button" aria-label="展开场景说明" aria-expanded="false">›</button>
     <p class="eyebrow">乘务作业训练</p>

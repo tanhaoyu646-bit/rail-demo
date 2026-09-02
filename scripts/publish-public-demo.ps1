@@ -12,7 +12,7 @@ if (-not $distRoot.StartsWith($projectRoot, [StringComparison]::OrdinalIgnoreCas
 }
 
 $audit = Get-Content -Raw -LiteralPath $auditPath | ConvertFrom-Json
-if ($audit.forbidden.Count -or $audit.sourceMaps.Count -or $audit.leakedAnswerFragments.Count -or $audit.requiredWatermarkCount -lt 2) {
+if ($audit.forbidden.Count -or $audit.sourceMaps.Count -or $audit.leakedAnswerFragments.Count -or $audit.requiredWatermarkCount -lt 1) {
   throw "公开版泄露审计未通过：$auditPath"
 }
 
