@@ -55,7 +55,7 @@ app.innerHTML = `
   <div class="inventory-dock collapsed">
     <button class="hotbar-toggle" type="button" aria-label="展开随身物品" aria-expanded="false">⌃</button>
     <nav class="hotbar" aria-label="随身物品快捷栏">
-      <button data-item="recorder"><kbd>1</kbd><img src="${import.meta.env.BASE_URL}assets/props/recorder.png" alt=""><span>录音笔</span></button>
+      <button data-item="recorder"><kbd>1</kbd><img src="${import.meta.env.BASE_URL}assets/props/recorder-reference.png" alt=""><span>录音笔</span></button>
       <button data-item="notebook"><kbd>2</kbd><span class="item-glyph notebook-glyph">帐</span><span>司机手帐</span></button>
       <button data-item="ic-card"><kbd>3</kbd><img src="${import.meta.env.BASE_URL}assets/props/ic-card.png" alt=""><span>IC卡</span></button>
       <button data-item="delivery-reveal" class="locked"><kbd>4</kbd><span class="item-glyph paper-glyph">揭</span><span>交付揭示</span></button>
@@ -702,6 +702,7 @@ function ensureKioskRuntime(): KioskScreenRuntime {
     onPrinted: unlockDeliveryReveal,
     onStartBreath: triggerBreathAnalyzer,
     onReportDifference: source => { trainingWorkflow.pendingDifference = source; },
+    onRequestCard: () => { void selectInventoryItem('ic-card'); },
     getSelectedItem: () => selectedItem,
     onInsertCard: async () => {
       if (!heldItem || selectedItem !== 'ic-card' || !kioskCardInsertion) return false;
@@ -1106,11 +1107,13 @@ mobileJoystick?.addEventListener('pointerdown', (event) => {
   mobileJoystick.setPointerCapture(event.pointerId);
   updateMobileJoystick(event);
   event.preventDefault();
+  event.stopPropagation();
 });
 mobileJoystick?.addEventListener('pointermove', (event) => {
   if (mobileJoystickPointer !== event.pointerId) return;
   updateMobileJoystick(event);
   event.preventDefault();
+  event.stopPropagation();
 });
 mobileJoystick?.addEventListener('pointerup', resetMobileJoystick);
 mobileJoystick?.addEventListener('pointercancel', resetMobileJoystick);
@@ -1123,11 +1126,16 @@ app.querySelector<HTMLButtonElement>('[data-mobile-action="primary"]')?.addEvent
   if (selectedItem) triggerHeldItemAction();
   else interactNearby();
 });
-app.querySelector<HTMLButtonElement>('[data-mobile-action="jump"]')?.addEventListener('click', () => {
+const mobileJumpButton = app.querySelector<HTMLButtonElement>('[data-mobile-action="jump"]');
+function triggerMobileJump(event?: PointerEvent): void {
+  event?.preventDefault();
+  event?.stopPropagation();
   if (kioskOpen || sceneOverlayOpen || !grounded) return;
   verticalVelocity = 4.8;
   grounded = false;
-});
+}
+// A second touch must jump immediately while the first remains captured by the joystick.
+mobileJumpButton?.addEventListener('pointerdown', triggerMobileJump);
 const mobileSprintButton = app.querySelector<HTMLButtonElement>('[data-mobile-action="sprint"]');
 const stopMobileSprint = (): void => {
   mobileSprint = false;
@@ -1138,6 +1146,7 @@ mobileSprintButton?.addEventListener('pointerdown', (event) => {
   mobileSprintButton.classList.add('pressed');
   mobileSprintButton.setPointerCapture(event.pointerId);
   event.preventDefault();
+  event.stopPropagation();
 });
 mobileSprintButton?.addEventListener('pointerup', stopMobileSprint);
 mobileSprintButton?.addEventListener('pointercancel', stopMobileSprint);

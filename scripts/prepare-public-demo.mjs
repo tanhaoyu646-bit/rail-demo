@@ -28,7 +28,9 @@ mkdirSync(target, { recursive: true });
 
 const explicitFiles = [
   'assets/props/recorder.png',
+  'assets/props/recorder-reference.png',
   'assets/props/ic-card.png',
+  'assets/props/ic-card-front-reference.png',
 ];
 
 function listFiles(directory) {

@@ -22,7 +22,6 @@ type HeldModelConfig = {
 };
 
 const privateHeldModelConfigs: Partial<Record<InventoryItemId, HeldModelConfig>> = {
-  recorder: { url: asset('models/props/recorder-lite.glb'), targetHeight: 0.205 },
   notebook: { url: asset('models/props/driver-notebook-closed-lite.glb'), targetHeight: 0.39 },
   'ic-card': { url: asset('models/props/ic-card-lite.glb'), targetHeight: 0.24, rotation: [Math.PI / 2, 0, 0] },
   documents: { url: asset('models/props/work-card-lite.glb'), targetHeight: 0.34 },
@@ -140,7 +139,12 @@ function notebookPageFace(side: 'left' | 'right', width: number, height: number,
 function createRecorder(): THREE.Group {
   const group = new THREE.Group();
   const body = new THREE.Mesh(new RoundedBoxGeometry(0.088, 0.205, 0.024, 3, 0.008), material(0x111413, 0.54));
-  group.add(body, imageFace(asset('props/recorder.png'), 0.084, 0.198, 0.013));
+  group.add(body, imageFace(asset('props/recorder-reference.png'), 0.084, 0.198, 0.013));
+  const actionButton = new THREE.Mesh(new THREE.SphereGeometry(0.009, 10, 6), material(0xb92d2d, 0.48));
+  actionButton.name = '录音按键';
+  actionButton.position.set(0, 0.025, 0.022);
+  actionButton.userData.restZ = actionButton.position.z;
+  group.add(actionButton);
   return group;
 }
 
@@ -171,7 +175,15 @@ function createOpenNotebook(): THREE.Group {
 function createIcCard(): THREE.Group {
   const group = new THREE.Group();
   const sleeve = new THREE.Mesh(new RoundedBoxGeometry(0.27, 0.19, 0.025, 3, 0.018), material(0x26343b, 0.52));
-  group.add(sleeve, imageFace(asset('props/ic-card.png'), 0.285, 0.197, 0.015));
+  group.add(sleeve, imageFace(asset('props/ic-card-front-reference.png'), 0.285, 0.197, 0.015));
+  group.userData.insertionDirection = [0, 0, -1];
+  group.userData.cardInsertion = {
+    width: 0.285,
+    // The green contact end is held away from the black grip and enters first.
+    tip: new THREE.Vector3(0, -0.095, -0.01),
+    pivotQuaternion: new THREE.Quaternion(),
+    greenLength: 0.12,
+  };
   return group;
 }
 
@@ -213,8 +225,12 @@ function createDocumentStack(): THREE.Group {
     const book = new THREE.Mesh(new RoundedBoxGeometry(0.25, 0.34, 0.025, 2, 0.006), material(color, 0.66));
     book.position.set(index * 0.018, index * 0.012, index * 0.025);
     book.rotation.z = (index - 1) * 0.045;
+    book.userData.documentBase = true;
     group.add(book);
   });
+  const documentFan = createDocumentFan();
+  documentFan.position.set(-0.04, -0.02, 0.01);
+  group.add(documentFan);
   return group;
 }
 
@@ -467,9 +483,9 @@ async function addFpsHands(group: THREE.Group, id: InventoryItemId, variant: Hel
   }
   if (new URLSearchParams(window.location.search).get('hand') !== 'procedural') {
     try {
-      const { createUploadedFpsHand } = await import('./uploadedFpsHand');
-      group.add(await createUploadedFpsHand(id, variant));
-      group.userData.handSource = 'uploaded-hand-20260831';
+      const { createPhotoFpsHand } = await import('./uploadedPhotoHand');
+      group.add(await createPhotoFpsHand(id, variant));
+      group.userData.handSource = 'uploaded-hand-photo-reference';
       return;
     } catch (error) {
       console.warn('上传手模加载失败，保留备用手部。', error);
@@ -494,6 +510,12 @@ export function createHeldItem(id: InventoryItemId, withFallbackHand = true): TH
   group.position.set(0.22, 0.08, -1.15);
   group.rotation.set(-0.18, -0.28, -0.08);
   group.scale.setScalar(id === 'delivery-reveal' ? 1.05 : 0.9);
+  group.userData.restPosition = group.position.clone();
+  group.userData.restScale = group.scale.x;
+  if (id === 'documents') {
+    group.userData.openPosition = new THREE.Vector3(0.02, -0.045, -0.74);
+    group.userData.openScale = 0.94;
+  }
   group.userData.itemId = id;
   return group;
 }

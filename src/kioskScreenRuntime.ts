@@ -7,6 +7,7 @@ type RuntimeOptions = {
   onComplete: () => void;
   onPrinted: () => void;
   onStartBreath: () => void;
+  onRequestCard: () => void;
   onStepChange: (step: number) => void;
   onRevealViewChange: (view: 'overview' | 'screen' | 'paper') => void;
   getSelectedItem: () => string | null;
@@ -148,7 +149,7 @@ export class KioskScreenRuntime {
       this.ctx.fillText(this.message, 28, 610, 975);
     }
     if (this.step > 0) this.button('上一步', 714, 553, 120, 48, () => { if (!this.inserting) this.setStep(this.step - 1); });
-    if(this.step!==6||this.cardContentsOpen) this.button(this.step === 5 ? '验卡' : '确认', 844, 553, 164, 48, () => this.next(), true);
+    if (this.step !== 5 && (this.step !== 6 || this.cardContentsOpen)) this.button('确认', 844, 553, 164, 48, () => this.next(), true);
   }
 
   private setStep(step: number): void {
@@ -361,8 +362,11 @@ export class KioskScreenRuntime {
     ctx.font = '21px "Microsoft YaHei", sans-serif';
     ctx.fillText(`运行区段：${paperRevealRecords[0].line} · ${paperRevealRecords[0].location}—${paperRevealRecords.at(-1)!.location} · ${paperRevealRecords[0].direction}`, 104, 230);
     ctx.fillText(`待写入揭示：${paperRevealRecords.length} 条 · ${paperRevealRecords.map(r=>r.order).join(' / ')}`, 104, 277);
-    this.button(this.inserting ? '插入中…' : this.icInserted ? '已插入卡槽' : '对槽插入IC卡', 104, 337, 228, 68, () => { void this.insertCard(); }, true);
-    this.button('写卡', 352, 337, 228, 68, () => {
+    this.button(this.options.getSelectedItem() === 'ic-card' ? 'IC卡已取出' : '取出IC卡', 104, 337, 190, 68,
+      () => { if (!this.icInserted && !this.inserting) this.options.onRequestCard(); }, true);
+    this.button(this.inserting ? '插入中…' : this.icInserted ? '已插入卡槽' : '插入IC卡', 306, 337, 190, 68,
+      () => { void this.insertCard(); }, true);
+    this.button('写卡', 508, 337, 190, 68, () => {
       if (!this.icInserted || this.inserting) this.message = '请先等IC卡完全插入卡槽。';
       else {
         this.cardMemory.write(this.cardFaultPending ? introduceDifference(paperRevealRecords,trainingScenario.studentId) : paperRevealRecords);
@@ -372,7 +376,7 @@ export class KioskScreenRuntime {
       }
       this.draw();
     }, true);
-    this.button('验卡', 600, 337, 228, 68, () => this.verifyCard(), true);
+    this.button('验卡', 710, 337, 190, 68, () => this.verifyCard(), true);
     ctx.font = '18px "Microsoft YaHei", sans-serif'; ctx.fillStyle = '#4a665d'; ctx.textAlign = 'left';
     this.footer();
   }

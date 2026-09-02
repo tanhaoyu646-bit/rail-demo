@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: publicDemo ? {
         './uploadedFpsHand': resolve(__dirname, 'src/uploadedFpsHand.demo.ts'),
+        './uploadedPhotoHand': resolve(__dirname, 'src/uploadedPhotoHand.demo.ts'),
       } : {},
     },
     build: {

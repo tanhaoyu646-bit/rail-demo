@@ -1,7 +1,7 @@
 {
-  "createdAt": "2026-09-01T13:54:17.879Z",
-  "fileCount": 31,
-  "totalBytes": 5873804,
+  "createdAt": "2026-09-01T23:59:23.794Z",
+  "fileCount": 33,
+  "totalBytes": 8937042,
   "forbidden": [],
   "sourceMaps": [],
   "requiredWatermarkCount": 2,
@@ -133,19 +133,29 @@
       "sha256": "543d7f3b45c79afc30a35e751323dd807ee839c59136782823fa4fa15bb97426"
     },
     {
+      "path": "assets/index-BnOIEBmX.js",
+      "bytes": 832109,
+      "sha256": "0c2e892d8f140f4280a7e896a6726f6b82b7c28f40933121e21a29ab73f388d5"
+    },
+    {
       "path": "assets/index-pWRwvnGr.css",
       "bytes": 35733,
       "sha256": "fe5cea53cf747e3424c8c835bfa3f8c2fab2a2b9b94d5669316c71c60d7b076a"
     },
     {
-      "path": "assets/index-qEW7KJO_.js",
-      "bytes": 831220,
-      "sha256": "f03ca05892bb2e1b7b1358d1f790925d1e4808c663205482a41d58b3b0b49c0e"
+      "path": "assets/props/ic-card-front-reference.png",
+      "bytes": 1376996,
+      "sha256": "8f980ef06d3eb054ad26315f712489fe79729824356e52f2d38adb719965a441"
     },
     {
       "path": "assets/props/ic-card.png",
       "bytes": 216407,
       "sha256": "d1db403414872729e2bdea6ff77f38c2c3d16efb66cf9c27581c9d79d2939e89"
+    },
+    {
+      "path": "assets/props/recorder-reference.png",
+      "bytes": 1685353,
+      "sha256": "adf0fb3e8927743f33e7d847f85ebbc5f7a3521bee5a0a99b62adb555050425e"
     },
     {
       "path": "assets/props/recorder.png",
@@ -155,7 +165,7 @@
     {
       "path": "index.html",
       "bytes": 695,
-      "sha256": "cb1db1021fd986a4b6025a775487d02ad198a51d071acd109df4afd92e4cb505"
+      "sha256": "43679130cf0f8df66116ec16ef6666598175a9409571d4877ba82f312a4d5cef"
     },
     {
       "path": "robots.txt",

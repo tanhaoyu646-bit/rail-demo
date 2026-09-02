@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "dev:full": "vite --host 0.0.0.0 --port 4175",
     "build": "tsc --noEmit && vite build",
     "build:demo": "node scripts/prepare-public-demo.mjs && tsc --noEmit && vite build --mode demo && node scripts/audit-public-demo.mjs",
     "prebuild:release": "node scripts/clean-release-hashes.mjs",
