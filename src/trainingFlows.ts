@@ -74,8 +74,9 @@ export function evaluateNotebookDraft(value: string, records = paperRevealRecord
     hasLocation: locationTerms.some(term => normalized.includes(term.replace(/[\s，。、“”‘’；：:,.!?！？、/\\()（）[\]【】]/g, '').toLowerCase())),
     hasOperation: operationTerms.some(term => normalized.includes(term.replace(/[\s，。、“”‘’；：:,.!?！？、/\\()（）[\]【】]/g, '').toLowerCase()))
       || /(凭证发车|引导接车|行车办法|特殊行车|重点揭示)/.test(normalized),
-    hasWeather: /(雨|雾|雨雾|大风|冰雪|低温|高温|降雨|降雪|能见度|瞭望不良|天气)/.test(normalized),
-    hasPersonnel: /(人员|人物|司机|副司机|精神|休息|身体|疲劳|酒精|饮酒|状态良好|状态正常|精神良好|身体正常)/.test(normalized),
+    hasWeather: /(雨|雾|雨雾|大风|冰雪|低温|高温|降雨|降雪|能见度|瞭望不良)/.test(normalized),
+    hasPersonnel: /(精神|休息|身体|疲劳|酒精|饮酒|状态良好|状态正常|精神良好|身体正常)/.test(normalized)
+      && /(人员|人物|司机|副司机|状态)/.test(normalized),
   };
 }
 
