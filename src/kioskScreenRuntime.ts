@@ -13,6 +13,11 @@ type RuntimeOptions = {
   getSelectedItem: () => string | null;
   onInsertCard: () => Promise<boolean>;
   onTakeCard: () => void;
+  assessmentMode?: boolean;
+  onDocumentsChecked?: (correct: boolean) => void;
+  onPublishedChecked?: (correct: boolean) => void;
+  onCardChecked?: (correct: boolean) => void;
+  onQuizChecked?: (correct: boolean) => void;
   cardMemory?: TrainingCardMemory;
   publishedRecords?: readonly CardReveal[];
   onReportDifference?: (source: DifferenceSource) => void;
@@ -68,6 +73,10 @@ export class KioskScreenRuntime {
   private icWritten = false;
   private message = '';
   private revealView: 'overview' | 'screen' | 'paper' = 'overview';
+  private quizAnswer: number | null = null;
+  private readonly quizChoices = shuffled([
+    paperRevealRecords.length - 1, paperRevealRecords.length, paperRevealRecords.length + 1, paperRevealRecords.length + 2,
+  ].filter((value, index, values) => value > 0 && values.indexOf(value) === index), seededRandom(`${trainingScenario.studentId}:kiosk-quiz`));
 
   constructor(private readonly options: RuntimeOptions) {
     this.cardMemory = options.cardMemory ?? new TrainingCardMemory();
@@ -83,7 +92,7 @@ export class KioskScreenRuntime {
     for (const [, , file] of documents) this.loadImage(`doc:${file}`, asset(`documents/upright/${file}`));
     const debugParams = new URLSearchParams(window.location.search);
     const debugStep = Number(debugParams.get('kioskStep'));
-    if (import.meta.env.DEV && Number.isInteger(debugStep) && debugStep >= 0 && debugStep <= 5) this.step = debugStep;
+    if (import.meta.env.DEV && Number.isInteger(debugStep) && debugStep >= 0 && debugStep <= 7) this.step = debugStep;
     this.options.onStepChange(this.step);
     const debugRevealView = debugParams.get('revealView');
     if (import.meta.env.DEV && this.step === 4 && (debugRevealView === 'screen' || debugRevealView === 'paper')) {
@@ -128,15 +137,15 @@ export class KioskScreenRuntime {
     ctx.font = '15px "Microsoft YaHei", sans-serif';
     ctx.fillStyle = '#cfe8e4';
     ctx.fillText(instruction, 28, 53);
-    for (let index = 0; index < 7; index += 1) {
+    for (let index = 0; index < 8; index += 1) {
       ctx.beginPath();
-      ctx.arc(720 + index * 31, 35, 11, 0, Math.PI * 2);
+      ctx.arc(688 + index * 31, 35, 11, 0, Math.PI * 2);
       ctx.fillStyle = index < this.step ? '#82d7b8' : index === this.step ? '#ffb456' : '#4d7880';
       ctx.fill();
       ctx.fillStyle = '#fff';
       ctx.font = '12px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(String(index + 1), 720 + index * 31, 36);
+      ctx.fillText(String(index + 1), 688 + index * 31, 36);
     }
     this.button('退出', 938, 14, 68, 42, this.options.onClose);
   }
@@ -154,7 +163,7 @@ export class KioskScreenRuntime {
 
   private setStep(step: number): void {
     if (step !== 1) this.breathRunning = false;
-    this.step = THREE.MathUtils.clamp(step, 0, 6);
+    this.step = THREE.MathUtils.clamp(step, 0, 7);
     if (this.revealView !== 'overview') {
       this.revealView = 'overview';
       this.options.onRevealViewChange(this.revealView);
@@ -179,7 +188,9 @@ export class KioskScreenRuntime {
       const required = documents.filter((item) => item[3]).map((item) => item[0]);
       const missing = required.filter((id) => !this.selectedDocuments.has(id));
       const extra = [...this.selectedDocuments].filter((id) => !required.includes(id as never));
-      if (missing.length || extra.length) {
+      const correct = !missing.length && !extra.length;
+      this.options.onDocumentsChecked?.(correct);
+      if (!correct && !this.options.assessmentMode) {
         const missingNames = documents.filter((item) => missing.includes(item[0] as never)).map((item) => item[1]);
         const extraNames = documents.filter((item) => extra.includes(item[0] as never)).map((item) => item[1]);
         this.message = [
@@ -192,21 +203,39 @@ export class KioskScreenRuntime {
         return;
       }
     } else if (this.step === 3 && !this.printed) this.message = '请先启动打印并领取交付揭示。';
-    else if (this.step === 4 && !cardMatchesPaper(this.publishedRecords)) this.message = '揭示不一致，请向调度员报告复核。';
-    else if (this.step === 4 && this.paperMarks.size < revealPaperRows.length) this.message = '核对尚未完成。';
+    else if (this.step === 4) {
+      const correct = cardMatchesPaper(this.publishedRecords) && this.paperMarks.size >= revealPaperRows.length;
+      this.options.onPublishedChecked?.(correct);
+      if (!correct && !this.options.assessmentMode) this.message = !cardMatchesPaper(this.publishedRecords) ? '揭示不一致，请向调度员报告复核。' : '核对尚未完成。';
+      else { this.setStep(5); return; }
+    }
     else if (this.step === 5) { this.verifyCard(); return; }
-    else if (this.step === 6 && !this.cardContentsOpen) this.message = '请先确认揭示条数。';
-    else if (this.step === 6 && !cardMatchesPaper(this.cardReadback)) this.message = '卡内数据与纸质揭示不一致，不能通过；请返回重新写卡、验卡。';
-    else if (this.step === 6 && this.cardPaperMarks.size < revealPaperRows.length) this.message = '纸卡核对尚未完成：请举近纸质揭示，逐条点击正文划线。';
+    else if (this.step === 6) {
+      const correct = this.cardContentsOpen && cardMatchesPaper(this.cardReadback) && this.cardPaperMarks.size >= revealPaperRows.length;
+      this.options.onCardChecked?.(correct);
+      if (!correct && !this.options.assessmentMode) {
+        if (!this.cardContentsOpen) this.message = '请先确认揭示条数。';
+        else if (!cardMatchesPaper(this.cardReadback)) this.message = '卡内数据与纸质揭示不一致，不能通过；请返回重新写卡、验卡。';
+        else this.message = '纸卡核对尚未完成：请举近纸质揭示，逐条点击正文划线。';
+      } else { this.setStep(7); return; }
+    }
+    else if (this.step === 7) {
+      if (this.quizAnswer === null) this.message = '请选择一个答案。';
+      else {
+        const correct = this.quizChoices[this.quizAnswer] === paperRevealRecords.length;
+        this.options.onQuizChecked?.(correct);
+        if (!correct && !this.options.assessmentMode) this.message = '回答不正确，请根据本轮揭示重新判断。';
+        else {
+          this.completed = true;
+          this.options.onTakeCard();
+          this.icInserted = false;
+          this.options.onComplete();
+          return;
+        }
+      }
+    }
     else {
       this.message = '';
-      if (this.step === 6) {
-        this.completed = true;
-        this.options.onTakeCard();
-        this.icInserted = false;
-        this.options.onComplete();
-        return;
-      }
       this.setStep(this.step + 1);
       return;
     }
@@ -461,6 +490,27 @@ export class KioskScreenRuntime {
     this.footer();
   }
 
+  private drawQuiz(): void {
+    const { ctx } = this;
+    this.header('揭示核对答题');
+    ctx.fillStyle = '#0a4d9a'; ctx.fillRect(0, 70, 1024, 474);
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.font = '700 27px "Microsoft YaHei", sans-serif';
+    ctx.fillText('第1题：本轮运行揭示共有多少条？', 72, 180);
+    ctx.font = '18px "Microsoft YaHei", sans-serif'; ctx.fillStyle = '#cbe4ff';
+    ctx.fillText('请依据已打印并核对的纸质运行揭示作答。', 72, 220);
+    this.quizChoices.forEach((choice, index) => {
+      const x = 76 + index * 225;
+      const selected = this.quizAnswer === index;
+      rounded(ctx, x, 300, 175, 68, 8);
+      ctx.fillStyle = selected ? '#ffdf75' : '#edf2f8'; ctx.fill();
+      ctx.strokeStyle = selected ? '#fff5bb' : '#9eb8d8'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#123f84'; ctx.textAlign = 'center'; ctx.font = '700 32px "Microsoft YaHei", sans-serif';
+      ctx.fillText(`${choice}条`, x + 87, 342);
+      this.regions.push({ x, y: 300, w: 175, h: 68, action: () => { this.quizAnswer = index; this.message = ''; this.draw(); } });
+    });
+    this.footer();
+  }
+
   draw(): void {
     this.regions.length = 0;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -471,7 +521,8 @@ export class KioskScreenRuntime {
     else if (this.step === 3) this.drawPrint();
     else if (this.step === 4) this.drawReveal();
     else if (this.step === 5) this.drawIc();
-    else this.drawCardCheck();
+    else if (this.step === 6) this.drawCardCheck();
+    else this.drawQuiz();
     this.texture.needsUpdate = true;
   }
 

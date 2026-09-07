@@ -547,6 +547,22 @@ function prepareImportedHeldModel(model: THREE.Object3D, id: InventoryItemId, co
   return oriented;
 }
 
+// Each hand-held GLB is parsed once. Later pickups clone the template and keep
+// its shared GPU resources alive, avoiding repeated loader stalls.
+const heldTemplateCache = new Map<string, Promise<THREE.Group>>();
+
+function loadHeldTemplate(url: string): Promise<THREE.Group> {
+  let promise = heldTemplateCache.get(url);
+  if (!promise) {
+    promise = gltfLoader.loadAsync(url).then((gltf) => gltf.scene).catch((error) => {
+      heldTemplateCache.delete(url);
+      throw error;
+    });
+    heldTemplateCache.set(url, promise);
+  }
+  return promise;
+}
+
 export async function loadHeldItem(id: InventoryItemId, variant: HeldItemVariant = 'default'): Promise<THREE.Group> {
   if (id === 'notebook' && variant === 'active') {
     // The supplied "open notebook" scan is actually a purple training certificate.
@@ -571,8 +587,10 @@ export async function loadHeldItem(id: InventoryItemId, variant: HeldItemVariant
     return group;
   }
   try {
-    const gltf = await gltfLoader.loadAsync(config.url);
-    const group = prepareImportedHeldModel(gltf.scene, id, config);
+    const template = await loadHeldTemplate(config.url);
+    const model = template.clone(true) as THREE.Group;
+    model.userData.sharedResources = true;
+    const group = prepareImportedHeldModel(model, id, config);
     if (id === 'ic-card') {
       group.updateMatrixWorld(true);
       const cardBounds = new THREE.Box3().setFromObject(group);

@@ -16,10 +16,12 @@ import { mountDispatcherFlow, mountLkjFlow, mountNotebookFlow, mountPersonDialog
 import { TrainingWorkflow, createDialoguePicker, type PersonRole } from './trainingWorkflow';
 import { paperRevealRecords } from './cardRevealData';
 import { createRoomFurniture, decorateRoom, createSeatedDeputy, createFloorMaterial, createRearDoorDetails, counterBounds, dispatcherPosition, deputyForwardOffset, rearDoorPosition } from './sceneEnvironment';
+import { readDeputyTuning, loadAssistantDriverModel, applyDeputyTuning, mountDeputyTuner } from './deputyModel';
 import { resolveRoomMove, type RoomCollider } from './roomCollision';
 import './styles.css';
 import { createPerformanceDiagnostics } from './performanceDiagnostics';
 import { disposeOwnedObject } from './resourceLifetime';
+import { assessmentMode, mountEntryGate, mountLearnerBadge, mountScoreResult, scoreKioskCompletion, setScore } from './assessment';
 
 const reviewMode = new URLSearchParams(window.location.search).has('review');
 const mobileMode = new URLSearchParams(window.location.search).has('mobile')
@@ -36,6 +38,7 @@ const appRoot: HTMLDivElement = app;
 app.innerHTML = `
   <canvas class="viewport" aria-label="出勤一体机三维预览"></canvas>
   <div class="studio-watermark studio-watermark--top" aria-hidden="true">谭浩宇工作室</div>
+  <aside class="learner-hud" aria-label="当前实训人员"></aside>
   <section class="hud collapsed">
     <button class="hud-toggle" type="button" aria-label="展开场景说明" aria-expanded="false">›</button>
     <p class="eyebrow">乘务作业训练</p>
@@ -85,6 +88,7 @@ app.innerHTML = `
   </section>
   <div class="kiosk-overlay" hidden></div>
   <div class="scene-overlay" hidden></div>
+  <div class="assessment-entry"></div>
   <div class="pass">03 / 08　交互与物品</div>
 `;
 
@@ -93,6 +97,8 @@ const selectionElement = app.querySelector<HTMLElement>('#selection');
 const promptElement = app.querySelector<HTMLElement>('.interaction-prompt');
 const kioskOverlayElement = app.querySelector<HTMLElement>('.kiosk-overlay');
 const sceneOverlayElement = app.querySelector<HTMLElement>('.scene-overlay');
+const learnerHud = app.querySelector<HTMLElement>('.learner-hud');
+const assessmentEntry = app.querySelector<HTMLElement>('.assessment-entry');
 const hudElement = app.querySelector<HTMLElement>('.hud');
 const hudToggle = app.querySelector<HTMLButtonElement>('.hud-toggle');
 const inventoryDock = app.querySelector<HTMLElement>('.inventory-dock');
@@ -106,6 +112,9 @@ const selection: HTMLElement = selectionElement;
 const interactionPrompt: HTMLElement = promptElement;
 const kioskOverlay: HTMLElement = kioskOverlayElement;
 const sceneOverlay: HTMLElement = sceneOverlayElement;
+
+if (learnerHud) mountLearnerBadge(learnerHud);
+if (assessmentEntry) mountEntryGate(assessmentEntry);
 
 hudToggle?.addEventListener('click', () => {
   const collapsed = hudElement?.classList.toggle('collapsed') ?? true;
@@ -377,14 +386,44 @@ function roomBox(
   return mesh;
 }
 
+function createPaintFinish(color: number, seed: number): THREE.MeshStandardMaterial {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 192;
+  const context = canvas.getContext('2d')!;
+  context.fillStyle = '#f5f5f2';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  let state = seed;
+  for (let index = 0; index < 1600; index += 1) {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+    const x = state % canvas.width;
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+    const y = state % canvas.height;
+    context.fillStyle = index % 2 ? 'rgba(70,78,72,.024)' : 'rgba(255,255,255,.07)';
+    context.fillRect(x, y, 1, 1);
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 3);
+  texture.anisotropy = 4;
+  return new THREE.MeshStandardMaterial({ color, map: texture, roughness: .88, metalness: 0 });
+}
+
 if (!reviewMode) {
   const room = new THREE.Group();
   room.name = '出勤调度室';
+  const backWallFinish = createPaintFinish(0xd8d4c9, 71);
+  const sideWallFinish = createPaintFinish(0xdedbd1, 113);
   const backWallLeft = roomBox('后墙左段', [0.82, 3.4, 0.12], [-5.59, 1.7, -4], 0xd8d4c9);
   const backWallRight = roomBox('后墙右段', [10.02, 3.4, 0.12], [0.99, 1.7, -4], 0xd8d4c9);
   const backWallTop = roomBox('门楣', [1.16, 1.12, 0.12], [-4.60, 2.84, -4], 0xd8d4c9);
   const leftWall = roomBox('左墙', [0.12, 3.4, 12], [-6, 1.7, 2], 0xdedbd1);
   const rightWall = roomBox('右墙', [0.12, 3.4, 12], [6, 1.7, 2], 0xdedbd1);
+  backWallLeft.material = backWallFinish;
+  backWallRight.material = backWallFinish;
+  backWallTop.material = backWallFinish;
+  leftWall.material = sideWallFinish;
+  rightWall.material = sideWallFinish;
   room.add(backWallLeft, backWallRight, backWallTop, leftWall, rightWall);
   interactionOccluders.push(backWallLeft, backWallRight, backWallTop, leftWall, rightWall);
   const ceiling = roomBox('吊顶', [12, 0.1, 12], [0, 3.4, 2], 0xeeeeea);
@@ -393,6 +432,9 @@ if (!reviewMode) {
   const entranceLeft=roomBox('派班室后墙左段',[5.30,3.4,.12],[-3.35,1.7,8],0xdedbd1);
   const entranceRight=roomBox('派班室后墙右段',[5.30,3.4,.12],[3.35,1.7,8],0xdedbd1);
   const entranceTop=roomBox('派班室后门门楣',[1.40,1.12,.12],[0,2.84,8],0xdedbd1);
+  entranceLeft.material = sideWallFinish;
+  entranceRight.material = sideWallFinish;
+  entranceTop.material = sideWallFinish;
   room.add(entranceLeft,entranceRight,entranceTop);
   interactionOccluders.push(entranceLeft,entranceRight,entranceTop);
   const {desk, deskTop, cabinet, bench, chair, stool, backpack} = createRoomFurniture();
@@ -430,10 +472,35 @@ if (!reviewMode) {
   dispatcherObject = dispatcher;
   interactables.push(dispatcher, desk);
 
+  // Keep the accepted procedural deputy as a loading fallback. The uploaded
+  // seated GLB replaces only this visual object; interaction coordinates stay
+  // on the tested training workflow.
+  const deputyBase = new THREE.Vector3(2.05, 0, 1.12 + deputyForwardOffset);
+  const deputyTuning = readDeputyTuning();
   const assistantDriver = createSeatedDeputy();
   assistantDriverObject = assistantDriver;
   room.add(assistantDriver);
   interactables.push(assistantDriver);
+
+  if (!__PUBLIC_DEMO__ && deputyTuning.variant !== 'proc') {
+    loadAssistantDriverModel(deputyTuning).then((deputyModel) => {
+      if (!deputyModel) return;
+      room.remove(assistantDriver);
+      const placeholderIndex = interactables.indexOf(assistantDriver);
+      if (placeholderIndex >= 0) interactables.splice(placeholderIndex, 1);
+      applyDeputyTuning(deputyModel, deputyTuning, deputyBase);
+      room.add(deputyModel.root);
+      assistantDriverObject = deputyModel.root;
+      interactables.push(deputyModel.root);
+      if (new URLSearchParams(window.location.search).has('depTune')) {
+        mountDeputyTuner(deputyModel, deputyTuning, deputyBase);
+      }
+    }).catch((error) => {
+      console.warn('副司机GLB加载失败，保留程序化占位人物。', error);
+      assistantDriver.name = '副司机（程序化占位）';
+      assistantDriver.userData.interactionLabel = '副司机：配合填写司机手帐与出乘预想';
+    });
+  }
 
   if (!__PUBLIC_DEMO__) loadDispatcherModel().then((loadedDispatcher) => {
     loadedDispatcher.position.set(...dispatcherPosition);
@@ -708,6 +775,11 @@ function ensureKioskRuntime(): KioskScreenRuntime {
   if (kioskController) return kioskController;
   kioskController = new KioskScreenRuntime({
     onClose: closeKiosk,
+    assessmentMode,
+    onDocumentsChecked: correct => setScore('documents', correct ? 10 : 0),
+    onPublishedChecked: correct => setScore('publishedReveal', correct ? 10 : 0),
+    onCardChecked: correct => setScore('cardReveal', correct ? 10 : 0),
+    onQuizChecked: correct => setScore('kioskQuiz', correct ? 10 : 0),
     onPrinted: unlockDeliveryReveal,
     onStartBreath: triggerBreathAnalyzer,
     onReportDifference: source => { trainingWorkflow.pendingDifference = source; },
@@ -756,6 +828,7 @@ function ensureKioskRuntime(): KioskScreenRuntime {
     },
     onComplete: () => {
       // All card checks have passed, including any reported card fault that was rewritten.
+      scoreKioskCompletion();
       trainingWorkflow.pendingDifference = null;
       trainingWorkflow.complete('kiosk');
       closeKiosk();
@@ -776,6 +849,15 @@ function closeSceneOverlay(): void {
   sceneOverlayOpen = false;
   sceneOverlay.hidden = true;
   document.body.classList.remove('scene-flow-active');
+}
+
+function showFinalScore(): void {
+  document.exitPointerLock?.();
+  interactionPrompt.hidden = true;
+  sceneOverlayOpen = true;
+  sceneOverlay.hidden = false;
+  document.body.classList.add('scene-flow-active');
+  sceneFlowCleanup = mountScoreResult(sceneOverlay, closeSceneOverlay);
 }
 
 function openPersonDialogue(role: PersonRole): void {
@@ -809,12 +891,16 @@ function openDispatcherFlow(): void {
   document.body.classList.add('scene-flow-active');
   sceneFlowCleanup = mountDispatcherFlow(sceneOverlay, {
     onClose: closeSceneOverlay,
+    assessment: assessmentMode,
+    onScore: (countCorrect, operationQuestionsCorrect) => {
+      setScore('dispatcherCount', countCorrect ? 10 : 0);
+      setScore('dispatcherQuestions', operationQuestionsCorrect ? 10 : 0);
+    },
     onComplete: () => {
       if (!trainingWorkflow.complete('dispatcher')) return;
       closeSceneOverlay();
-      setActiveStation('cab');
-      activeStation = 'cab';
-      selection.textContent = '人人核对完成，下一步进行人车核对。';
+      selection.textContent = '人人核对完成：本轮出勤考评结束。';
+      showFinalScore();
     },
   });
 }
@@ -834,6 +920,8 @@ function openNotebookFlow(): void {
   document.body.classList.add('scene-flow-active');
   sceneFlowCleanup = mountNotebookFlow(sceneOverlay, {
     onClose: closeSceneOverlay,
+    assessment: assessmentMode,
+    onScore: points => setScore('deputyMeeting', points),
     onComplete: () => {
       if (!trainingWorkflow.complete('meeting')) return;
       closeSceneOverlay();

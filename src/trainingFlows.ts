@@ -4,25 +4,31 @@ import { createHintPicker } from './trainingHints';
 type OverlayOptions = {
   onClose: () => void;
   onComplete?: () => void;
+  assessment?: boolean;
 };
 
-const weatherQuestions = [
-  {
-    question: '雨雾天气瞭望条件不良时，出乘预想应重点采取什么措施？',
-    answers: ['加强瞭望、控制速度并提前采取制动措施', '保持常速，只增加鸣笛次数', '关闭LKJ提示避免干扰'],
-    correct: 0,
-  },
-  {
-    question: '核对运行揭示时，应重点确认哪些内容？',
-    answers: ['命令号、时间、区段、行别、限速及设备变化', '只核对车次和司机姓名', '只核对纸张页数'],
-    correct: 0,
-  },
-  {
-    question: '低温、冰雪条件下应在预想中增加哪项内容？',
-    answers: ['防滑、防空转并关注制动距离变化', '提高牵引力快速通过', '减少对线路状态的确认'],
-    correct: 0,
-  },
-];
+function createDispatcherQuestions() {
+  const record = paperRevealRecords[0];
+  const method = record.content.includes('绿色许可证') ? '凭绿色许可证发车'
+    : record.content.includes('特定引导') ? '按特定引导接车进站' : '按揭示规定办理';
+  return [
+    {
+      question: `本轮${record.location}${record.direction}方向的行车方式应如何办理？`,
+      answers: [method, '保持常速通过，不必执行揭示要求', '取消LKJ提示后按平常办法办理'],
+      correct: 0,
+    },
+    {
+      question: `核对${record.order}号运行揭示时，应重点确认哪些内容？`,
+      answers: ['命令号、时间、区段、行别、限速及设备变化', '只核对车次和司机姓名', '只核对纸张页数'],
+      correct: 0,
+    },
+    {
+      question: '雨雾天气瞭望条件不良时，出乘预想应重点采取什么措施？',
+      answers: ['加强瞭望、控制速度并提前采取制动措施', '保持常速，只增加鸣笛次数', '关闭LKJ提示避免干扰'],
+      correct: 0,
+    },
+  ];
+}
 
 // Public practice keeps the same interaction structure without shipping the
 // private answer key or grading rules. These options are deliberately unscored.
@@ -45,12 +51,18 @@ let notebookDraft = '';
 const deputyHint=createHintPicker('deputy');
 const dispatcherHint=createHintPicker('dispatcher');
 
-export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions): () => void {
+export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions & {
+  onScore?: (revealCountCorrect: boolean, operationQuestionsCorrect: boolean) => void;
+}): () => void {
+  const revealCount = paperRevealRecords.length;
+  const countAnswers = shuffled([revealCount - 1, revealCount, revealCount + 1, revealCount + 2]
+    .filter((value, index, values) => value > 0 && values.indexOf(value) === index)
+    .map(value => ({ text: `${value}条`, correct: value === revealCount })));
   const questions = __PUBLIC_DEMO__
     ? shuffled(publicPracticeQuestions).slice(0, 2).map(item => ({ ...item,
       answers: shuffled(item.answers.map(text => ({ text, correct: undefined as boolean | undefined }))),
     }))
-    : shuffled(weatherQuestions).slice(0, 2).map(item => ({...item,
+    : shuffled(createDispatcherQuestions()).slice(0, 2).map(item => ({...item,
       answers: shuffled(item.answers.map((text,index)=>({text,correct:index===item.correct}))),
     }));
   host.innerHTML = `
@@ -59,7 +71,8 @@ export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions):
       <main>
         <div class="npc-dialogue"><i>调</i><div><b>出勤调度员</b><p data-hint aria-live="polite">先核对本次出乘信息。有疑问可以问我。</p><button type="button" class="npc-ask" data-ask-hint>询问调度员</button></div></div>
         <form class="question-list">
-          ${questions.map((item, index) => `<fieldset><legend>${index + 1}. ${item.question}</legend>${item.answers.map((answer, answerIndex) => `<label><input type="radio" name="question-${index}" value="${answerIndex}"><span>${answer.text}</span></label>`).join('')}</fieldset>`).join('')}
+          <fieldset><legend>1. 本轮纸质运行揭示共有多少条？</legend>${countAnswers.map((answer, answerIndex) => `<label><input type="radio" name="reveal-count" value="${answerIndex}"><span>${answer.text}</span></label>`).join('')}</fieldset>
+          ${questions.map((item, index) => `<fieldset><legend>${index + 2}. ${item.question}</legend>${item.answers.map((answer, answerIndex) => `<label><input type="radio" name="question-${index}" value="${answerIndex}"><span>${answer.text}</span></label>`).join('')}</fieldset>`).join('')}
         </form>
         <p class="flow-message" aria-live="polite"></p>
       </main>
@@ -69,7 +82,7 @@ export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions):
   host.querySelector('[data-ask-hint]')?.addEventListener('click',()=>{const target=host.querySelector('[data-hint]');if(target)target.textContent=dispatcherHint();});
   host.querySelector('[data-close]')?.addEventListener('click', options.onClose);
   host.querySelector('[data-submit]')?.addEventListener('click', () => {
-    const allAnswered = questions.every((_, index) =>
+    const allAnswered = !!host.querySelector<HTMLInputElement>('input[name="reveal-count"]:checked') && questions.every((_, index) =>
       host.querySelector<HTMLInputElement>(`input[name="question-${index}"]:checked`));
     if (!allAnswered) {
       if (message) message.textContent = '请完成本轮所有核对项目。';
@@ -80,11 +93,19 @@ export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions):
       options.onComplete?.();
       return;
     }
-    const passed = questions.every((item, index) => {
+    const countValue = host.querySelector<HTMLInputElement>('input[name="reveal-count"]:checked')?.value;
+    const countCorrect = countValue !== undefined && countAnswers[Number(countValue)]?.correct === true;
+    const questionsCorrect = questions.every((item, index) => {
       const value=host.querySelector<HTMLInputElement>(`input[name="question-${index}"]:checked`)?.value;
       return value !== undefined && item.answers[Number(value)]?.correct;
     });
-    if (!passed) {
+    options.onScore?.(countCorrect, questionsCorrect);
+    if (options.assessment) {
+      if (message) message.textContent = '本轮人人核对已提交。';
+      options.onComplete?.();
+      return;
+    }
+    if (!countCorrect || !questionsCorrect) {
       if (message) message.textContent = '回答未通过，请重新结合揭示和天气条件判断。';
       return;
     }
@@ -117,7 +138,7 @@ export function mountPersonDialogue(host: HTMLElement, options: OverlayOptions &
   return ()=>{host.innerHTML='';};
 }
 
-export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): () => void {
+export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions & { onScore?: (points: number) => void }): () => void {
   host.classList.add('notebook-overlay');
   host.innerHTML = `
     <section class="training-panel notebook-panel" role="dialog" aria-modal="true" aria-label="司机手帐填写">
@@ -194,10 +215,18 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions): (
       options.onComplete?.();
       return;
     }
+    const hasLocation = paperRevealRecords.some(record => value.includes(record.location));
     const hasReveal = /(揭示|限速|命令号|信号机|施工|绿色许可证|特定引导)/.test(value);
     const hasWeather = /(雨|雾|大风|冰雪|低温|高温|天气)/.test(value);
-    const hasMeasure = /(瞭望|控速|控制速度|制动|防滑|防空转)/.test(value);
-    if (!hasReveal || !hasWeather || !hasMeasure) {
+    const hasPersonnel = /(人员状态|精神状态|状态良好|休息充分|身体状况|疲劳|酒精)/.test(value);
+    const points = [hasLocation, hasReveal, hasWeather, hasPersonnel].filter(Boolean).length * 2.5;
+    if (options.assessment) {
+      options.onScore?.(points);
+      options.onComplete?.();
+      if (message) message.textContent = `手帐已提交，已识别 ${points / 2.5} 项预想要点。`;
+      return;
+    }
+    if (!hasLocation || !hasReveal || !hasWeather || !hasPersonnel) {
       if (message) message.textContent = '预想还不完整，可向副司机或调度员询问。';
       return;
     }
