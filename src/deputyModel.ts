@@ -160,9 +160,14 @@ export async function loadAssistantDriverModel(
   source.position.set(-center.x * baseScale, -bounds.min.y * baseScale, -center.z * baseScale);
   source.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;
+    // Imported GLBs can carry stale bounds after normalization. Recompute them
+    // and keep the character visible even when the mobile camera clips close
+    // to the desk during the first-person approach.
+    object.geometry.computeBoundingBox();
+    object.geometry.computeBoundingSphere();
     object.castShadow = false;
     object.receiveShadow = false;
-    object.frustumCulled = true;
+    object.frustumCulled = false;
   });
 
   const inner = new THREE.Group();

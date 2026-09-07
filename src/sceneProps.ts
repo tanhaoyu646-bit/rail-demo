@@ -563,6 +563,18 @@ function loadHeldTemplate(url: string): Promise<THREE.Group> {
   return promise;
 }
 
+/** Warm the network/decoder caches during idle time so the first pickup is
+ * immediate on mobile. It only loads shared templates; no scene objects are
+ * created and no extra GPU copies are retained. */
+export function preloadHeldAssets(): void {
+  if (__PUBLIC_DEMO__) return;
+  const urls = Object.values(privateHeldModelConfigs).map(config => config?.url).filter((url): url is string => !!url);
+  for (const url of urls) void loadHeldTemplate(url).catch(() => undefined);
+  if (new URLSearchParams(window.location.search).get('hand') !== 'procedural') {
+    void import('./uploadedFpsHand').then(module => module.preloadUploadedFpsHand?.()).catch(() => undefined);
+  }
+}
+
 export async function loadHeldItem(id: InventoryItemId, variant: HeldItemVariant = 'default'): Promise<THREE.Group> {
   if (id === 'notebook' && variant === 'active') {
     // The supplied "open notebook" scan is actually a purple training certificate.

@@ -116,7 +116,15 @@ export function mountScoreResult(host: HTMLElement, onClose: () => void): () => 
     </main>
     <footer><button type="button" class="primary" data-close>完成</button></footer>
   </section>`;
-  const close = () => onClose();
+  // A score report is deliberately persistent.  Only an explicit button
+  // action can close it; background/touch events must never dismiss it.
+  const close = (event?: Event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    onClose();
+  };
+  host.addEventListener('pointerdown', event => event.stopPropagation());
+  host.addEventListener('click', event => event.stopPropagation());
   host.querySelectorAll<HTMLButtonElement>('[data-close]').forEach(button => button.addEventListener('click', close));
   return () => { host.innerHTML = ''; };
 }

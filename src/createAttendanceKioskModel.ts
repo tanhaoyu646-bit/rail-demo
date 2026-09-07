@@ -285,7 +285,14 @@ function referenceMapUrl(spec: SculptMaterialSpec, channel: string): string | nu
   if (!map || typeof map !== 'object') return null;
   const record = map as Record<string, unknown>;
   const url = typeof record.url === 'string' && record.url.trim() ? record.url : record.path;
-  return typeof url === 'string' && url.trim() ? url : null;
+  if (typeof url !== 'string' || !url.trim()) return null;
+  // The source manifest stores evidence-map basenames (for example
+  // `dark-plastic_height.png`) that are not shipped to the browser. Do not
+  // issue doomed root requests for those files; procedural PBR textures are
+  // used instead. Explicit web/asset URLs remain supported for future packs.
+  const normalized = url.trim();
+  if (!/^(?:https?:|data:|blob:|\/|\.\/|\.\.\/|assets\/)/i.test(normalized)) return null;
+  return normalized;
 }
 
 function createLoadedMapTexture(

@@ -51,6 +51,34 @@ let notebookDraft = '';
 const deputyHint=createHintPicker('deputy');
 const dispatcherHint=createHintPicker('dispatcher');
 
+/**
+ * Evaluate the notebook with offline railway-domain vocabulary.  The answer
+ * is intentionally semantic rather than an exact sentence match: learners
+ * may use their own wording while the four required dimensions remain clear.
+ */
+export function evaluateNotebookDraft(value: string, records = paperRevealRecords): {
+  hasLocation: boolean;
+  hasOperation: boolean;
+  hasWeather: boolean;
+  hasPersonnel: boolean;
+} {
+  const normalized = value.replace(/[\s，。、“”‘’；：:,.!?！？、/\\()（）[\]【】]/g, '').toLowerCase();
+  const locationTerms = records.flatMap(record => [record.location, record.line, `${record.location}${record.direction}`]);
+  const operationTerms = records.flatMap(record => {
+    const terms = [record.content, '揭示', '命令号', '信号机', '施工', '限速'];
+    if (record.content.includes('绿色许可证')) terms.push('绿色许可证', '许可证发车', '凭证发车');
+    if (record.content.includes('特定引导')) terms.push('特定引导', '引导接车', '特定引导接车');
+    return terms;
+  });
+  return {
+    hasLocation: locationTerms.some(term => normalized.includes(term.replace(/[\s，。、“”‘’；：:,.!?！？、/\\()（）[\]【】]/g, '').toLowerCase())),
+    hasOperation: operationTerms.some(term => normalized.includes(term.replace(/[\s，。、“”‘’；：:,.!?！？、/\\()（）[\]【】]/g, '').toLowerCase()))
+      || /(凭证发车|引导接车|行车办法|特殊行车|重点揭示)/.test(normalized),
+    hasWeather: /(雨|雾|雨雾|大风|冰雪|低温|高温|降雨|降雪|能见度|瞭望不良|天气)/.test(normalized),
+    hasPersonnel: /(人员|人物|司机|副司机|精神|休息|身体|疲劳|酒精|饮酒|状态良好|状态正常|精神良好|身体正常)/.test(normalized),
+  };
+}
+
 export function mountDispatcherFlow(host: HTMLElement, options: OverlayOptions & {
   onScore?: (revealCountCorrect: boolean, operationQuestionsCorrect: boolean) => void;
 }): () => void {
@@ -215,11 +243,9 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions & {
       options.onComplete?.();
       return;
     }
-    const hasLocation = paperRevealRecords.some(record => value.includes(record.location));
-    const hasReveal = /(揭示|限速|命令号|信号机|施工|绿色许可证|特定引导)/.test(value);
-    const hasWeather = /(雨|雾|大风|冰雪|低温|高温|天气)/.test(value);
-    const hasPersonnel = /(人员状态|精神状态|状态良好|休息充分|身体状况|疲劳|酒精)/.test(value);
-    const points = [hasLocation, hasReveal, hasWeather, hasPersonnel].filter(Boolean).length * 2.5;
+    const evaluation = evaluateNotebookDraft(value);
+    const { hasLocation, hasOperation: hasReveal, hasWeather, hasPersonnel } = evaluation;
+    const points = Object.values(evaluation).filter(Boolean).length * 2.5;
     if (options.assessment) {
       options.onScore?.(points);
       options.onComplete?.();
@@ -227,7 +253,9 @@ export function mountNotebookFlow(host: HTMLElement, options: OverlayOptions & {
       return;
     }
     if (!hasLocation || !hasReveal || !hasWeather || !hasPersonnel) {
-      if (message) message.textContent = '预想还不完整，可向副司机或调度员询问。';
+      const missing = [!hasLocation && '地点', !hasReveal && '特殊行车方式/揭示', !hasWeather && '天气', !hasPersonnel && '人员状态']
+        .filter(Boolean).join('、');
+      if (message) message.textContent = `预想还缺少：${missing}。可向副司机或调度员询问。`;
       return;
     }
     if (message) message.textContent = '司机手帐填写通过。';

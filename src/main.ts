@@ -7,7 +7,7 @@ import {
   frameRailwayAttendanceKioskCamera,
 } from './createAttendanceKioskModel';
 import { KioskScreenRuntime } from './kioskScreenRuntime';
-import { loadDispatcherModel, loadHeldItem, markDeliveryRevealPaperLine, syncDeliveryRevealPaperMarks, setDeliveryRevealViewPose, setHeldItemActionPose, setNotebookInspectionPose, softenKioskGeometry, type InventoryItemId } from './sceneProps';
+import { loadDispatcherModel, loadHeldItem, markDeliveryRevealPaperLine, syncDeliveryRevealPaperMarks, setDeliveryRevealViewPose, setHeldItemActionPose, setNotebookInspectionPose, softenKioskGeometry, preloadHeldAssets, type InventoryItemId } from './sceneProps';
 import { createKioskCardSlot, KioskCardInsertion } from './kioskCardInsertion';
 import { fitScreenAndAccessory, nearestKioskSurface } from './kioskBreathInteraction';
 import { paperLineAtLocalPoint } from './revealPaperLayout';
@@ -225,6 +225,7 @@ let selectedItem: InventoryItemId | null = null;
 let heldItem: THREE.Group | null = null;
 let deliveryRevealUnlocked = import.meta.env.DEV && Number(new URLSearchParams(window.location.search).get('kioskStep')) >= 4;
 let heldLoadToken = 0;
+let heldSelectionLoading: InventoryItemId | null = null;
 const heldRestPosition = new THREE.Vector3();
 let heldActionElapsed = 0;
 let heldActionActive = false;
@@ -243,17 +244,22 @@ async function replaceHeldItemVariant(variant: 'default' | 'active'): Promise<vo
   if (!selectedItem) return;
   const id = selectedItem;
   const token = ++heldLoadToken;
-  const loaded = await loadHeldItem(id, variant);
-  if (token !== heldLoadToken || selectedItem !== id) { disposeOwnedObject(loaded); return; }
-  if (heldItem) disposeOwnedObject(heldItem);
-  heldItem = loaded;
-  heldRestPosition.copy(loaded.position);
-  viewModelRoot.add(loaded);
-  kioskController?.draw();
+  heldSelectionLoading = id;
+  try {
+    const loaded = await loadHeldItem(id, variant);
+    if (token !== heldLoadToken || selectedItem !== id) { disposeOwnedObject(loaded); return; }
+    if (heldItem) disposeOwnedObject(heldItem);
+    heldItem = loaded;
+    heldRestPosition.copy(loaded.position);
+    viewModelRoot.add(loaded);
+    kioskController?.draw();
+  } finally {
+    if (heldSelectionLoading === id) heldSelectionLoading = null;
+  }
 }
 
 function triggerHeldItemAction(): void {
-  if (!selectedItem || !heldItem || heldActionActive) return;
+  if (!selectedItem || !heldItem || heldActionActive || heldSelectionLoading) return;
   if (selectedItem === 'ic-card' && kioskOpen && activeKioskStep === 5) {
     void kioskController?.insertCard();
     return;
@@ -292,7 +298,10 @@ function triggerHeldItemAction(): void {
 }
 
 async function selectInventoryItem(id: InventoryItemId): Promise<void> {
-  if (kioskCardInsertion?.busy) return;
+  if (kioskCardInsertion?.busy || heldSelectionLoading) {
+    selection.textContent = '物品正在准备，请稍候…';
+    return;
+  }
   if (id === 'ic-card' && kioskCardInsertion?.hasCard) {
     selection.textContent = 'IC卡仍在一体机卡槽内，请完成验卡与纸卡核对后取回。';
     return;
@@ -308,21 +317,27 @@ async function selectInventoryItem(id: InventoryItemId): Promise<void> {
     heldItem = null;
   } else {
     selectedItem = id;
-    if (heldItem) disposeOwnedObject(heldItem);
-    heldItem = null;
     const token = ++heldLoadToken;
+    heldSelectionLoading = id;
     selection.textContent = '正在取出物品…';
-    const loaded = await loadHeldItem(id);
-    if (token !== heldLoadToken || selectedItem !== id) { disposeOwnedObject(loaded); return; }
-    heldItem = loaded;
-    if (id === 'delivery-reveal') {
-      syncDeliveryRevealPaperMarks(loaded, kioskController?.getPaperMarks() ?? []);
-      revealCloseProgress = 0;
-      revealHideProgress = 0;
-      kioskController?.focusRevealView('overview');
+    try {
+      const loaded = await loadHeldItem(id);
+      if (token !== heldLoadToken || selectedItem !== id) { disposeOwnedObject(loaded); return; }
+      // Keep the previous item visible while the next GLB is decoding. This
+      // prevents a blank hand and makes a slow mobile decode feel continuous.
+      if (heldItem) disposeOwnedObject(heldItem);
+      heldItem = loaded;
+      if (id === 'delivery-reveal') {
+        syncDeliveryRevealPaperMarks(loaded, kioskController?.getPaperMarks() ?? []);
+        revealCloseProgress = 0;
+        revealHideProgress = 0;
+        kioskController?.focusRevealView('overview');
+      }
+      heldRestPosition.copy(loaded.position);
+      viewModelRoot.add(heldItem);
+    } finally {
+      if (heldSelectionLoading === id) heldSelectionLoading = null;
     }
-    heldRestPosition.copy(loaded.position);
-    viewModelRoot.add(heldItem);
   }
   heldActionActive = false;
   heldActionElapsed = 0;
@@ -346,6 +361,9 @@ function unlockDeliveryReveal(): void {
 appRoot.querySelectorAll<HTMLElement>('[data-item]').forEach((button) => {
   button.addEventListener('click', () => selectInventoryItem(button.dataset.item as InventoryItemId));
 });
+// Start decoding shared hand/prop templates after the first frame so pickup
+// remains responsive without delaying the initial room render.
+window.setTimeout(() => preloadHeldAssets(), 1200);
 scene.add(createRailwayAttendanceKioskLookDevLights('neutral'));
 if (!reviewMode) scene.add(new THREE.HemisphereLight(0xfffbef, 0x6b716f, 1.15));
 
@@ -485,11 +503,20 @@ if (!reviewMode) {
   if (!__PUBLIC_DEMO__ && deputyTuning.variant !== 'proc') {
     loadAssistantDriverModel(deputyTuning).then((deputyModel) => {
       if (!deputyModel) return;
+      let renderableMeshes = 0;
+      deputyModel.root.traverse(object => {
+        if (object instanceof THREE.Mesh && object.visible) renderableMeshes += 1;
+      });
+      if (!renderableMeshes) {
+        console.warn('副司机GLB没有可渲染网格，继续使用程序化占位人物。');
+        return;
+      }
       room.remove(assistantDriver);
       const placeholderIndex = interactables.indexOf(assistantDriver);
       if (placeholderIndex >= 0) interactables.splice(placeholderIndex, 1);
       applyDeputyTuning(deputyModel, deputyTuning, deputyBase);
       room.add(deputyModel.root);
+      deputyModel.root.updateMatrixWorld(true);
       assistantDriverObject = deputyModel.root;
       interactables.push(deputyModel.root);
       if (new URLSearchParams(window.location.search).has('depTune')) {

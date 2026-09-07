@@ -55,6 +55,10 @@ async function loadTemplate(): Promise<THREE.Group> {
   return templatePromise;
 }
 
+export function preloadUploadedFpsHand(): Promise<void> {
+  return loadTemplate().then(() => undefined);
+}
+
 // Measured on the accepted work-card view, after target-height normalization.
 // Transfer all three contact offsets, not its centre or its bounding-box depth.
 export const workCardGripReference = {

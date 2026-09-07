@@ -23,8 +23,10 @@ body { background: #e7e4dc; }
   pointer-events: none;
   user-select: none;
 }
-.studio-watermark--top { top: 14px; left: 14px; }
-body:not(.public-demo) .studio-watermark { display: none; }
+.studio-watermark--top {
+  top: max(10px, env(safe-area-inset-top));
+  left: max(10px, env(safe-area-inset-left));
+}
 
 .demo-question-list {
   display: grid;
